@@ -1,0 +1,16 @@
+---
+layout: compress
+published: true
+---
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body>
+    <main class="wrapper">
+      {% include header.html %}
+      {% include anchor-headings.html html=content anchorBody='' anchorClass='anchor-heading' h_min=2 h_max=3 %}
+      {% include footer.html %}
+    </main>
+    {% include foot.html %}
+  </body>
+</html>

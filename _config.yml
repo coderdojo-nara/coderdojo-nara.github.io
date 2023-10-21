@@ -1,0 +1,65 @@
+# Site settings
+title_left    : ""
+title_right   : "CoderDojo 奈良" # default: ""
+description   : "子どもと大人のためのプログラミングコミュニティ"
+keywords      : "CoderDojo, 奈良, プログラミング"
+url           : https://coderdojo-nara.github.io # site url
+baseurl       : "" # apply repo name like "/myproject" if used under gh-pages branch, else (under master branch) just leave empty/blank
+cover         : "/assets/images/OGP/default_.png" # image uri like logo/cover image for site seo
+locale        : "ja_JP"
+
+google_analytics  : # UA-XXXXX-XX
+twitter_username  : "@CoderDojoNara"
+twitter_domain    : "coderdojo-nara.github.io"
+comments_enabled  : false # if enabled (set to true), please provide your disqus_username
+disqus_shortname  : ""
+postshare_enabled : false
+
+# Build settings
+permalink   : /:year/:title/
+markdown    : kramdown
+highlighter : rouge
+
+source      : ./
+destination : ./_site
+
+# Sass configuration
+sass:
+  sass_dir  : assets/scss
+  style     : compressed # expanded
+
+# Author settings
+author:
+  name     : "CoderDojo 奈良"
+
+plugins:
+  - jekyll-sitemap
+  - bourbon
+  - jekyll-paginate
+
+# navbar pages
+navbar:
+  - slug : about
+    title: About
+  - slug : blog
+    title: Blog
+
+exclude:
+  - "gulp"
+  - "node_modules"
+  - "bower"
+  - "bower_components"
+  - "config.rb"
+  - "src"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - ".rvmrc"
+  - ".rbenv-version"
+  - "package.json"
+  - "gulpfile.js"
+  - "README.md"
+  - "Rakefile"
+  - "changelog.md"
+  - "script"
+  - "vendor"
+  - "thinkspace.gemspec"
