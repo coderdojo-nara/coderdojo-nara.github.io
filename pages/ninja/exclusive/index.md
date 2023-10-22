@@ -10,6 +10,6 @@ sitemap: false
 - [本を借りる](./library/)
 - [オンライン学習サービス"Progate"を利用する](./progate/)
 - [micro:bitを使う](./microbit/)
-- [教育版Minecraftのライセンス貸与](./minecraft/)
+- [Minecraft Education（教育版マインクラフト）のライセンス貸与](./minecraft/)
 
 {% include contact.html %}
