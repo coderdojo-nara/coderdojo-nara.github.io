@@ -1,7 +1,7 @@
 ---
 title: micro:bitを使う
 layout: page
-permalink: /ninja/exclusive/progate/
+permalink: /ninja/exclusive/microbit/
 sitemap: false
 ---
 {% include excluseive.html %}
