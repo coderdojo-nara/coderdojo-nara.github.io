@@ -1,6 +1,9 @@
-$font-color: #222222; 
-$body-color: #eeeeee;
-$link-color: #4072B3;
+$font-color: #222222;
+$body-color: #fefefe;
+$head-color: #dbdbdb;
+// #f0fae6;
+// $head-color: #e8f7d9;
+$link-color: #0086B3;
 
 $h2-bg-color: gray;
 $h2-font-color: $body-color;
@@ -73,17 +76,21 @@ i {
     margin-right: 5px;
 }
 
-.navbar {
-    padding-top: 10px;
+.site-header {
+    background-color: $head-color;
 }
 
-.nav > .container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-    padding-bottom: 5px;
+// .navbar {
+//     padding-top: 10px;
+// }
 
-}
+// .nav > .container {
+//     display: flex;
+//     flex-direction: row;
+//     margin-bottom: 0;
+//     padding-bottom: 5px;
+
+// }
 
 h1.logo {
     margin: 0;

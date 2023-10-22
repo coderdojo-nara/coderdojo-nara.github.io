@@ -1,7 +1,7 @@
 ---
 title:  メンター参加希望・見学希望者向けガイダンス
 layout: page
-permalink: /guidance/
+permalink: /mentor/guidance/
 ---
 CoderDojoの活動に関心をもってくださって、ありがとうございます。
 こちらは、メンターとして参加を希望される方、もしくは見学を希望される方向けの案内です。
@@ -20,7 +20,7 @@ CoderDojoはボランティアの運営による「プログラミングクラ�
 
 こちらのリンク先に、メンターとして理解し賛同していただきたいことをまとめていますので、こちらの内容をあらかじめご確認ください。不明な点があれば、面談の際にお問い合わせください。
 
-[メンター同意書](https://github.com/nara-coderdojo/document/blob/master/MentorAgreement.md)
+[メンター同意書](https://github.com/coderdojo-nara/document/blob/master/MentorAgreement.md)
 
 面談の中では、以下の点についてお話させていただきたいと思います。
 
@@ -34,7 +34,5 @@ CoderDojoはボランティアの運営による「プログラミングクラ�
 なお、CoderDojoが一般的なプログラミング教室とは性質が異なり教室開校の参考にならないことから「自分がプログラミング教室を開きたいのでその参考にするため」の見学はお断りしています。この点、ご了承ください。
 
 ## CoderDojo関連サイト
-- [CoderDojo 奈良/生駒](https://coderdojo-nara-ikoma.connpass.com/)
-- [CoderDojo 奈良・生駒Twitterアカウント](https://twitter.com/NaraCoderDojo)
 - [CoderDojo（アイルランド）](http://www.coderdojo.com/)
 - [CoderDojo Japan（日本で開催されているCoderDojoの一覧はこちらで見られます）](http://www.coderdojo.jp/)
