@@ -111,3 +111,14 @@ h1.post-title {
         margin-right: 1em;
     }
 }
+
+
+.logo {
+    a {
+        color: $font-color;
+    }
+    font-weight: 300;
+    span {
+        font-weight: 300;
+    }
+}
