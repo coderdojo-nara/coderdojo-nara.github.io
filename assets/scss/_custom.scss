@@ -37,24 +37,15 @@ h2, h3, h4 {
 }
 
 h2 {
-    font-size: 1.4em;
-    color: $h2-font-color;
-    background: $h2-bg-color;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    &:first-child {
-        margin-top: 0px;
-    }
-    &:not(:first-child) {
-        margin-top: 60px;
-    }
+    font-size: 1.2em;
+    color: $font-color;
+    border-bottom: 3px solid $h2-bg-color;
 }
 
 h3 {
-    font-size: 1.2em;
+    font-size: 1em;
     color: $font-color;
-    border-bottom: 3px solid $h3-bg-color;
-    // background: $h3-bg-color;
+    border-bottom: 1px solid $h3-bg-color;
 }
 
 h4 {
