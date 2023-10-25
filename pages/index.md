@@ -17,7 +17,11 @@ CoderDojoのただひとつのルールは、"Be Cool!（カッコよくあれ�
 
 他の地域のCoderDojo開催予定は[近日開催の道場](https://coderdojo.jp/events)で探せます。
 
-## お問い合わせについて
+## blog
+{% include news.html %}
+[記事一覧を見る](/blog/)
+
+## お問い合わせ
 お問い合わせについては、[nara.jp@coderdojo.com](mailto:nara.jp@coderdojo.com)宛にメールでお願いします。
 
 CoderDojo 奈良の公式[X（旧Twitter）アカウント](https://twitter.com/CoderDojoNara)もあります、よかったらフォローしてやってください。
