@@ -13,7 +13,7 @@ CoderDojoのただひとつのルールは、"Be Cool!（カッコよくあれ�
 ## 開催場所と日程
 - 開催場所：〒630-8115 奈良県奈良市大宮町３丁目５−４１ ぷろぼの福祉ビル 5F会議室（[Google Maps](https://goo.gl/maps/6o8AhhvTSzvU7APi7)）
 - 開催日：毎月第三土曜日（月によって変わる場合があります）
-- 参加方法の詳細については[「参加する」](/join/)をご覧ください。[こちらのサイト](https://coderdojo-nara-ikoma.connpass.com/)に登録していただきますと、各回の開催案内がメールで送られます。
+- 参加方法の詳細については[「参加する」](/join/)をご覧ください。
 
 他の地域のCoderDojo開催予定は[近日開催の道場](https://coderdojo.jp/events)で探せます。
 
