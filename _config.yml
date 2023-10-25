@@ -5,7 +5,7 @@ description   : "子どもと大人のためのプログラミングコミュニ
 keywords      : "CoderDojo, 奈良, プログラミング"
 url           : https://coderdojo-nara.github.io # site url
 baseurl       : "" # apply repo name like "/myproject" if used under gh-pages branch, else (under master branch) just leave empty/blank
-cover         : "/assets/images/OGP/default_.png" # image uri like logo/cover image for site seo
+cover         : "/assets/images/OGP/default.png" # image uri like logo/cover image for site seo
 locale        : "ja_JP"
 
 google_analytics  : # UA-XXXXX-XX
