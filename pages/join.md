@@ -26,7 +26,6 @@ CoderDojoでは、参加する子供たちのことを"ニンジャ"と呼んで
 
 もし、プログラミングに関してわからないことがあっても、現役のエンジニアのメンターさんもいらっしゃいますので、他のメンターさんにフォローしてもらえます。
 
-メンターとしての参加を希望していただける方は、[ガイダンス](/mentor/guidance/)をお読みいただいた上で、[こちらのフォーム](https://docs.google.com/forms/d/e/1FAIpQLSe-jYF2vMdsfK-8EU_VHB3WiHUjU5Edytf90g8h8avQFuuTsg/viewform)よりご連絡をお願いします。
+メンターとしての参加を希望していただける方は、[ガイダンス](/mentor/guidance/)をお読みいただいた上で、[こちらのフォーム](https://forms.gle/rkq1FxkPYrVPzuyX7)よりご連絡をお願いします。
 
 みなさまのご参加をお待ちしています。
-
