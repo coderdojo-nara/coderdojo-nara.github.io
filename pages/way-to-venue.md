@@ -5,7 +5,7 @@ permalink: /way-to-venue/
 ---		
 会場は、ぷろぼの福祉ビル5F会議室です。最寄駅の近鉄新大宮駅から経路で説明します。
 
--[Googleマップはこちら](https://goo.gl/maps/6o8AhhvTSzvU7APi7)）
+[Googleマップはこちら](https://goo.gl/maps/6o8AhhvTSzvU7APi7)
 
 1. 近鉄新大宮駅から南へ進み、一つ目の交差点を左前に渡ります（両方向同時に青になります）。
 1. 道沿いに西（奈良中央郵便局の方向）へ進みます。
