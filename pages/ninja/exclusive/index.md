@@ -4,7 +4,7 @@ layout: page
 permalink: /ninja/exclusive/
 sitemap: false
 ---
-{% include excluseive.html %}
+{% include exclusive.html %}
 
 ### 利用できるもの
 - [本を借りる](./library/)

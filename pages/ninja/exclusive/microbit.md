@@ -4,7 +4,7 @@ layout: page
 permalink: /ninja/exclusive/microbit/
 sitemap: false
 ---
-{% include excluseive.html %}
+{% include exclusive.html %}
 
 [micro:bit](https://microbit.org/ja/)はイギリスで開発された教育用途のシングルボードコンピュータで、プログラミングにはPCが必要ですがPCで作ったプログラムを転送すれば単体で動作させることができるものです。
 

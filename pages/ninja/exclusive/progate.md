@@ -4,7 +4,7 @@ layout: page
 permalink: /ninja/exclusive/progate/
 sitemap: false
 ---
-{% include excluseive.html %}
+{% include exclusive.html %}
 
 CoderDojoでは、オンライン学習サービス"[Progate](https://prog-8.com/)"さんの法人向けプランを無償で利用させていただけることになりました。
 

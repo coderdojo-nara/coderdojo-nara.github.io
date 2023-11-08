@@ -4,7 +4,7 @@ layout: page
 permalink: /ninja/exclusive/minecraft/
 sitemap: false
 ---
-{% include excluseive.html %}
+{% include exclusive.html %}
 
 CoderDojoの参加者は、 Minecraft Educationのライセンスを貸与してもらうことができます。
 
