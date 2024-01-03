@@ -32,6 +32,9 @@ sass:
 author:
   name     : "CoderDojo 奈良"
 
+include:
+  - _pages
+
 plugins:
   - jekyll-sitemap
   - bourbon
