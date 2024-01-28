@@ -1,5 +1,5 @@
 ---
-title: おうちをプログラミングしよう！
+title: おうちをプログラミングしよう@Panasonic
 date: 2024-01-27T23:00:00+09:00
 author: kwaka1208
 layout: post
