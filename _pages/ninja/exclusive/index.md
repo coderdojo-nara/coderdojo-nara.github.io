@@ -12,4 +12,6 @@ sitemap: false
 - [micro:bitを使う](./microbit/)
 - [Minecraft Education（教育版マインクラフト）のライセンス貸与](./minecraft/)
 
+{% include sns.html %}
+
 {% include contact.html %}
