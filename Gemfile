@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 gemspec
-gem "jekyll", "~> 4.2"
+gem "jekyll", "~> 4.0.0"
 group :jekyll_plugins do
     gem "jekyll-sitemap"
     gem "bourbon"
