@@ -3,7 +3,7 @@ title: CoderDojo 奈良 No.66開催!!
 date: 2022-11-20T12:00:00+09:00
 author: 610t
 layout: post
-permalink: /blog/CoderDojoNara_20221119
+permalink: /blog/CoderDojoNara_20221119/
 categories:
   - blog
 ---
