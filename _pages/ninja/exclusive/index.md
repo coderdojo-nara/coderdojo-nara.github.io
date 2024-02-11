@@ -1,5 +1,5 @@
 ---
-title: ニンジャ向け情報まとめ
+title: CoderDojo 奈良に参加されているみなさんへ
 layout: page
 permalink: /ninja/exclusive/
 sitemap: false
