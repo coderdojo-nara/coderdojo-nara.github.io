@@ -17,8 +17,8 @@ categories:
 [この資料](https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/e617a8c6-f884-4fad-b27f-cc1cbba04982/cbd2794a/20220517_meeting_mobility_outline_05.pdf)の中の
 ![](/assets/images/2024/02/cover.png)
 
-19枚目のここです。
-![](/assets/images/2024/02/p19.png)
+19枚目のここです（画像をクリック／タップすると拡大します）。
+[![](/assets/images/2024/02/p19.png)](/assets/images/2024/02/p19.png)
 
 誤解が無いように念のためお伝えしておきますと、この資料はデジタル庁が作ったものではなく「一般社団法人スマートシティ・インスティテュート」という団体が作成したものであり、国がそれを認めたとかそういう話でもありません。
 
