@@ -1,6 +1,6 @@
 ---
 title: CoderDojoは暮らしやすさの指標のひとつらしい（知らんけど）
-date: 2024-02-11T10:00:00+09:00
+date: 2024-02-12T10:00:00+09:00
 author: kwaka1208
 layout: post
 permalink: /blog/well-being/
