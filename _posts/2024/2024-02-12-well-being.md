@@ -11,7 +11,7 @@ categories:
 
 古い話で恐縮ですが、あまり一般には知られていないのかなと思うので記事にしてみました。
 
-令和4年（2022年）のに開催された「[デジタル交通社会のありかたに関する研究会](https://www.digital.go.jp/councils/digital-transportation-society/e617a8c6-f884-4fad-b27f-cc1cbba04982)」という会合で発表された資料の中に「暮らしやすさの客観指数」の項目としてCoderDojoが挙げられています。
+令和4年（2022年）に開催された「[デジタル交通社会のありかたに関する研究会](https://www.digital.go.jp/councils/digital-transportation-society/e617a8c6-f884-4fad-b27f-cc1cbba04982)」という会合で発表された資料の中に「暮らしやすさの客観指数」の項目としてCoderDojoが挙げられています。
 
 
 [この資料](https://www.digital.go.jp/assets/contents/node/basic_page/field_ref_resources/e617a8c6-f884-4fad-b27f-cc1cbba04982/cbd2794a/20220517_meeting_mobility_outline_05.pdf)の中の
