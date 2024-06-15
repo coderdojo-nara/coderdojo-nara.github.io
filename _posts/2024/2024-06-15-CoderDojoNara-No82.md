@@ -7,3 +7,12 @@ permalink: /blog/CoderDojoNara_20240615
 categories:
   - blog
 ---
+## 会場の様子
+### みんなの作業
+#### LEGO
+#### マインクラフト
+#### Scratch
+#### OctoStudio
+### 発表:マインクラフト
+## おわりに
+## 余談: むとうがやってたこと
