@@ -26,12 +26,17 @@ categories:
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/LEGO?src=hash&amp;ref_src=twsrc%5Etfw">#LEGO</a> は、やっぱり人気!!<br>ニンジャの作品。<a href="https://twitter.com/hashtag/CoderDojo?src=hash&amp;ref_src=twsrc%5Etfw">#CoderDojo</a> <a href="https://twitter.com/hashtag/%E5%A5%88%E8%89%AF?src=hash&amp;ref_src=twsrc%5Etfw">#奈良</a> <a href="https://t.co/9Wfwnnu5cW">pic.twitter.com/9Wfwnnu5cW</a></p>&mdash; むとうたけし (@610t) <a href="https://twitter.com/610t/status/1801855470044647792?ref_src=twsrc%5Etfw">June 15, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 二人のちっさいニンジャがLEGOをしていました。
+メンターもなにやらいじっています。
+
+![](/assets/images/2024/06/No82-LEGO.jpg)
 
 タイヤで転がるものやコマを作っていました。
 転がるものはどれだけうまく転がるか、競争になっていました。
 コマも、どれだけ長い時間回るかの競争でした。
 
 #### マインクラフト
+![](/assets/images/2024/06/No82-Minecraft.jpg)
+
 マインクラフトは、いつもの二人がやっていました。
 
 一人は立派なホテルを作っていました。
@@ -40,6 +45,8 @@ categories:
 もう一人は、途中で飽きてしまい、LEGOで遊ぶのに切り替えていました。
 
 #### Scratch
+![](/assets/images/2024/06/No82-Scratch.jpg)
+
 [Scratch](https://scratch.mit.edu/)は掛け算問題出しゲームを作っていました。
 
 問題をランダムに出すために、乱数を使って、チャンピオンと一緒にあーでもないこーでもないと頑張っていました。
@@ -55,6 +62,8 @@ Scratchも開発しているLifelong Kindergartenグループが新たに開発�
 ごめんなさい。
 
 ### 発表:マインクラフトホテル
+![](/assets/images/2024/06/No82-Presentation.jpg)
+
 小学校4年生の子がマインクラフトで作ったホテルを紹介してくれました。
 
 現在は、地上5階、地下2階の構成です。
