@@ -23,6 +23,8 @@ categories:
 ニンジャのみんなは、以下のような作業をしていました。
 
 #### LEGO
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/LEGO?src=hash&amp;ref_src=twsrc%5Etfw">#LEGO</a> は、やっぱり人気!!<br>ニンジャの作品。<a href="https://twitter.com/hashtag/CoderDojo?src=hash&amp;ref_src=twsrc%5Etfw">#CoderDojo</a> <a href="https://twitter.com/hashtag/%E5%A5%88%E8%89%AF?src=hash&amp;ref_src=twsrc%5Etfw">#奈良</a> <a href="https://t.co/9Wfwnnu5cW">pic.twitter.com/9Wfwnnu5cW</a></p>&mdash; むとうたけし (@610t) <a href="https://twitter.com/610t/status/1801855470044647792?ref_src=twsrc%5Etfw">June 15, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 二人のちっさいニンジャがLEGOをしていました。
 
 タイヤで転がるものやコマを作っていました。
@@ -87,8 +89,12 @@ CoderDojo奈良としては、おそらく2024/07/20(土)になると思いま�
 ## 余談: むとうがやってたこと
 むとうは、以下のような荷物を持って参加していました。
 
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">明日の <a href="https://twitter.com/hashtag/CoderDojo?src=hash&amp;ref_src=twsrc%5Etfw">#CoderDojo</a> は、こんな感じで。 <a href="https://t.co/dmbcvkI3Fv">pic.twitter.com/dmbcvkI3Fv</a></p>&mdash; むとうたけし (@610t) <a href="https://twitter.com/610t/status/1801489660880859337?ref_src=twsrc%5Etfw">June 14, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 [M5Stack](https://m5stack.com/)というマイコンを持って行ってたのですが、これを使うには2.4GHzのWiFiが必要なことを忘れていましたorz
 昔は、デモ用のネットワークを組んで回避していたのですが、今回は作る元気がありませんでした。
+
+<blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Gの無線が無いと、オレと <a href="https://twitter.com/hashtag/UIFlow?src=hash&amp;ref_src=twsrc%5Etfw">#UIFlow</a> 1や <a href="https://twitter.com/hashtag/%EF%BD%BD%EF%BE%80%EF%BD%AF%EF%BD%B8%EF%BE%81%EF%BD%AC%EF%BE%9D?src=hash&amp;ref_src=twsrc%5Etfw">#ｽﾀｯｸﾁｬﾝ</a> は無力だ…<br>実験用ネットワーク作る元気も無いよ…<br>とりま、UIFlow2のUSBモードで逃げる。<a href="https://twitter.com/hashtag/CoderDojo?src=hash&amp;ref_src=twsrc%5Etfw">#CoderDojo</a> <a href="https://twitter.com/hashtag/%E5%A5%88%E8%89%AF?src=hash&amp;ref_src=twsrc%5Etfw">#奈良</a> <a href="https://t.co/WqVbq7puWN">pic.twitter.com/WqVbq7puWN</a></p>&mdash; むとうたけし (@610t) <a href="https://twitter.com/610t/status/1801853082180997495?ref_src=twsrc%5Etfw">June 15, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 なぜM5Stackを持って行ったのかというと、[ｽﾀｯｸﾁｬﾝ](https://scrapbox.io/stack-chan/)というAIロボットをニンジャに体験して欲しいというのと、[UIFlow](https://flow.m5stack.com/)で遊んで欲しいなぁという思いからでした。
 
