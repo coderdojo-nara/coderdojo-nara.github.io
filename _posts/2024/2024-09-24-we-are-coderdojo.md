@@ -1,5 +1,5 @@
 ---
-title: CoderDojoはCode Clubと統合されました
+title: CoderDojoのサイトはCode Clubと統合されました
 date: 2024-09-24T20:00:00+09:00
 author: kwaka1208
 layout: post
