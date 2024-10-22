@@ -46,7 +46,9 @@
 
   {% assign page_image = '' %}
   {% capture page_image %}
-      {% if page.cover %}
+      {% if page.tags contains "report" %}
+          {{ "/assets/images/OGP/report.png" | prepend: site.baseurl | prepend: site.url }}
+      {% elsif page.cover %}
           {{ page.cover | prepend: site.baseurl | prepend: site.url }}
       {% else %}
           {{ site.cover | prepend: site.baseurl | prepend: site.url }}
