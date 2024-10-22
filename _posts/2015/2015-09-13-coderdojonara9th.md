@@ -4,8 +4,6 @@ date: 2015-09-13T01:51:12+09:00
 author: kwaka1208
 layout: post
 permalink: /blog/coderdojonara9th/
-geo_public:
-  - "0"
 categories:
   - blog
 tags:
