@@ -6,6 +6,8 @@ layout: post
 permalink: /blog/CoderDojoNara_20221119/
 categories:
   - blog
+tags:
+  - report
 ---
 CoderDojo 奈良では、2022/11/19 13:00-16:00の日程で、[CoderDojo 奈良 No.66](https://coderdojo-nara-ikoma.connpass.com/event/266742/)を開催しました。
 会場は、いつもの[ぷろぼの](https://probono.vport.org/)福祉ビル 5F会議室です。

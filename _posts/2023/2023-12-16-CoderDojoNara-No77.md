@@ -6,6 +6,8 @@ layout: post
 permalink: /blog/CoderDojoNara_20231216
 categories:
   - blog
+tags:
+  - report
 ---
 むとう(@610t)です。
 

@@ -8,6 +8,8 @@ geo_public:
   - "0"
 categories:
   - blog
+tags:
+  - report
 ---
 CoderDojo 奈良の若林です。2015年9月12日、9回目のCoderDojo 奈良を開催しました。
 

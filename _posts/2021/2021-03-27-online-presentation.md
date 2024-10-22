@@ -6,6 +6,8 @@ layout: post
 permalink: /blog/2021-03-27-online-presentation/
 categories:
   - blog
+tags:
+  - report
 ---
 こんにちは、若林です。久しぶりのblog更新です。このサイトで使っているJekyllをかなり理解してきたので、ちょっと更新を頑張ってみようかなと思ったりしていますが、もしかしたら続かないかもしれません。
 

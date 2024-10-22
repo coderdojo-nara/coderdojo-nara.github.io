@@ -6,6 +6,8 @@ layout: post
 permalink: /blog/CoderDojoNara_20240615
 categories:
   - blog
+tags:
+  - report
 ---
 こんにちは、むとう([610t](https://scrapbox.io/610t/610t))です。
 今日は、[CoderDojo奈良 No.82](https://coderdojo-nara-ikoma.connpass.com/event/321004/)にメンターとして参加したので、その報告をしたいと思います。

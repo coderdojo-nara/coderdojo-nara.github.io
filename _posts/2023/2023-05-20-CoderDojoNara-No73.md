@@ -6,6 +6,8 @@ layout: post
 permalink: /blog/CoderDojoNara_20230520/
 categories:
   - blog
+tags:
+  - report
 ---
 2023/05/20(土)13:00-16:00に[CoderDojo奈良の第73回](https://coderdojo-nara-ikoma.connpass.com/event/283152/)が開催されました!!
 
