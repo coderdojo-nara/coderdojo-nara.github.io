@@ -6,10 +6,13 @@ excerpt: "子どもと大人のためのプログラミングクラブ"
 ---
 ![](/assets/images/OGP/default.png)
 
+{% include announcement.html %}
+
 ## CoderDojo 奈良について
 CoderDojo 奈良は、アイルランドで始まった子どもと大人のためのプログラミングクラブの奈良市での活動です。プログラミング以外にもコンピュータを使った活動が好きな子どもたちが仲間を見つける場所で、誰でも参加費用を払うことなく参加できます。
 
 {% include inner_links.html %}
+
 
 ## Be Cool!
 CoderDojoのただひとつのルールは、"Be Cool!（カッコよくあれ！）"です。活動の中のすべてのことについて"Cool"であることを心がけてください。

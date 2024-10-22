@@ -5,10 +5,7 @@ permalink: /contact/
 ---		
 CoderDojoへの参加に関心を持ってくださり、ありがとうございます。
 
-現在、問い合わせは[メール nara.jp@coderdojo.com](mailto:nara.jp@coderdojo.com)か[X（旧Twitter）](https://x.com/coderdojo-nara/)で受け付けております。
+問い合わせについては、[お問い合わせフォーム](https://forms.gle/tYBwSvrEiEYujNNa7){:target="_blank"}で受け付けています。
+もっとカジュアルにコンタクトしたい、という方は[X（旧Twitter）](https://x.com/coderdojo-nara/){:target="_blank"}もありますので、お気軽にメンションやメッセージをください。
 
-活動内容や参加方法など、どんなことでも結構ですので、気軽にご連絡ください。[どんな人がやってるの？についてはこちら](/staff/)をご覧ください。
-
-- [メール nara.jp@coderdojo.com](mailto:nara.jp@coderdojo.com)で問い合わせる。
-
-- [X（旧Twitter）@CoderDojoNara](https://x.com/CoderDojoNara/)で問い合わせる。
+[どんな人がやってるの？についてはこちら](/staff/)にあります。活動内容や参加方法など、どんなことでも結構ですので、気軽にご連絡くださいね。
