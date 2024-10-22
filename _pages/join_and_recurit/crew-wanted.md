@@ -1,5 +1,5 @@
 ---
-title: CoderDojoで一緒に活動しませんか
+title: CoderDojo 奈良で一緒に活動しませんか
 layout: page
 permalink: /crew-wanted/
 ---		
