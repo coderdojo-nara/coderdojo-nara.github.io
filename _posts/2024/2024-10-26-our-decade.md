@@ -4,7 +4,7 @@ date: 2024-10-26T00:00:00+09:00
 author: kwaka1208
 layout: post
 permalink: /blog/our-decade/
-cover: /assets/images/2024/10/decade.jpg
+cover: /assets/images/2024/10/decade.png
 categories:
   - blog
 ---
