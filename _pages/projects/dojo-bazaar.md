@@ -1,11 +1,12 @@
 ---
-title: Dojo生協
+title: Dojoバザール
 layout: page
-permalink: /dojo-coop/
+permalink: /dojo-bazaar/
 sitemap: true
 ---
+
 micro:bitやM5Stack、その周辺機器などプログラミングに使う電子デバイスなどを購入したいけど、そんなにたくさん買うわけじゃないので送料の方が高くついて買いにくい、ってことありませんか？若林はあります。
-そういう悩みを解消するために共同購入する仕組み「Dojo生協」をトライアルとしてやってみようと思います。
+そういう悩みを解消するために共同購入する市場的「Dojoバザール」をトライアルとしてやってみようと思います。
 送料は買う方にとっても負担ですが無料にしてしまうと売る側の負担が大きい。物流にもきちんとお金が落ちるようになっていないといけないので、買う側でまとまりましょうという取り組みです。
 
 当面は、[スイッチサイエンス](https://www.switch-science.com/)での購入に限定したいと思います。これはあっちの方が安いとかもあると思いますが、言い出すとサポートしきれないので。良いやり方が考案できれば購入先の選択肢を増やします。
@@ -18,10 +19,10 @@ micro:bitやM5Stack、その周辺機器などプログラミングに使う電�
 送料負担を減らすのが狙いなので、基本的にDojoの日に受け渡しする前提です。
 連絡用にLINEのオープンチャットを作成しましたので、関心のある方はご参加ください。
 
-オープンチャット「Dojo生協」（[参加リンク](https://line.me/ti/g2/2wnQ7ez-UbDaYkmNbmX_ThShiXss-KagsgnlXA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default)）
+オープンチャット「Dojoバザール」（[参加リンク](https://line.me/ti/g2/2wnQ7ez-UbDaYkmNbmX_ThShiXss-KagsgnlXA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default)）
 
 何を買ったらいいのかわからない、ということの相談もできるようにしたいと思いますので、直近購入の予定が無い方でもぜひご参加ください。
 
 おすすめの製品などはこちらにまとめていきます。
 
-[Dojo生協 - CoderDojo Nara](https://scrapbox.io/CoderDojo-Nara/Dojo%E7%94%9F%E5%8D%94)
+[Dojoバザール - CoderDojo Nara](https://scrapbox.io/CoderDojo-Nara/Dojo%E7%94%9F%E5%8D%94)
