@@ -4,7 +4,7 @@ date: 2023-10-26T00:00:00+09:00
 author: kwaka1208
 layout: post
 permalink: /blog/9th-avvinersary/
-cover: /assets/images/2023/9th-anniversary.png
+og_image: /assets/images/2023/9th-anniversary.png
 categories:
   - blog
 ---

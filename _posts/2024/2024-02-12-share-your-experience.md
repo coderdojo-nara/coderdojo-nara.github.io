@@ -4,7 +4,7 @@ date: 2024-02-12T12:00:00+09:00
 author: kwaka1208
 layout: post
 permalink: /blog/share-your-experience/
-cover: /assets/images/2024/02/share-your-experience.png
+og_image: /assets/images/2024/02/share-your-experience.png
 categories:
   - blog
 ---

@@ -6,7 +6,7 @@ layout: post
 permalink: /blog/dojocon-japan-2023-in-nara/
 categories:
   - blog
-cover: /assets/images/2022/dojocon-japan-2023-in-nara.png
+og_image: /assets/images/2022/dojocon-japan-2023-in-nara.png
 ---
 ![](/assets/images/2022/dojocon-japan-2023-in-nara.png)
 

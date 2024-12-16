@@ -5,8 +5,10 @@ description   : "奈良市で開催している子どものためのプログラ
 keywords      : "奈良市,プログラミング,子ども,CoderDojo,奈良県,無料,非営利,コミュニティ"
 url           : https://coderdojo-nara.github.io # site url
 baseurl       : "" # apply repo name like "/myproject" if used under gh-pages branch, else (under master branch) just leave empty/blank
-cover         : "/assets/images/OGP/default.png" # image uri like logo/cover image for site seo
 locale        : "ja_JP"
+
+og_image        : /assets/images/OGP/default.png
+og_image_report : /assets/images/OGP/report.png
 
 google_analytics  : # UA-XXXXX-XX
 twitter_username  : "@CoderDojoNara"

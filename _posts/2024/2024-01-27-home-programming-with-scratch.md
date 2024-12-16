@@ -4,7 +4,7 @@ date: 2024-01-27T23:00:00+09:00
 author: kwaka1208
 layout: post
 permalink: /blog/home-programming-with-scratch/
-cover: /assets/images/2024/01/ogp-panasonic.png
+og_image: /assets/images/2024/01/ogp-panasonic.png
 categories:
   - blog
 ---

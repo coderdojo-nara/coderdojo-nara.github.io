@@ -4,7 +4,7 @@ date: 2024-09-24T20:00:00+09:00
 author: kwaka1208
 layout: post
 permalink: /blog/we-are-coderdojo/
-cover: /assets/images/2024/09/ogp-we-are-coderdojo.png
+og_image: /assets/images/2024/09/ogp-we-are-coderdojo.png
 categories:
   - blog
 ---
