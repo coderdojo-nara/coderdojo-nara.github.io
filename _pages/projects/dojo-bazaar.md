@@ -26,3 +26,5 @@ micro:bitやM5Stack、その周辺機器などプログラミングに使う電�
 おすすめの製品などはこちらにまとめていきます。
 
 [Dojoバザール - CoderDojo Nara](https://scrapbox.io/CoderDojo-Nara/Dojo%E7%94%9F%E5%8D%94)
+
+共同購入を申込される方は[こちらのフォーム](https://forms.gle/utE4DY65ds7BwCrF8)からお申し込みください。
