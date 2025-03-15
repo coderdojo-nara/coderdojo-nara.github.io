@@ -21,7 +21,7 @@ permalink: /coolest_projects_international/
 ## Coolest Projects Globalとは
 Coolest ProjectsはCoderDojoコミュニティで開催されている作品発表のイベントです。元々はアイルランドでのみ開催されていましたが、最近はアイルランド以外の国でも開催されるようになり、アイルランドで開催されるものを"Coolest Projects Global"と呼ばわれるようになりました。
 
-DojoCon Japan 2016で開催されました"Go Global! DojoCon Japan 2016プログラミングコンテスト"の優勝者を2017年のCoolest Projects 2017へ送り出して以降、2018,2019と毎年日本のニンジャやメンターも参加していましたが、2020年以降はオンラインでの開催となっています。
+DojoCon Japan 2016で開催されました"Go Global! DojoCon Japan 2016プログラミングコンテスト"の優勝者を2017年のCoolest Projects 2017へ送り出して以降、2018,2019と毎年日本のニンジャやサポーターも参加していましたが、2020年以降はオンラインでの開催となっています。
 
 > 昨年までは、Coolest Projects Internationalでしたが、今年からGlobalになったようです。これがダブリンで開催されるものを指すのかオンライン開催のものを指すのかはよくわかりません。
 

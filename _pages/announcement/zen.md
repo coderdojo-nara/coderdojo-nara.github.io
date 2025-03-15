@@ -6,7 +6,7 @@ permalink: /zen/
 ## zenへの登録について
 「CoderDojo Community Platform Zen」とは、アイルランドのCoderDojo Foundationが開発・提供しているサービスで、Dojoのイベント管理機能やフォーラム（掲示板）などの機能があります。
 
-奈良と生駒では、2018年よりこのサービスを使って参加申し込みの受付を行いますので、保護者のみなさん、13以上のニンジャ、メンターさんも以下の手順に沿って登録をお願いいたします。
+奈良と生駒では、2018年よりこのサービスを使って参加申し込みの受付を行いますので、保護者のみなさん、13以上のニンジャ、サポーターさんも以下の手順に沿って登録をお願いいたします。
 
 13歳未満のニンジャについては、自分のアカウントを持つことができませんので、保護者の方が登録していただいて保護者のアカウントにニンジャを追加する形になります。
 
@@ -57,8 +57,8 @@ permalink: /zen/
 
 <img src="/assets/images/zen/05.png" style="border: solid 1px #222; max-width: 488px; width: 100%; height: auto;">
 
-## メンターさんへ
-メンターとして参加してくださっている方は、さらに「Voluteer as Mentor」のボタンを押してください。
+## サポーターさんへ
+サポーターとして参加してくださっている方は、さらに「Voluteer as Mentor」のボタンを押してください。
 
 <img src="/assets/images/zen/06.png" style="border: solid 1px #222; max-width: 500px; width: 100%; height: auto;">
 
