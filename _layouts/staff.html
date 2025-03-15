@@ -1,0 +1,10 @@
+---
+layout: page
+published: true
+---
+{% for p in site.data.staff %}
+<h3>{{ p.name }}</h3>
+<p>{{ p.profile }}</p>
+<p>住んでるところ： {{ p.address }}</p>
+<a href='{{ p.link }}' target='_blank'>{{ p.link }}</a>
+{% endfor %}
