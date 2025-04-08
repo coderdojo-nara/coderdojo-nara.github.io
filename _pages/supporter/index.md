@@ -1,8 +1,8 @@
 ---
 title: CoderDojoでサポーターができること
 layout: page
-permalink: /mentor/
-sitemap: false
+permalink: /supporter/
+sitemap: true
 ---
 CoderDojoで子どもたちをサポートする大人を「サポーター」と呼びます。サポーターは必ずしもエンジニアでなくても構いません、プログラミング初心者、未経験者でもOK。子どもたちと一緒に活動するのが好きな方なら誰でもサポーターになれます。そんなサポーターのみなさんがCoderDojoでできることはの中の3つをご紹介します。
 
