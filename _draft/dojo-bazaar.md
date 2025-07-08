@@ -2,7 +2,7 @@
 title: Dojoバザール
 layout: page
 permalink: /dojo-bazaar/
-sitemap: true
+sitemap: false
 ---
 micro:bitやM5Stack、その周辺機器などプログラミングに使う電子デバイスなどを購入したいけど、そんなにたくさん買うわけじゃないので送料の方が高くついて買いにくい、ってことありませんか？若林はあります。
 そういう悩みを解消するために共同購入する市場的「Dojoバザール」をトライアルとしてやってみようと思います。
