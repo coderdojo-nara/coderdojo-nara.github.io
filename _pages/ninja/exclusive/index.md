@@ -9,7 +9,6 @@ sitemap: false
 ### 利用できるもの
 - [本を借りる](./library/)
 - [オンライン学習サービス"Progate"を利用する](./progate/)
-- [Minecraft Education（教育版マインクラフト）のライセンス貸与](./minecraft/)
 
 {% include sns.html %}
 
