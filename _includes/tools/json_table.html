@@ -1,0 +1,101 @@
+<div id="{{ include.id | default: 'json-table' }}" class="json-table-container">
+    <p class="loading-message">Loading data...</p>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const url = "{{ include.src }}";
+        const containerId = "{{ include.id | default: 'json-table' }}";
+        const container = document.getElementById(containerId);
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tableData = Array.isArray(data) ? data : [data];
+
+                if (tableData.length === 0) {
+                    container.innerHTML = '<p>No data found.</p>';
+                    return;
+                }
+
+                const table = document.createElement('table');
+                table.className = 'json-table';
+
+                const headers = Object.keys(tableData[0]);
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+
+                headers.forEach(key => {
+                    const th = document.createElement('th');
+                    th.textContent = key;
+                    headerRow.appendChild(th);
+                });
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+
+                const tbody = document.createElement('tbody');
+                tableData.forEach(row => {
+                    const tr = document.createElement('tr');
+                    headers.forEach(key => {
+                        const td = document.createElement('td');
+                        const cellValue = row[key];
+                        td.textContent = (typeof cellValue === 'object' && cellValue !== null)
+                            ? JSON.stringify(cellValue)
+                            : cellValue;
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+                table.appendChild(tbody);
+
+                container.innerHTML = '';
+                container.appendChild(table);
+            })
+            .catch(error => {
+                console.error('Error fetching JSON:', error);
+                container.innerHTML = `<p style="color: red;">Error loading data: ${error.message}</p>`;
+            });
+    });
+</script>
+
+<style>
+    /* --- スタイル設定 --- */
+
+    .json-table {
+        width: 95%;
+        /* ページ幅の95% */
+        margin: 20px auto;
+        /* 中央寄せ */
+        border-collapse: collapse;
+        table-layout: fixed;
+        /* ★重要: これを設定し、セル幅を指定しないと「均等割り」になります */
+    }
+
+    .json-table th,
+    .json-table td {
+        /* width: 50%;  <-- ★削除しました。これで自動計算されます */
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+        word-wrap: break-word;
+        /* 均等幅の枠からはみ出さないように強制的に折り返す */
+        vertical-align: top;
+        /* 複数行になったときに見やすいよう上揃え */
+    }
+
+    .json-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .loading-message {
+        font-style: italic;
+        color: #666;
+        text-align: center;
+    }
+</style>
