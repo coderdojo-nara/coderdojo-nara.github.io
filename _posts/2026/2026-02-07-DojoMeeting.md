@@ -5,6 +5,51 @@ author: kwaka1208
 layout: post
 categories:
   - blog
+images:
+    - url: /assets/images/2026/DojoMeeting/01.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/02.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/03.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/04.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/05.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/06.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/07.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/08.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/09.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/10.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/11.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/12.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/13.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/14.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/15.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/16.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/17.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/18.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/19.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/20.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/21.jpg
+      alt: 
+    - url: /assets/images/2026/DojoMeeting/22.jpg
+      alt: 
 ---
 2026年2月7日、CoderDojoの運営に関わる仲間が集う **DojoMeeting** を開催しました。
 
@@ -66,3 +111,4 @@ DojoMeetingには、決まった形式はありません。開催頻度の縛り
 - [DojoMeeting Kansai #1 - connpass](https://dojo-meeting.connpass.com/event/379223/)
 - [【CoderDojo】DojoMeeting Kansaiから始まるKNIMEエバンジェリスト活動｜ナイメスト](https://note.com/knimesupportteam/n/n78f7ffdfd269)
 
+{% include tools/images.html images=page.images %}

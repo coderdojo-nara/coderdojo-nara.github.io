@@ -1,0 +1,26 @@
+<style>
+    .images {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-bottom: 1.5rem;
+        img {
+            width:100%;
+            max-width:320px;
+            margin-right:1rem;
+            border-radius: 6px;
+        }
+        p {
+            text-align: center;
+        }
+    }
+</style>
+
+<div class="images">
+    {% for image in include.images %}
+    <div class="image">
+        <img src="{{ image.url }}" alt="{{ image.alt }}">
+        <p>{{ image.alt }}</p>
+    </div>
+    {% endfor %}
+</div>
