@@ -105,7 +105,7 @@ DojoMeetingには、決まった形式はありません。開催頻度の縛り
 
 この記事を読んでくださった皆さんの地域でも、ぜひこの仕組みを「真似して」開催してみてください。こうした小さな交流の輪が広がることで、既存の道場が活性化したり、新しい道場が生まれるきっかけになれば幸いです。
 
-##　当日資料
+## 当日資料
 
 - [DojoMeetingKansai20250207-CDN.pdf - Google ドライブ](https://drive.google.com/file/d/1O_t4Tld-pdA2Md2ETuZTH5MOra3V2h-Z/view)
 - [CDNロボットワークショップ20260111.pdf - Google ドライブ](https://drive.google.com/file/d/1VmlcFGLBnaTU_KNOQTJFguFJ8G9L4tP7/view)
