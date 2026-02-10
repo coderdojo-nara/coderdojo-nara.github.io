@@ -120,6 +120,8 @@ DojoMeetingには、決まった形式はありません。開催頻度の縛り
 
 - [KNIME｜データの連携・統合・分析を自動化するオープンソースプラットフォームKNIME（インフォコム）](https://knime-infocom.jp/)
 - [Low-code programming for event-driven applications : Node-RED](https://nodered.org/)
-- [Luanti | オープンソース・ボクセルゲームエンジン - Luanti](https://www.luanti.org/ja/)
+- [Luanti｜オープンソース・ボクセルゲームエンジン - Luanti](https://www.luanti.org/ja/)
+
+## 当日の様子
 
 {% include tools/images.html images=page.images %}
