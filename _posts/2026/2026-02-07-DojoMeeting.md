@@ -118,4 +118,8 @@ DojoMeetingには、決まった形式はありません。開催頻度の縛り
 - [DojoMeeting Kansai #1 - connpass](https://dojo-meeting.connpass.com/event/379223/)
 - [【CoderDojo】DojoMeeting Kansaiから始まるKNIMEエバンジェリスト活動｜ナイメスト](https://note.com/knimesupportteam/n/n78f7ffdfd269)
 
+- [KNIME｜データの連携・統合・分析を自動化するオープンソースプラットフォームKNIME（インフォコム）](https://knime-infocom.jp/)
+- [Low-code programming for event-driven applications : Node-RED](https://nodered.org/)
+- [Luanti | オープンソース・ボクセルゲームエンジン - Luanti](https://www.luanti.org/ja/)
+
 {% include tools/images.html images=page.images %}
