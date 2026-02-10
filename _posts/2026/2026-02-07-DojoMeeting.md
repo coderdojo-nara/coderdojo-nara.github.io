@@ -105,8 +105,15 @@ DojoMeetingには、決まった形式はありません。開催頻度の縛り
 
 この記事を読んでくださった皆さんの地域でも、ぜひこの仕組みを「真似して」開催してみてください。こうした小さな交流の輪が広がることで、既存の道場が活性化したり、新しい道場が生まれるきっかけになれば幸いです。
 
+##　当日資料
+
+- [DojoMeetingKansai20250207-CDN.pdf - Google ドライブ](https://drive.google.com/file/d/1O_t4Tld-pdA2Md2ETuZTH5MOra3V2h-Z/view)
+- [CDNロボットワークショップ20260111.pdf - Google ドライブ](https://drive.google.com/file/d/1VmlcFGLBnaTU_KNOQTJFguFJ8G9L4tP7/view)
+- [3Dプリンターのワークショップをやってみた20260207.pdf - Google ドライブ](https://drive.google.com/file/d/1Bs7N0TNg5TZRCsBISyLU-koihrlTEjO0/view)
+- [KNIMEは地味だが役に立つ_2026_0207_DojoMeeting_Kansai_#1.pptx](https://www.slideshare.net/slideshow/knime-_2026_0207_dojomeeting_kansai_-1-pptx/285697708)
+- [KNIMEで奈良の気温を調べてみた_2026_0207_KNIMEST.pptx](https://www.slideshare.net/slideshow/knime-_2026_0207_knimest-pptx/285726848)
+
 ## 関連リンク
-当日のイベントページ、資料、参加者のblogやSNSの投稿などをご紹介します。
 
 - [DojoMeeting Kansai #1 - connpass](https://dojo-meeting.connpass.com/event/379223/)
 - [【CoderDojo】DojoMeeting Kansaiから始まるKNIMEエバンジェリスト活動｜ナイメスト](https://note.com/knimesupportteam/n/n78f7ffdfd269)
