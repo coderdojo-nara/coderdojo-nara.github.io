@@ -1,0 +1,46 @@
+label:
+  type: text
+  comment: The label text for the input field.
+name:
+  type: text
+  comment: The name attribute for the input field.
+type:
+  type: select
+  options:
+    values:
+      - text
+      - email
+      - password
+      - tel
+      - url
+      - number
+  comment: The input type.
+placeholder:
+  type: text
+  comment: Placeholder text for the input field.
+required:
+  type: switch
+  comment: Whether the field is required.
+value:
+  type: text
+  comment: The default value for the input field.
+iconName:
+  type: select
+  comment: The name of the icon to display. See the Icon component documentation for more information.
+  options:
+    values: _select_data.icons
+    preview:
+      text:
+        - key: name
+      image:
+        - template: src/icons/{id}.svg
+iconPosition:
+  type: select
+  comment: The position of the icon relative to the input field.
+  hidden: "!iconName"
+  options:
+    values:
+      - id: before
+        name: Before
+      - id: after
+        name: After

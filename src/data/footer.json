@@ -1,0 +1,37 @@
+{
+  "logoSource": "/assets/images/OGP/default.png",
+  "logoAlt": "CoderDojo 奈良",
+  "links": [
+    {
+      "name": "ホーム",
+      "path": "/"
+    },
+    {
+      "name": "About",
+      "path": "/about/"
+    },
+    {
+      "name": "参加する",
+      "path": "/join/"
+    },
+    {
+      "name": "Blog",
+      "path": "/blog/"
+    },
+    {
+      "name": "お問い合わせ",
+      "path": "/contact/"
+    },
+    {
+      "name": "行動規範",
+      "path": "/code_of_conduct/"
+    }
+  ],
+  "socials": [
+    {
+      "icon": "social/x",
+      "link": "https://twitter.com/CoderDojoNara"
+    }
+  ],
+  "footerText": "© CoderDojo 奈良 All rights reserved."
+}

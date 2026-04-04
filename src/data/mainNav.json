@@ -1,0 +1,32 @@
+{
+  "logoSource": "/assets/images/OGP/default.png",
+  "logoAlt": "CoderDojo 奈良",
+  "navData": [
+    {
+      "name": "ホーム",
+      "path": "/",
+      "children": []
+    },
+    {
+      "name": "About",
+      "path": "/about/",
+      "children": []
+    },
+    {
+      "name": "参加する",
+      "path": "/join/",
+      "children": []
+    },
+    {
+      "name": "Blog",
+      "path": "/blog/",
+      "children": []
+    },
+    {
+      "name": "お問い合わせ",
+      "path": "/contact/",
+      "children": []
+    }
+  ],
+  "buttonSections": []
+}

@@ -1,14 +1,35 @@
-# 変数の定義
-JEKYLL = bundle exec jekyll
-
-# サーバー起動
+# Astroサーバー起動（開発）
 serve:
-	$(JEKYLL) serve
+	npm run dev
 
-# ビルドのみ実行
+# Astroビルド
 build:
-	$(JEKYLL) build
+	npm run build
+
+# Astroプレビュー（ビルド後に起動）
+preview: build
+	npm run preview
 
 # 依存関係のインストール
 install:
-	bundle install
+	npm install
+
+# ビルド後にサイトを同期
+release: build
+	rsync -avz --delete ./dist/ pote2@pote2.sakura.ne.jp:/home/pote2/www/crssrds.jp/dist/
+
+# check.txt内のURLアクセステスト（make serveでサーバー起動後に実行）
+check:
+	@while IFS= read -r url; do \
+		status=$$(curl -s -o /dev/null -w "%{http_code}" "$$url"); \
+		if [ "$$status" = "200" ]; then \
+			echo "OK  $$url"; \
+		else \
+			echo "NG  $$url ($$status)"; \
+		fi; \
+	done < check.txt > check_result.txt
+	@echo "完了: check_result.txt に出力しました"
+
+# check_result.txt の全URLをブラウザで開く
+open-check:
+	@open $$(awk '{print $$2}' check_result.txt | tr '\n' ' ')

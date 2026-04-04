@@ -1,0 +1,8 @@
+{
+  "name": "CoderDojo 奈良",
+  "url": "https://coderdojo-nara.github.io",
+  "description": "奈良市で開催している子どものためのプログラミングコミュニティ",
+  "logoSource": "/assets/images/OGP/default.png",
+  "titleFormat": "{title} | CoderDojo 奈良",
+  "twitterHandle": "@CoderDojoNara"
+}

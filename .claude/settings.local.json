@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(head -20 /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/_posts/2026/*.md)",
+      "Bash(find /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/_posts -name *.md)",
+      "Bash(rsync -av --exclude='.git' --exclude='README.md' /Users/kwaka1208/git/01_web/astro-component-starter-main/ /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/)",
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)",
+      "Bash(cp:*)",
+      "Bash(cat /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src/pages/blog/[...page].astro)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Read(//Users/kwaka1208/.nodenv/versions/**)",
+      "Bash(nodenv versions:*)",
+      "Bash(NODENV_VERSION=22.22.1 npm run build)",
+      "Bash(NODENV_VERSION=22.22.1 /Users/kwaka1208/.nodenv/versions/22.22.1/bin/node --version)",
+      "Bash(NODENV_VERSION=22.22.1 /Users/kwaka1208/.nodenv/versions/22.22.1/bin/npm install)",
+      "Bash(PATH=\"/Users/kwaka1208/.nodenv/versions/22.22.1/bin:$PATH\" npm run build)",
+      "Bash(sed -i '' \"s/^date: ''''$/date: ''2026-03-01''/\" /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src/content/blog/2026-03-01-presentation.mdx)",
+      "Bash(sed -i '' \"s/^date: ''''$/date: ''2026-04-04''/\" /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src/content/blog/2026-04-04-contest.mdx)",
+      "Bash(ls /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/dist/sitemap*)",
+      "Bash(PATH=\"/Users/kwaka1208/.nodenv/versions/22.22.1/bin:$PATH\" npm install @astrojs/rss)"
+    ]
+  }
+}

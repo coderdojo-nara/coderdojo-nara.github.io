@@ -1,0 +1,126 @@
+$font-color: #222222;
+$body-color: #fefefe;
+$head-color: #dbdbdb;
+// #f0fae6;
+// $head-color: #e8f7d9;
+$link-color: #0086B3;
+
+$h2-bg-color: gray;
+$h2-font-color: $body-color;
+$h3-bg-color: gray;
+$h3-font-color: gray;
+$h4-bg-color: gray;
+$h4-font-color: $body-color;
+
+body {
+    color: $font-color;
+    background-color: $body-color;
+    line-height: 2em;
+    font-size: 1em;
+}
+
+div.post-content {
+    line-height: 2.2em;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: $link-color;
+}
+
+h1 {
+    border-radius: 15px;
+}
+
+h2, h3, h4 {
+    padding: 10px 10px;
+    margin-top: 30px;
+}
+
+h2 {
+    font-size: 1.2em;
+    color: $font-color;
+    border-bottom: 3px solid $h2-bg-color;
+}
+
+h3 {
+    font-size: 1em;
+    color: $font-color;
+    border-bottom: 1px solid $h3-bg-color;
+}
+
+h4 {
+    font-size: 1em;
+    color: $font-color;
+    border-bottom: 1px solid $h4-bg-color;
+}
+
+.highlight pre code {
+    white-space: pre-wrap;
+    padding: 15px;
+}
+
+td {
+    padding: 0 15px;
+}
+
+i {
+    margin-right: 5px;
+}
+
+.site-header {
+    background-color: $head-color;
+}
+
+// .navbar {
+//     padding-top: 10px;
+// }
+
+// .nav > .container {
+//     display: flex;
+//     flex-direction: row;
+//     margin-bottom: 0;
+//     padding-bottom: 5px;
+
+// }
+
+h1.logo {
+    margin: 0;
+}
+
+h1.post-title {
+    margin-bottom: 0.2em;
+}
+
+.post-date-author {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+    img {
+        max-width: 30px;
+        height: auto;
+        border-radius: 50%;
+        margin-right: 1em;
+    }
+}
+
+
+.logo {
+    a {
+        color: $font-color;
+    }
+    font-weight: 300;
+    span {
+        font-weight: 300;
+    }
+}
+
+hr {
+    margin: 3rem 0 3rem 0; 
+}
+
+.profile_image {
+    width: 100%;
+    max-width: 150px;
+    border-radius:50%;
+    margin-right: 1rem;  
+}
