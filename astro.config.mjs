@@ -4,6 +4,7 @@ import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import rehypeExternalLinks from "rehype-external-links";
 
 import mdx from "@astrojs/mdx";
 
@@ -82,6 +83,11 @@ export default defineConfig({
     }),
     mdx(),
   ],
+  markdown: {
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
+    ],
+  },
   vite: {
     build: {
       chunkSizeWarningLimit: 1024,

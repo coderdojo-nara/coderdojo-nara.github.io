@@ -46,6 +46,13 @@ const pageTitle = blogPage?.data?.title ?? "Blog";
 const pageDescription =
   blogPage?.data?.description ??
   "CoderDojo 奈良の活動報告や関連情報のブログ記事一覧です。";
+
+function getPostUrl(post: any): string {
+  const year = String(post.data.date.getFullYear());
+  const filename = post.id.split("/").pop() ?? post.id;
+  const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
+  return `/${year}/${slug}/`;
+}
 ---
 
 <Page
@@ -79,13 +86,10 @@ const pageDescription =
                 day: "numeric",
               });
 
-              // Get slug from id (for glob loader) or slug property (for default loader)
-              const slug = post.id?.replace(/\.mdx?$/, "") || post.slug;
-
               return (
                 <GridItem>
                   <Card
-                    link={`/blog/${slug}`}
+                    link={getPostUrl(post)}
                     rounded={true}
                     border={true}
                     paddingVertical="lg"

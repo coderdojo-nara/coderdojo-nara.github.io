@@ -63,7 +63,7 @@ collections_config:
         comment: Optional image path for the blog post.
         options:
           paths:
-            uploads: src/assets/images
+            uploads: src/images
           resize_style: contain
           width: 1920
           height: 1280
@@ -82,7 +82,7 @@ collections_config:
         type: image
         options:
           paths:
-            uploads: src/assets/images
+            uploads: src/images
           resize_style: contain
           width: 1920
           height: 1280
@@ -90,7 +90,7 @@ collections_config:
         type: image
         options:
           paths:
-            uploads: src/assets/images
+            uploads: src/images
           resize_style: contain
           width: 1920
           height: 1280

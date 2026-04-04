@@ -24,7 +24,7 @@ authorImage:
   comment: Photo of the testimonial author.
   options:
     paths:
-      uploads: src/assets/images
+      uploads: src/images
       static: ""
     resize_style: contain
     width: 1920

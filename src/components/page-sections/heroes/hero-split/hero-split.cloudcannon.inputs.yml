@@ -24,7 +24,7 @@ imageSource:
   comment: Feature image to display alongside the hero content.
   options:
     paths:
-      uploads: src/assets/images
+      uploads: src/images
       static: ""
     resize_style: contain
     width: 1920

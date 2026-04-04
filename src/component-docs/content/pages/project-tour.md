@@ -126,7 +126,7 @@ pageSections:
   - _component: page-sections/features/feature-split
     heading: Fast and easy
     subtext: Zero-JS by default.
-    imageSource: /src/assets/images/feature.svg
+    imageSource: /src/images/feature.svg
 ---
 ```
 

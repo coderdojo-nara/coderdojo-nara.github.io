@@ -69,7 +69,7 @@ let imageHeight = height;
 let shouldRenderOptimizedPicture = false;
 
 if (isLocalSource) {
-  const imageFiles = import.meta.glob("/src/assets/images/**/*", {
+  const imageFiles = import.meta.glob("/src/images/**/*", {
     import: "default",
     eager: true,
   }) as Record<string, any>;

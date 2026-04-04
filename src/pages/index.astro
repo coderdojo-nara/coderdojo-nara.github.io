@@ -1,0 +1,94 @@
+---
+import Heading from "@core-elements/heading/Heading.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Page from "@layouts/Page.astro";
+import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
+import Card from "@wrappers/card/Card.astro";
+import Grid from "@wrappers/grid/Grid.astro";
+import GridItem from "@wrappers/grid/GridItem.astro";
+import footerData from "@data/footer.json";
+import mainNavData from "@data/mainNav.json";
+import { getCollection, render } from "astro:content";
+
+const pages = await getCollection("pages");
+const indexPage = pages.find((p) => p.id === "index");
+
+const { Content } = indexPage ? await render(indexPage) : { Content: () => null };
+
+const recentPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 4);
+
+function getPostUrl(post: any): string {
+  const year = String(post.data.date.getFullYear());
+  const filename = post.id.split("/").pop() ?? post.id;
+  const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
+  return `/${year}/${slug}/`;
+}
+---
+
+<Page
+  frontmatter={indexPage?.data}
+  mainNav={mainNavData}
+  footer={footerData}
+>
+  <Content />
+
+  <CustomSection
+    maxContentWidth="2xl"
+    paddingHorizontal="lg"
+    paddingVertical="2xl"
+    colorScheme="inherit"
+    backgroundColor="base"
+  >
+    <Heading level="h2" size="lg" style="margin-bottom: var(--spacing-lg);">
+      最近のブログ記事
+    </Heading>
+
+    <Grid
+      gap="md"
+      layout="start"
+      minItemWidth="240"
+      maxItemWidth="360"
+    >
+      {
+        recentPosts.map((post) => {
+          const pubDate = post.data.date.toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+          return (
+            <GridItem>
+              <Card
+                link={getPostUrl(post)}
+                rounded={true}
+                border={true}
+                paddingVertical="md"
+                paddingHorizontal="lg"
+              >
+                <SimpleText
+                  size="sm"
+                  style="color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"
+                >
+                  {pubDate}
+                </SimpleText>
+                <Heading
+                  level="h3"
+                  size="sm"
+                  style="margin-top: var(--spacing-xs); margin-bottom: 0;"
+                >
+                  {post.data.title}
+                </Heading>
+              </Card>
+            </GridItem>
+          );
+        })
+      }
+    </Grid>
+
+    <div style="margin-top: var(--spacing-lg);">
+      <a href="/blog/">記事一覧を見る →</a>
+    </div>
+  </CustomSection>
+</Page>

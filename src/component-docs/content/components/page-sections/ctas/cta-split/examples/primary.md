@@ -5,7 +5,7 @@ blocks:
   _component: 'page-sections/ctas/cta-split'
   heading: 'Keep your team aligned'
   subtext: 'Drop structured CTAs between sections to reinforce the next step.'
-  imageSource: /src/assets/images/component-docs/sunset.jpg
+  imageSource: /src/images/component-docs/sunset.jpg
   imageAlt: 'Sunset.'
   buttonSections:
     - _component: building-blocks/core-elements/button

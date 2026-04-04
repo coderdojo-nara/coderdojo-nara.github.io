@@ -3,11 +3,11 @@ title: CoderDojo 奈良
 description: 奈良市で開催している子どものためのプログラミングコミュニティ
 pageSections:
   - _component: page-sections/heroes/hero-center
-    eyebrow: 子どもと大人のためのプログラミングクラブ
+    eyebrow: 子どものためのプログラミングクラブ
     heading: CoderDojo 奈良へようこそ
     subtext: >-
-      CoderDojo 奈良は、アイルランドで始まった子どもと大人のためのプログラミングクラブの奈良市での活動です。
-      プログラミング以外にもコンピュータを使った活動が好きな子どもたちが仲間を見つける場所で、
+      CoderDojoは、アイルランドで始まった子どものためのプログラミングクラブです。<br>
+      プログラミング以外にもコンピュータを使った活動が好きな子どもたちが仲間を見つける場所で<br>
       誰でも参加費用を払うことなく参加できます。
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -32,7 +32,7 @@ pageSections:
     eyebrow: ''
     heading: Be Cool!
     subtext: >-
-      CoderDojoのただひとつのルールは、"Be Cool!（カッコよくあれ！）"です。
+      CoderDojoのただひとつのルールは、"Be Cool!（カッコよくあれ！）"です。<br>
       活動の中のすべてのことについて"Cool"であることを心がけてください。
     gap: xl
     minItemWidth: 280
@@ -59,7 +59,7 @@ pageSections:
   - _component: page-sections/ctas/cta-center
     heading: 参加したい方へ
     subtext: >-
-      参加申し込みはconnpassで受け付けています。
+      参加申し込みはconnpassで受け付けています。<br>
       登録していただくと開催ごとにメールでご案内します。
     buttonSections:
       - _component: building-blocks/core-elements/button

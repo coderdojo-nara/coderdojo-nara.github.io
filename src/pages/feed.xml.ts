@@ -12,13 +12,15 @@ export async function GET(context: APIContext) {
     description: "奈良市で開催している子どものためのプログラミングコミュニティ",
     site: context.site!,
     items: posts.map((post) => {
-      const slug = post.id.replace(/\.(md|mdx)$/, "");
+        const year = String(post.data.date.getFullYear());
+      const filename = post.id.split("/").pop() ?? post.id;
+      const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
       return {
         title: post.data.title,
         description: post.data.description || "",
         pubDate: post.data.date,
         author: post.data.author,
-        link: `/blog/${slug}/`,
+        link: `/${year}/${slug}/`,
       };
     }),
     customData: `<language>ja</language>`,

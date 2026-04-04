@@ -1,6 +1,5 @@
 {
-  "logoSource": "/assets/images/OGP/default.png",
-  "logoAlt": "CoderDojo 奈良",
+  "logoText": "CoderDojo 奈良",
   "navData": [
     {
       "name": "ホーム",

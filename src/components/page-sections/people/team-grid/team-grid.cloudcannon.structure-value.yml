@@ -29,7 +29,7 @@ _structures:
           name: Team member name
           role: Job title
           bio: Brief bio or description of the team member.
-          imageSource: /src/assets/images/component-docs/profile.jpg
+          imageSource: /src/images/component-docs/profile.jpg
           imageAlt: Team member photo
         preview:
           text:
@@ -55,7 +55,7 @@ _structures:
             comment: Photo of the team member.
             options:
               paths:
-                uploads: src/assets/images
+                uploads: src/images
                 static: ""
               resize_style: contain
               width: 1920

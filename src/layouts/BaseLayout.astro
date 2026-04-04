@@ -16,7 +16,10 @@ export interface Props {
 const props = Astro.props;
 const formattedTitle = seoData.titleFormat.replace("{title}", props.title);
 const pageDescription = props.description || seoData.description;
-const pageImage = props.image || seoData.logoSource;
+const rawImage = props.image || seoData.logoSource;
+const pageImage = rawImage
+  ? new URL(rawImage, Astro.url.origin).toString()
+  : rawImage;
 ---
 
 <!doctype html>
