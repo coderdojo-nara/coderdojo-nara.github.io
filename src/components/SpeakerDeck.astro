@@ -1,0 +1,27 @@
+---
+// src/components/SpeakerDeck.astro
+interface Props {
+  id: string;
+  ratio?: string;
+}
+
+const { id, ratio = "1.77777777777778" } = Astro.props;
+---
+
+<div class="speakerdeck-wrapper">
+  <script
+    is:inline
+    async
+    class="speakerdeck-embed"
+    data-id={id}
+    data-ratio={ratio}
+    src="//speakerdeck.com/assets/embed.js"
+  ></script>
+</div>
+
+<style>
+  .speakerdeck-wrapper {
+    margin: 2rem 0;
+    width: 100%;
+  }
+</style>
