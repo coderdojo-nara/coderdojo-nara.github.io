@@ -15,6 +15,7 @@ export async function GET(context: APIContext) {
         const year = String(post.data.date.getFullYear());
       const filename = post.id.split("/").pop() ?? post.id;
       const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
+
       return {
         title: post.data.title,
         description: post.data.description || "",

@@ -23,6 +23,7 @@ function getPostUrl(post: any): string {
   const year = String(post.data.date.getFullYear());
   const filename = post.id.split("/").pop() ?? post.id;
   const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
+
   return `/${year}/${slug}/`;
 }
 ---
@@ -58,6 +59,7 @@ function getPostUrl(post: any): string {
             month: "long",
             day: "numeric",
           });
+
           return (
             <GridItem>
               <Card
