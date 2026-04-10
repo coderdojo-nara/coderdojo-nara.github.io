@@ -14,6 +14,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
+  redirects: {
+    "/minecraft-workshp": "/minecraft-workshop",
+  },
   site: "https://coderdojo-nara.github.io",
   fonts: siteFonts,
   build: {
@@ -84,9 +87,7 @@ export default defineConfig({
     mdx(),
   ],
   markdown: {
-    rehypePlugins: [
-      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
-    ],
+    rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]],
   },
   vite: {
     build: {
