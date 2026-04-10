@@ -9,6 +9,7 @@ const pageSchema = z.object({
   keywords: z.array(z.string()).optional(),
   image: z.string().optional(),
   canonical: z.string().optional(),
+  sitemap: z.boolean().optional().default(true),
   pageSections: z.array(contentBlockSchema).optional().default([]),
 });
 

@@ -27,6 +27,8 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+const hasSections = page.data.pageSections && page.data.pageSections.length > 0;
+const noindex = page.data.sitemap === false;
 ---
 
 <Page
@@ -34,5 +36,13 @@ const { Content } = await render(page);
   mainNav={mainNavData}
   footer={footerData}
 >
-  <Content />
+  {noindex && <meta slot="head" name="robots" content="noindex, nofollow" />}
+  {hasSections ? (
+    <Content />
+  ) : (
+    <section style="max-width: 70ch; margin: 4rem auto; padding: 0 1.5rem;">
+      <h1>{page.data.title}</h1>
+      <Content />
+    </section>
+  )}
 </Page>

@@ -1,0 +1,10 @@
+---
+title: staff
+---
+{% for p in site.data.staff %}
+<h3>{{ p.name }}</h3>
+<img src='{{ p.image}}' class='profile_image' />
+<p>{{ p.profile }}</p>
+<p>{{ p.address }}</p>
+<a href='{{ p.link }}' target='_blank'>{{ p.link }}</a>
+{% endfor %}

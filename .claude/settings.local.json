@@ -20,7 +20,8 @@
       "Bash(sed -i '' \"s/^date: ''''$/date: ''2026-04-04''/\" /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src/content/blog/2026-04-04-contest.mdx)",
       "Bash(ls /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/dist/sitemap*)",
       "Bash(PATH=\"/Users/kwaka1208/.nodenv/versions/22.22.1/bin:$PATH\" npm install @astrojs/rss)",
-      "Bash(PATH=\"/Users/kwaka1208/.nodenv/versions/22.22.1/bin:$PATH\" npm install rehype-external-links)"
+      "Bash(PATH=\"/Users/kwaka1208/.nodenv/versions/22.22.1/bin:$PATH\" npm install rehype-external-links)",
+      "Bash(find /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src/content/blog -type f -name *.md -o -name *.mdx)"
     ]
   }
 }

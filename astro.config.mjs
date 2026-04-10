@@ -16,6 +16,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   redirects: {
     "/2026/minecraft-workshp": "/2026/minecraft-workshop",
+    "/ninja/exclusive/minecraft/": "/ninja/minecraft/",
+    "/dojo-coop/": "https://coderdojo-nara.github.io/dojo-bazaar/",
   },
   site: "https://coderdojo-nara.github.io",
   fonts: siteFonts,
@@ -76,12 +78,15 @@ export default defineConfig({
     }),
     sitemap({
       filter: (page) => {
-        // Always exclude component library from sitemap if disabled
-        if (process.env.DISABLE_COMPONENT_LIBRARY === "true") {
-          return !page.includes("/component-docs");
-        }
-        // If not disabled, still exclude from sitemap (existing behavior)
-        return !page.includes("/component-docs");
+        const { pathname } = new URL(page);
+        if (pathname.startsWith("/component-docs/")) return false;
+        // sitemap: false が指定されたページ
+        if (pathname.startsWith("/ninja/exclusive/")) return false;
+        if (pathname.startsWith("/redirect/")) return false;
+        if (pathname === "/ninja/") return false;
+        if (pathname === "/DojoMeeting/") return false;
+        if (pathname === "/projects/ShakyoDojo/") return false;
+        return true;
       },
     }),
     mdx(),
