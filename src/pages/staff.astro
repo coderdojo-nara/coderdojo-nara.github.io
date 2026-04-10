@@ -1,0 +1,23 @@
+---
+import Page from "@layouts/Page.astro";
+import staffData from "@data/staff.json";
+---
+
+<Page title="スタッフ" description="CoderDojo 奈良のスタッフ紹介">
+  <section style="max-width: 70ch; margin: 4rem auto; padding: 0 1.5rem;">
+    <h1>スタッフ</h1>
+    {staffData.map((member) => (
+      <div style="margin-bottom: 2rem;">
+        <img
+          src={member.image}
+          alt={member.name}
+          style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%;"
+        />
+        <h3>{member.name}</h3>
+        <p>{member.profile}</p>
+        <p>{member.address}</p>
+        <a href={member.link} target="_blank" rel="noopener noreferrer">{member.link}</a>
+      </div>
+    ))}
+  </section>
+</Page>
