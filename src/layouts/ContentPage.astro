@@ -1,0 +1,31 @@
+---
+import Page from "@layouts/Page.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+  lead?: string;
+  noindex?: boolean;
+}
+
+const { title, description, eyebrow, lead, noindex = false } = Astro.props;
+---
+
+<Page
+  title={title}
+  description={description}
+  noindex={noindex}
+>
+  <div class="dj-page-header dj-page-header--narrow">
+    <div class="dj-page-header__inner">
+      {eyebrow && <p class="dj-page-eyebrow">{eyebrow}</p>}
+      <h1 class="dj-page-header__title">{title}</h1>
+      {lead && <p class="dj-page-header__lead">{lead}</p>}
+    </div>
+  </div>
+
+  <article class="dj-prose">
+    <slot />
+  </article>
+</Page>

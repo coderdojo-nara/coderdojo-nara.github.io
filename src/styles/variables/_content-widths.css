@@ -6,4 +6,8 @@
   --content-width-xl: 1024px;
   --content-width-2xl: 1280px;
   --content-width-3xl: 1536px;
+
+  /* テキスト中心ページ（ContentPage / ブログ記事）の中央カラム幅。
+     ヘッダー内テキストと本文プロースで共有する。 */
+  --dj-content-measure: 860px;
 }

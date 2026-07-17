@@ -1,0 +1,182 @@
+/* CoderDojo 奈良 リニューアルデザインの共通プリミティブ。
+   全ページで再利用するコンテナ・ボタン・ページヘッダー・CTA を定義する。 */
+@layer components {
+  /* Sticky footer: コンテンツが短くてもフッターを常にページ最下部へ配置する */
+  .site-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .site-shell > main {
+    flex: 1 0 auto;
+  }
+
+  .dj-wrap {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-inline: 32px;
+  }
+
+  .dj-wrap--narrow {
+    max-width: 900px;
+  }
+
+  /* アイブロウ（小見出しラベル） */
+  .dj-hero-eyebrow {
+    color: var(--brand-navy);
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.12em;
+    margin: 0 0 16px;
+  }
+
+  .dj-page-eyebrow {
+    color: var(--brand-amber);
+    font-size: 13px;
+    font-weight: var(--font-weight-black);
+    letter-spacing: 0.16em;
+    margin: 0 0 12px;
+  }
+
+  /* セクション見出し */
+  .dj-section-title {
+    color: var(--brand-navy);
+    font-size: 24px;
+    font-weight: var(--font-weight-black);
+    margin: 0;
+  }
+
+  /* ボタン */
+  .dj-btn {
+    border-radius: 8px;
+    display: inline-block;
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .dj-btn:hover {
+    opacity: 0.88;
+  }
+
+  .dj-btn--primary {
+    background: var(--brand-navy);
+    color: #fff;
+    padding: 14px 36px;
+  }
+
+  .dj-btn--secondary {
+    border: 2px solid var(--brand-navy);
+    color: var(--brand-navy);
+    padding: 12px 36px;
+  }
+
+  .dj-btn--accent {
+    background: var(--brand-amber);
+    color: var(--brand-ink);
+    padding: 12px 28px;
+  }
+
+  .dj-btn--ghost-light {
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 10px 28px;
+  }
+
+  .dj-btn--navy-outline {
+    border: 2px solid var(--brand-navy);
+    color: var(--brand-navy);
+    padding: 10px 28px;
+  }
+
+  .dj-btn--amber-outline {
+    border: 2px solid var(--brand-amber);
+    color: var(--brand-amber-dark);
+    padding: 10px 28px;
+  }
+
+  /* ページヘッダー（下層ページ共通） */
+  .dj-page-header {
+    background: var(--brand-hero-gradient);
+  }
+
+  .dj-page-header__inner {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 56px 32px 40px;
+  }
+
+  .dj-page-header__title {
+    color: var(--brand-navy);
+    font-size: 38px;
+    font-weight: var(--font-weight-black);
+    line-height: 1.3;
+    margin: 0 0 16px;
+  }
+
+  .dj-page-header__lead {
+    color: var(--brand-ink-sub);
+    line-height: 2;
+    margin: 0;
+    max-width: 760px;
+  }
+
+  /* テキスト中心ページ用: ヘッダー内テキストを本文と同じ中央カラム幅に揃える */
+  .dj-page-header--narrow .dj-page-header__inner {
+    max-width: var(--dj-content-measure);
+  }
+
+  .dj-page-header--narrow .dj-page-header__lead {
+    max-width: none;
+  }
+
+  /* CTA バナー（ネイビー地） */
+  .dj-cta {
+    background: var(--brand-navy);
+    color: #fff;
+  }
+
+  .dj-cta__inner {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 48px 32px;
+  }
+
+  .dj-cta__inner--center {
+    display: block;
+    text-align: center;
+  }
+
+  .dj-cta__title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: var(--font-weight-black);
+    margin: 0;
+  }
+
+  .dj-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (width < 640px) {
+    .dj-wrap,
+    .dj-page-header__inner,
+    .dj-cta__inner {
+      padding-inline: 20px;
+    }
+
+    .dj-page-header__title {
+      font-size: 30px;
+    }
+  }
+}

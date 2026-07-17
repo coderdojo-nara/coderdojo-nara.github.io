@@ -1,5 +1,6 @@
 ---
 title: DojoMeeting
+sitemap: false
 ---
 
 DojoMeetingで挙がっている内容はこちらです。

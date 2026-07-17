@@ -2,10 +2,75 @@
 import Page from "@layouts/Page.astro";
 ---
 
-<Page title="404 Not found" description="ページが見つかりませんでした">
-  <section style="max-width: 70ch; margin: 4rem auto; padding: 0 1.5rem; text-align: center;">
-    <h1>404 Not found</h1>
-    <p>アクセスされたURLは存在しませんでした。</p>
-    <p><a href="/">トップページ</a>からアクセスしてみてください。</p>
+<Page
+  title="404 Not Found"
+  description="ページが見つかりませんでした"
+  noindex={true}
+>
+  <section class="notfound">
+    <p class="notfound__code">404</p>
+    <h1 class="notfound__title">ページが見つかりませんでした</h1>
+    <p class="notfound__text">
+      アクセスされたURLは存在しないか、移動・削除された可能性があります。<br />
+      下のリンクからお探しください。
+    </p>
+    <div class="notfound__actions">
+      <a
+        href="/"
+        class="dj-btn dj-btn--primary"
+      >ホームへ戻る</a>
+      <a
+        href="/blog/"
+        class="dj-btn dj-btn--secondary"
+      >ブログを見る</a>
+    </div>
   </section>
 </Page>
+
+<style>
+  .notfound {
+    max-width: 640px;
+    margin-inline: auto;
+    padding: 80px 32px 96px;
+    text-align: center;
+  }
+
+  .notfound__code {
+    margin: 0;
+    color: var(--brand-amber);
+    font-size: 96px;
+    font-weight: var(--font-weight-black);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .notfound__title {
+    margin: 16px 0 0;
+    color: var(--brand-navy);
+    font-size: 28px;
+    font-weight: var(--font-weight-black);
+  }
+
+  .notfound__text {
+    margin: 20px 0 32px;
+    color: var(--brand-ink-sub);
+    line-height: 2;
+  }
+
+  .notfound__actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (width < 640px) {
+    .notfound {
+      padding: 56px 20px 72px;
+    }
+
+    .notfound__code {
+      font-size: 72px;
+    }
+  }
+</style>

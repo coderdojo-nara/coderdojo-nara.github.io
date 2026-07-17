@@ -1,0 +1,132 @@
+---
+type NavItem = { name: string; path: string };
+
+interface Props {
+  logoText?: string;
+  navData?: NavItem[];
+  joinUrl?: string;
+}
+
+const {
+  logoText = "CoderDojo 奈良",
+  navData = [],
+  joinUrl = "https://coderdojo-nara-ikoma.connpass.com/",
+} = Astro.props;
+
+// 末尾スラッシュを揃えて現在ページを判定する
+const normalize = (p: string) => (p.endsWith("/") ? p : `${p}/`);
+const current = normalize(Astro.url.pathname);
+const isActive = (path: string) => normalize(path) === current;
+
+// 「参加申し込み」CTA は通常 /join/ へ、参加ページ上では connpass へ直接リンク
+const ctaHref = isActive("/join/") ? joinUrl : "/join/";
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a
+      href="/"
+      class="site-header__logo"
+    >
+      {logoText}
+    </a>
+    <nav class="site-header__nav">
+      {
+        navData.map((item) => (
+          <a
+            href={item.path}
+            class:list={["site-header__link", { "is-active": isActive(item.path) }]}
+            aria-current={isActive(item.path) ? "page" : undefined}
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      <a
+        href={ctaHref}
+        class="site-header__cta"
+      >
+        参加申し込み
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--brand-navy);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: var(--layer-2, 20);
+  }
+
+  .site-header__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .site-header__logo {
+    font-weight: var(--font-weight-black);
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-header__nav {
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .site-header__link {
+    color: var(--brand-nav-inactive);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .site-header__link:hover {
+    color: #fff;
+  }
+
+  .site-header__link.is-active {
+    color: #fff;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .site-header__cta {
+    background: var(--brand-amber);
+    color: var(--brand-ink);
+    font-weight: var(--font-weight-bold);
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s ease;
+  }
+
+  .site-header__cta:hover {
+    opacity: 0.88;
+  }
+
+  @media (width < 640px) {
+    .site-header__inner {
+      padding: 16px 20px;
+    }
+
+    .site-header__nav {
+      gap: 16px 18px;
+      width: 100%;
+    }
+  }
+</style>

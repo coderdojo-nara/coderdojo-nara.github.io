@@ -1,0 +1,115 @@
+---
+import { Icon } from "astro-icon/components";
+
+type NavItem = { name: string; path: string };
+
+interface Props {
+  footerText?: string;
+  navData?: NavItem[];
+  links?: NavItem[];
+  xUrl?: string;
+  xHandle?: string;
+}
+
+const {
+  footerText = "© CoderDojo 奈良 All rights reserved.",
+  navData = [],
+  links = [],
+  xUrl = "https://x.com/CoderDojoNara",
+  xHandle = "@CoderDojoNara",
+} = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span class="site-footer__legal">{footerText}</span>
+    <nav class="site-footer__nav">
+      {
+        navData.map((item) => (
+          <a
+            href={item.path}
+            class="site-footer__link"
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      {
+        links.map((item) => (
+          <a
+            href={item.path}
+            class="site-footer__link"
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      <a
+        href={xUrl}
+        class="site-footer__x"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`X（${xHandle}）`}
+      >
+        <Icon name="social/x" />
+      </a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--brand-navy-dark);
+    color: var(--brand-footer-text);
+  }
+
+  .site-footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+
+  .site-footer__legal {
+    color: var(--brand-footer-text);
+  }
+
+  .site-footer__nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .site-footer__link {
+    color: var(--brand-footer-text);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .site-footer__link:hover {
+    opacity: 0.8;
+  }
+
+  .site-footer__x {
+    color: var(--brand-amber);
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .site-footer__x :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+
+  .site-footer__x:hover {
+    opacity: 0.85;
+  }
+</style>

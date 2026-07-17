@@ -1,0 +1,21 @@
+---
+import ContentPage from "@layouts/ContentPage.astro";
+import { getEntry, render } from "astro:content";
+
+const entry = await getEntry("pages", "supporter/guidance");
+
+if (!entry) {
+  throw new Error("pages コレクションに supporter/guidance が見つかりません");
+}
+
+const { Content } = await render(entry);
+---
+
+<ContentPage
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow="SUPPORTER"
+  lead="サポーターとしての参加・見学をお考えの方へ、CoderDojo の活動の考え方と参加までの流れをご案内します。"
+>
+  <Content />
+</ContentPage>

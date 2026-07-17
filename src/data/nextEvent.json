@@ -1,0 +1,11 @@
+{
+  "date": "8/8",
+  "weekday": "（土）",
+  "time": "13:00〜16:00",
+  "venue": "奈良市大宮町3-5-41\nぷろぼの福祉ビル 5F会議室",
+  "applyUrl": "https://coderdojo-nara-ikoma.connpass.com/event/400339/",
+  "badges": [
+    { "label": "参加費 無料", "variant": "success" },
+    { "label": "connpass受付", "variant": "info" }
+  ]
+}

@@ -1,52 +1,273 @@
 ---
 import Page from "@layouts/Page.astro";
+
+const connpassUrl = "https://coderdojo-nara-ikoma.connpass.com/";
+const crewWantedUrl = "/crew-wanted/";
 ---
 
-<Page title="参加する" description="CoderDojo 奈良への参加方法">
-  <section style="max-width: 70ch; margin: 4rem auto; padding: 0 1.5rem;">
-    <h1>参加する</h1>
-    <p>
-      CoderDojoへの参加に関心を持ってくださり、ありがとうございます。ご参加いただく前に、今一度私たちの活動について説明させてください。
-    </p>
-    <p>
-      CoderDojoは、プログラミングによる子供たちの創作活動をサポートする活動です。「プログラミング教室」ではありませんので、
-      テキストや決まったカリキュラムはありません。子どもたちが作りたいものをサポートする形になります。
-      必要に応じて基本的な使い方のレクチャーは行いますが、がっつり教えるということはありません。
-    </p>
-    <p>
-      では、何も得ることはないのか？というとそうではありません。CoderDojoに参加する子どもたちは、そうやって自分たちのやりたいことを見つけ、
-      必要な知識やスキルを身に着けていきます。また、サポーターや他の子どもたちとコミュニケーションすることを経験して身に着けていきます。
-    </p>
-    <p>
-      CoderDojoに参加する人は子どもも大人もひとりとして「お客さん」はいません。
-      コミュニティのメンバーとしてコミュニティ全体を支えていく、盛り上げていく、そのようなスタンスで参加していただければ嬉しいです。
-    </p>
+<Page
+  title="参加する"
+  description="CoderDojo 奈良への参加方法。ニンジャ（子ども）として、またサポーターとしての参加をご案内します。"
+>
+  <div class="dj-page-header">
+    <div class="dj-page-header__inner">
+      <p class="dj-page-eyebrow">JOIN</p>
+      <h1 class="dj-page-header__title">参加する</h1>
+      <p class="dj-page-header__lead">
+        CoderDojoへの参加に関心を持ってくださり、ありがとうございます。ご参加いただく前に、今一度私たちの活動について説明させてください。
+      </p>
+    </div>
+  </div>
 
-    <h2>Be Cool!</h2>
-    <p>
-      CoderDojoにおける唯一のルールは"Be Cool!（カッコよくあれ！）"です。
-      CoderDojoでは"Cool"であることだけが唯一のルールです。
-      ひとりひとりがどうしたら"Cool"になれるかを考えて一緒に活動しましょう。
-    </p>
-
-    <h2>ニンジャとして参加したい</h2>
-    <p>
-      CoderDojoでは、参加する子供たちのことを"ニンジャ"と呼んでいます。
-    </p>
-    <p>
-      奈良、生駒でそれぞれ月一回のペースでDojoを開いており、各回の開催案内や参加申し込みについては、
-      <a href="https://coderdojo-nara-ikoma.connpass.com/" target="_blank" rel="noopener">connpass</a>
-      というサービスを利用して受け付けています。こちらに登録していただきますと、開催ごとに案内がメールで送られますので、
-      登録して開催の案内が届くのをお待ちください。すでに案内済みの回があるかもしれませんので、開催予定のイベントも確認しておいてください。
-    </p>
-    <p>
-      なお、迷惑メールブロックを利用されている方は"@connpass.com"からのメールを受信可能なように設定をお願いします。
-    </p>
-
-    <h2>ボランティアスタッフ・サポーターとして参加したい</h2>
-    <p>
-      ありがとうございます、ぜひ<a href="/crew-wanted/">こちら</a>をご覧ください。
-    </p>
-    <p>みなさまのご参加をお待ちしています。</p>
+  {/* 活動理念 */}
+  <section class="dj-wrap philosophy">
+    <div class="philosophy__text">
+      <p>
+        CoderDojoは、プログラミングによる子供たちの創作活動をサポートする活動です。「プログラミング教室」ではありませんので、テキストや決まったカリキュラムはありません。子どもたちが作りたいものをサポートする形になります。必要に応じて基本的な使い方のレクチャーは行いますが、がっつり教えるということはありません。
+      </p>
+      <p>
+        では、何も得ることはないのか？というとそうではありません。CoderDojoに参加する子どもたちは、そうやって自分たちのやりたいことを見つけ、必要な知識やスキルを身に着けていきます。また、サポーターや他の子どもたちとコミュニケーションすることを経験して身に着けていきます。
+      </p>
+      <p>
+        CoderDojoに参加する人は子どもも大人もひとりとして「お客さん」はいません。コミュニティのメンバーとしてコミュニティ全体を支えていく、盛り上げていく、そのようなスタンスで参加していただければ嬉しいです。
+      </p>
+    </div>
+    <img
+      src="/images/tinkertoy.jpg"
+      alt="Dojoでの創作活動の様子"
+      class="philosophy__photo"
+    />
   </section>
+
+  {/* Be Cool! */}
+  <section class="be-cool">
+    <div class="dj-wrap be-cool__grid">
+      <h2 class="be-cool__title">Be Cool!</h2>
+      <p class="be-cool__text">
+        CoderDojoにおける唯一のルールは"Be
+        Cool!（カッコよくあれ！）"です。CoderDojoでは"Cool"であることだけが唯一のルールです。ひとりひとりがどうしたら"Cool"になれるかを考えて一緒に活動しましょう。
+      </p>
+    </div>
+  </section>
+
+  {/* 参加方法 2カード */}
+  <section class="dj-wrap how-to">
+    <article class="how-card">
+      <div class="how-card__head how-card__head--ninja">ニンジャとして参加したい</div>
+      <div class="how-card__body">
+        <p class="how-card__text">
+          CoderDojoでは、参加する子供たちのことを"ニンジャ"と呼んでいます。
+        </p>
+        <p class="how-card__text">
+          奈良、生駒でそれぞれ月一回のペースでDojoを開いており、各回の開催案内や参加申し込みについては、connpassというサービスを利用して受け付けています。こちらに登録していただきますと、開催ごとに案内がメールで送られますので、登録して開催の案内が届くのをお待ちください。すでに案内済みの回があるかもしれませんので、開催予定のイベントも確認しておいてください。
+        </p>
+        <div class="notice">
+          迷惑メールブロックを利用されている方は "@connpass.com"
+          からのメールを受信可能なように設定をお願いします。
+        </div>
+        <a
+          href={connpassUrl}
+          class="dj-btn dj-btn--accent how-card__cta"
+          target="_blank"
+          rel="noopener noreferrer"
+          >connpassで申し込む</a
+        >
+      </div>
+    </article>
+
+    <article class="how-card">
+      <div class="how-card__head how-card__head--supporter">
+        ボランティアスタッフ・サポーターとして参加したい
+      </div>
+      <div class="how-card__body">
+        <p class="how-card__text">
+          ありがとうございます。子どもたちの創作活動を見守り、いっしょに楽しんでくださる大人の仲間を歓迎しています。詳しくは募集ページをご覧ください。
+        </p>
+        <img
+          src="/images/venue.jpg"
+          alt="サポーターの活動の様子"
+          class="how-card__photo"
+        />
+        <a
+          href={crewWantedUrl}
+          class="dj-btn dj-btn--navy-outline how-card__cta"
+          >スタッフ募集ページを見る</a
+        >
+      </div>
+    </article>
+  </section>
+
+  {/* CTA */}
+  <div class="dj-cta">
+    <div class="dj-cta__inner dj-cta__inner--center">
+      <h2 class="dj-cta__title join-cta__title">みなさまのご参加をお待ちしています。</h2>
+      <p class="join-cta__lead">
+        わからないことがあれば、<a
+          href="/contact/"
+          class="join-cta__link"
+          >お問い合わせ</a
+        >からお気軽にどうぞ。
+      </p>
+    </div>
+  </div>
 </Page>
+
+<style>
+  .philosophy {
+    padding: 32px 32px 56px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .philosophy__text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .philosophy__text p {
+    line-height: 2;
+    color: var(--brand-ink-sub);
+    margin: 0;
+  }
+
+  .philosophy__photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+
+  /* Be Cool! */
+  .be-cool {
+    background: var(--brand-surface);
+  }
+
+  .be-cool__grid {
+    padding-block: 56px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .be-cool__title {
+    font-weight: var(--font-weight-black);
+    font-size: 40px;
+    margin: 0;
+    color: var(--brand-amber);
+    border-left: 6px solid var(--brand-navy);
+    padding-left: 24px;
+    line-height: 1.2;
+  }
+
+  .be-cool__text {
+    line-height: 2;
+    color: var(--brand-ink-sub);
+    margin: 0;
+  }
+
+  /* 参加方法カード */
+  .how-to {
+    padding-block: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .how-card {
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .how-card__head {
+    padding: 20px 32px;
+    font-weight: var(--font-weight-black);
+    font-size: 20px;
+  }
+
+  .how-card__head--ninja {
+    background: var(--brand-navy);
+    color: #fff;
+  }
+
+  .how-card__head--supporter {
+    background: var(--brand-amber);
+    color: var(--brand-ink);
+  }
+
+  .how-card__body {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .how-card__text {
+    line-height: 2;
+    color: var(--brand-ink-sub);
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .notice {
+    background: var(--brand-notice-bg);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--brand-notice-text);
+  }
+
+  .how-card__photo {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .how-card__cta {
+    margin-top: auto;
+    padding: 13px;
+  }
+
+  /* CTA */
+  .join-cta__title {
+    margin-bottom: 8px;
+  }
+
+  .join-cta__lead {
+    margin: 0;
+    color: var(--brand-nav-inactive);
+    font-size: 15px;
+  }
+
+  .join-cta__link {
+    color: var(--brand-amber);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+  }
+
+  @media (width < 900px) {
+    .philosophy,
+    .be-cool__grid,
+    .how-to {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-block: 48px;
+    }
+
+    .philosophy {
+      padding-top: 32px;
+    }
+  }
+</style>

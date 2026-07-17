@@ -1,19 +1,148 @@
 ---
 import Page from "@layouts/Page.astro";
+import { Icon } from "astro-icon/components";
+
+const formUrl = "https://forms.gle/tYBwSvrEiEYujNNa7";
+const xUrl = "https://x.com/CoderDojoNara";
+const staffUrl = "/staff/";
 ---
 
-<Page title="お問い合わせ" description="CoderDojo 奈良へのお問い合わせ">
-  <section style="max-width: 70ch; margin: 4rem auto; padding: 0 1.5rem;">
-    <h1>お問い合わせ</h1>
-    <p>CoderDojoへの参加に関心を持ってくださり、ありがとうございます。</p>
-    <p>
-      問い合わせについては、<a href="https://forms.gle/tYBwSvrEiEYujNNa7" target="_blank" rel="noopener">お問い合わせフォーム</a>で受け付けています。
-      もっとカジュアルにコンタクトしたい、という方は<a href="https://x.com/CoderDojoNara" target="_blank" rel="noopener">X（旧Twitter）</a>もありますので、
-      お気軽にメンションやメッセージをください。
-    </p>
-    <p>
-      <a href="/staff/">どんな人がやってるの？についてはこちら</a>にあります。
-      活動内容や参加方法など、どんなことでも結構ですので、気軽にご連絡くださいね。
-    </p>
+<Page
+  title="お問い合わせ"
+  description="CoderDojo 奈良へのお問い合わせ方法。フォーム・X（旧Twitter）・スタッフ紹介をご案内します。"
+>
+  <div class="dj-page-header">
+    <div class="dj-page-header__inner">
+      <p class="dj-page-eyebrow">CONTACT</p>
+      <h1 class="dj-page-header__title">お問い合わせ</h1>
+      <p class="dj-page-header__lead">
+        CoderDojoへの参加に関心を持ってくださり、ありがとうございます。活動内容や参加方法など、どんなことでも結構ですので、気軽にご連絡くださいね。
+      </p>
+    </div>
+  </div>
+
+  <section class="dj-wrap channels">
+    <article class="channel">
+      <div class="channel__chip channel__chip--info">
+        <Icon name="envelope" />
+      </div>
+      <h2 class="channel__title">お問い合わせフォーム</h2>
+      <p class="channel__text">問い合わせについては、お問い合わせフォームで受け付けています。</p>
+      <a
+        href={formUrl}
+        class="dj-btn dj-btn--primary channel__cta"
+        target="_blank"
+        rel="noopener noreferrer"
+        >フォームを開く</a
+      >
+    </article>
+
+    <article class="channel">
+      <div class="channel__chip channel__chip--dark">
+        <Icon name="social/x" />
+      </div>
+      <h2 class="channel__title">X（旧Twitter）</h2>
+      <p class="channel__text">
+        もっとカジュアルにコンタクトしたい、という方はXもありますので、お気軽にメンションやメッセージをください。
+      </p>
+      <a
+        href={xUrl}
+        class="dj-btn dj-btn--navy-outline channel__cta"
+        target="_blank"
+        rel="noopener noreferrer"
+        >@CoderDojoNara</a
+      >
+    </article>
+
+    <article class="channel">
+      <div class="channel__chip channel__chip--amber">
+        <Icon name="hand-raised" />
+      </div>
+      <h2 class="channel__title">どんな人がやってるの？</h2>
+      <p class="channel__text">運営しているスタッフの紹介はこちらのページにあります。</p>
+      <a
+        href={staffUrl}
+        class="dj-btn dj-btn--amber-outline channel__cta"
+        >スタッフ紹介を見る</a
+      >
+    </article>
   </section>
 </Page>
+
+<style>
+  .channels {
+    padding: 32px 32px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+  }
+
+  .channel {
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .channel__chip {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .channel__chip :global(svg) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .channel__chip--info {
+    background: var(--brand-badge-info-bg);
+    color: var(--brand-navy);
+  }
+
+  .channel__chip--dark {
+    background: var(--brand-ink);
+    color: #fff;
+  }
+
+  .channel__chip--dark :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .channel__chip--amber {
+    background: var(--brand-notice-bg);
+    color: var(--brand-amber);
+  }
+
+  .channel__title {
+    font-weight: var(--font-weight-black);
+    font-size: 19px;
+    margin: 0;
+    color: var(--brand-navy);
+  }
+
+  .channel__text {
+    line-height: 1.9;
+    color: var(--brand-ink-sub);
+    margin: 0;
+    font-size: 14px;
+    flex: 1;
+  }
+
+  .channel__cta {
+    padding: 11px 12px;
+  }
+
+  @media (width < 860px) {
+    .channels {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+    }
+  }
+</style>

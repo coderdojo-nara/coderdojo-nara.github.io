@@ -1,96 +1,553 @@
 ---
-import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Page from "@layouts/Page.astro";
-import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
-import Card from "@wrappers/card/Card.astro";
-import Grid from "@wrappers/grid/Grid.astro";
-import GridItem from "@wrappers/grid/GridItem.astro";
-import footerData from "@data/footer.json";
-import mainNavData from "@data/mainNav.json";
-import { getCollection, render } from "astro:content";
+import nextEvent from "@data/nextEvent.json";
+import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
+import { getCollection } from "astro:content";
 
 const pages = await getCollection("pages");
 const indexPage = pages.find((p) => p.id === "index");
 
-const { Content } = indexPage ? await render(indexPage) : { Content: () => null };
+const recentPosts = sortPostsByDateDesc(await getCollection("blog")).slice(0, 4);
 
-const recentPosts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 4);
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" });
 
-function getPostUrl(post: any): string {
-  const year = String(post.data.date.getFullYear());
-  const filename = post.id.split("/").pop() ?? post.id;
-  const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
-
-  return `/${year}/${slug}/`;
-}
+const badgeClass: Record<string, string> = {
+  success: "badge badge--success",
+  info: "badge badge--info",
+};
 ---
 
 <Page
-  frontmatter={indexPage?.data}
-  mainNav={mainNavData}
-  footer={footerData}
+  title={indexPage?.data.title ?? "CoderDojo 奈良"}
+  description={indexPage?.data.description}
 >
-  <Content />
+  {/* ヒーロー */}
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <p class="eyebrow-label">子どものためのプログラミングクラブ</p>
+        <h1 class="hero__title">CoderDojo 奈良へようこそ</h1>
+        <p class="hero__text">
+          CoderDojoは、アイルランドで始まった子どものためのプログラミングクラブです。プログラミング以外にもコンピュータを使った活動が好きな子どもたちが仲間を見つける場所で、誰でも参加費用を払うことなく参加できます。
+        </p>
+        <div class="btn-row">
+          <a
+            href="/join/"
+            class="btn btn--primary"
+            >参加する</a
+          >
+          <a
+            href="/about/"
+            class="btn btn--secondary"
+            >CoderDojoとは</a
+          >
+        </div>
+      </div>
 
-  <CustomSection
-    maxContentWidth="2xl"
-    paddingHorizontal="lg"
-    paddingVertical="2xl"
-    colorScheme="inherit"
-    backgroundColor="base"
-  >
-    <Heading level="h2" size="lg" style="margin-bottom: var(--spacing-lg);">
-      最近のブログ記事
-    </Heading>
-
-    <Grid
-      gap="md"
-      layout="start"
-      minItemWidth="240"
-      maxItemWidth="360"
-    >
-      {
-        recentPosts.map((post) => {
-          const pubDate = post.data.date.toLocaleDateString("ja-JP", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
-
-          return (
-            <GridItem>
-              <Card
-                link={getPostUrl(post)}
-                rounded={true}
-                border={true}
-                paddingVertical="md"
-                paddingHorizontal="lg"
-              >
-                <SimpleText
-                  size="sm"
-                  style="color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"
-                >
-                  {pubDate}
-                </SimpleText>
-                <Heading
-                  level="h3"
-                  size="sm"
-                  style="margin-top: var(--spacing-xs); margin-bottom: 0;"
-                >
-                  {post.data.title}
-                </Heading>
-              </Card>
-            </GridItem>
-          );
-        })
-      }
-    </Grid>
-
-    <div style="margin-top: var(--spacing-lg);">
-      <a href="/blog/">記事一覧を見る →</a>
+      {/* 次回開催カード */}
+      <aside class="event-card">
+        <div class="event-card__ribbon">次回の開催</div>
+        <div class="event-card__body">
+          <div class="event-card__date">
+            <span class="event-card__day">{nextEvent.date}</span>
+            <span class="event-card__weekday">{nextEvent.weekday}</span>
+            <span class="event-card__time">{nextEvent.time}</span>
+          </div>
+          <p
+            class="event-card__venue"
+            set:html={nextEvent.venue.replace(/\n/g, "<br>")}
+          />
+          <div class="event-card__badges">
+            {
+              nextEvent.badges.map((b) => (
+                <span class={badgeClass[b.variant] ?? "badge"}>{b.label}</span>
+              ))
+            }
+          </div>
+          <a
+            href={nextEvent.applyUrl}
+            class="btn btn--primary event-card__cta"
+            target="_blank"
+            rel="noopener noreferrer"
+            >申し込みページへ</a
+          >
+        </div>
+      </aside>
     </div>
-  </CustomSection>
+  </section>
+
+  {/* 写真バンド */}
+  <img
+    src="/images/cover.jpg"
+    alt="CoderDojo 奈良の活動の様子"
+    class="photo-band"
+  />
+
+  {/* Be Cool! */}
+  <section class="container be-cool">
+    <h2 class="be-cool__title">Be Cool!</h2>
+    <p class="be-cool__text">
+      CoderDojoのただひとつのルールは、"Be
+      Cool!（カッコよくあれ！）"です。活動の中のすべてのことについて"Cool"であることを心がけてください。
+    </p>
+  </section>
+
+  {/* 開催情報 + 参加誘導 */}
+  <section class="info-section">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-cell">
+          <div class="info-cell__label">開催場所</div>
+          <p class="info-cell__body">奈良県奈良市大宮町３丁目５−４１ ぷろぼの福祉ビル 5F会議室</p>
+        </div>
+        <div class="info-cell">
+          <div class="info-cell__label">開催日</div>
+          <p class="info-cell__body">毎月第三土曜日（月によって変わる場合があります）</p>
+        </div>
+        <div class="info-cell">
+          <div class="info-cell__label">参加費</div>
+          <p class="info-cell__body">無料。どなたでもご参加いただけます。</p>
+        </div>
+      </div>
+
+      <div class="join-banner">
+        <div class="join-banner__text">
+          <h2 class="join-banner__title">参加したい方へ</h2>
+          <p class="join-banner__lead">
+            参加申し込みはconnpassで受け付けています。登録していただくと開催ごとにメールでご案内します。
+          </p>
+        </div>
+        <div class="join-banner__actions">
+          <a
+            href="/join/"
+            class="btn btn--accent"
+            >参加方法を見る</a
+          >
+          <a
+            href="/contact/"
+            class="btn btn--ghost-light"
+            >お問い合わせ</a
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 最近のブログ記事 */}
+  <section class="container recent-blog">
+    <div class="recent-blog__head">
+      <h2 class="section-title">最近のブログ記事</h2>
+      <a
+        href="/blog/"
+        class="recent-blog__more"
+        >記事一覧を見る →</a
+      >
+    </div>
+    <div class="recent-blog__list">
+      {
+        recentPosts.map((post) => (
+          <a
+            href={getPostUrl(post)}
+            class="recent-blog__row"
+          >
+            <span class="recent-blog__date">{formatDate(post.data.date)}</span>
+            <span class="recent-blog__title">{post.data.title}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 </Page>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-inline: 32px;
+  }
+
+  .eyebrow-label {
+    color: var(--brand-navy);
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.12em;
+    margin: 0 0 16px;
+  }
+
+  /* ヒーロー */
+  .hero {
+    background: var(--brand-hero-gradient);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 48px;
+    padding-block: 64px;
+    align-items: center;
+  }
+
+  .hero__title {
+    font-weight: var(--font-weight-black);
+    font-size: 42px;
+    line-height: 1.4;
+    margin: 0 0 20px;
+    color: var(--brand-navy);
+  }
+
+  .hero__text {
+    font-size: 16px;
+    line-height: 2;
+    margin: 0 0 28px;
+    color: var(--brand-ink-sub);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ボタン */
+  .btn {
+    display: inline-block;
+    font-weight: var(--font-weight-bold);
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    text-align: center;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.88;
+  }
+
+  .btn--primary {
+    background: var(--brand-navy);
+    color: #fff;
+    padding: 14px 36px;
+  }
+
+  .btn--secondary {
+    border: 2px solid var(--brand-navy);
+    color: var(--brand-navy);
+    padding: 12px 36px;
+  }
+
+  .btn--accent {
+    background: var(--brand-amber);
+    color: var(--brand-ink);
+    padding: 12px 28px;
+  }
+
+  .btn--ghost-light {
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 10px 28px;
+  }
+
+  /* 次回開催カード */
+  .event-card {
+    background: #fff;
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(20, 40, 70, 0.12);
+    overflow: hidden;
+  }
+
+  .event-card__ribbon {
+    background: var(--brand-amber);
+    color: var(--brand-ink);
+    font-weight: var(--font-weight-black);
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+  }
+
+  .event-card__body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .event-card__date {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .event-card__day {
+    font-size: 40px;
+    font-weight: var(--font-weight-black);
+    color: var(--brand-navy);
+  }
+
+  .event-card__weekday {
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+    color: var(--brand-navy);
+  }
+
+  .event-card__time {
+    color: var(--brand-ink-sub);
+  }
+
+  .event-card__venue {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--brand-ink-sub);
+    margin: 0;
+  }
+
+  .event-card__badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-size: 13px;
+    font-weight: var(--font-weight-bold);
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  .badge--success {
+    background: var(--brand-badge-success-bg);
+    color: var(--brand-badge-success-text);
+  }
+
+  .badge--info {
+    background: var(--brand-badge-info-bg);
+    color: var(--brand-navy);
+  }
+
+  .event-card__cta {
+    padding: 12px;
+  }
+
+  /* 写真バンド */
+  .photo-band {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Be Cool! */
+  .be-cool {
+    padding-block: 64px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .be-cool__title {
+    font-weight: var(--font-weight-black);
+    font-size: 40px;
+    margin: 0;
+    color: var(--brand-amber);
+    border-left: 6px solid var(--brand-navy);
+    padding-left: 24px;
+    line-height: 1.2;
+  }
+
+  .be-cool__text {
+    line-height: 2;
+    color: var(--brand-ink-sub);
+    margin: 0;
+  }
+
+  /* 開催情報 + 参加誘導 */
+  .info-section {
+    background: var(--brand-surface);
+  }
+
+  .info-section .container {
+    padding-block: 56px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--brand-border);
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .info-cell {
+    background: #fff;
+    padding: 32px;
+  }
+
+  .info-cell__label {
+    font-size: 13px;
+    font-weight: var(--font-weight-bold);
+    color: var(--brand-ink-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .info-cell__body {
+    margin: 0;
+    line-height: 1.9;
+    font-size: 15px;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .join-banner {
+    margin-top: 40px;
+    background: var(--brand-navy);
+    color: #fff;
+    border-radius: 12px;
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .join-banner__text {
+    min-width: 300px;
+    flex: 1;
+  }
+
+  .join-banner__title {
+    font-weight: var(--font-weight-black);
+    font-size: 24px;
+    margin: 0 0 10px;
+    color: #fff;
+  }
+
+  .join-banner__lead {
+    margin: 0;
+    line-height: 1.9;
+    color: var(--brand-nav-inactive);
+    font-size: 15px;
+  }
+
+  .join-banner__actions {
+    display: flex;
+    gap: 12px;
+    flex: none;
+    flex-wrap: wrap;
+  }
+
+  /* 最近のブログ記事 */
+  .recent-blog {
+    padding-block: 56px;
+  }
+
+  .recent-blog__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .section-title {
+    font-weight: var(--font-weight-black);
+    font-size: 24px;
+    margin: 0;
+    color: var(--brand-navy);
+  }
+
+  .recent-blog__more {
+    font-weight: var(--font-weight-bold);
+    font-size: 14px;
+    color: var(--brand-navy);
+    text-decoration: none;
+  }
+
+  .recent-blog__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .recent-blog__row {
+    display: flex;
+    gap: 24px;
+    padding: 18px 8px;
+    border-top: 1px solid var(--brand-border-hairline);
+    align-items: baseline;
+    color: var(--brand-ink);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .recent-blog__row:last-child {
+    border-bottom: 1px solid var(--brand-border-hairline);
+  }
+
+  .recent-blog__row:hover {
+    opacity: 0.75;
+  }
+
+  .recent-blog__date {
+    font-size: 13px;
+    color: var(--brand-ink-muted);
+    flex: none;
+    width: 110px;
+  }
+
+  .recent-blog__title {
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* レスポンシブ */
+  @media (width < 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-block: 48px;
+    }
+
+    .event-card {
+      max-width: 420px;
+    }
+
+    .be-cool {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-block: 48px;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (width < 640px) {
+    .container {
+      padding-inline: 20px;
+    }
+
+    .hero__title {
+      font-size: 32px;
+    }
+
+    .be-cool__title {
+      font-size: 32px;
+    }
+
+    .join-banner {
+      padding: 28px 24px;
+    }
+
+    .recent-blog__row {
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+</style>

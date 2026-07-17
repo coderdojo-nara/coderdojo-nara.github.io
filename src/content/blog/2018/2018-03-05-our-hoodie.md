@@ -15,7 +15,7 @@ We made front design to share with another Dojo.  And you can design by yourself
 
 We will share this design data as below, if you like this front design and will adopt it, we are very happy.
 
-[Adobe Illustrator file](/etc/CoderDojo-naraikoma-hoodie.ai)
+Adobe Illustrator file (the file is no longer available)
 
 ![layout](/images/2018/hoodie05.png)
 

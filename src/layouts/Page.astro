@@ -1,6 +1,6 @@
 ---
-import Footer from "@components/navigation/footer/Footer.astro";
-import MainNavigation from "@components/navigation/main-nav/MainNav.astro";
+import SiteFooter from "@components/navigation/site-footer/SiteFooter.astro";
+import SiteHeader from "@components/navigation/site-header/SiteHeader.astro";
 import MainComponent from "@components/utils/MainComponent.astro";
 import footerData from "@data/footer.json";
 import mainNavData from "@data/mainNav.json";
@@ -22,8 +22,17 @@ type Props = {
   keywords?: string[];
   image?: string;
   canonical?: string;
-  mainNav?: Record<string, unknown>;
-  footer?: Record<string, unknown>;
+  noindex?: boolean;
+  mainNav?: {
+    logoText?: string;
+    navData?: { name: string; path: string }[];
+    [key: string]: unknown;
+  };
+  footer?: {
+    footerText?: string;
+    links?: { name: string; path: string }[];
+    [key: string]: unknown;
+  };
 };
 
 const {
@@ -33,6 +42,7 @@ const {
   keywords: keywordsProp,
   image: imageProp,
   canonical: canonicalProp,
+  noindex = false,
   mainNav = mainNavData,
   footer = footerData,
 } = Astro.props as Props;
@@ -51,8 +61,16 @@ const sections = frontmatter?.pageSections ?? [];
   keywords={keywords}
   image={image}
   canonical={canonical}
+  noindex={noindex}
 >
-  <MainNavigation {...mainNav} />
+  <slot
+    name="head"
+    slot="head"
+  />
+  <SiteHeader
+    logoText={mainNav.logoText}
+    navData={mainNav.navData}
+  />
 
   <main>
     {
@@ -68,5 +86,9 @@ const sections = frontmatter?.pageSections ?? [];
     }
     <slot />
   </main>
-  <Footer {...footer} />
+  <SiteFooter
+    footerText={footer.footerText}
+    navData={mainNav.navData}
+    links={footer.links}
+  />
 </Layout>

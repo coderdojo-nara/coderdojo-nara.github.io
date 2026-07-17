@@ -13,4 +13,4 @@ CoderDojo 奈良では一緒に活動してくださる方を募集していま�
 
 [どんな人がやってるの？についてはこちら](/staff/)にあります。活動内容や参加方法など、どんなことでも結構ですので、気軽にご連絡くださいね。
 
-![](/assets/images/announcement/minecraft.png)
+![](/images/announcement/minecraft.png)

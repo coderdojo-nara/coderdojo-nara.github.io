@@ -27,4 +27,4 @@ title:  "プログラミングコンテストリンク集"
 - [EXA KIDS(エクサキッズ)](https://exa-kids.org/)
 
 ## 終了
-- [Coolest Projects online showcase](/cpi2020/)：6月28日
+- [Coolest Projects online showcase](/coolest_projects_international/)：6月28日

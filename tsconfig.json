@@ -18,7 +18,8 @@
       "@styles/*": ["src/styles/*"],
       "@data/*": ["src/data/*"],
       "@content/*": ["src/content/*"],
-      "@assets/*": ["src/*"]
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": [".astro/types.d.ts", "src/**/*"],

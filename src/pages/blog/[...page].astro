@@ -1,147 +1,210 @@
 ---
-import Heading from "@core-elements/heading/Heading.astro";
-import Image from "@core-elements/image/Image.astro";
-import Pagination from "@core-elements/pagination/Pagination.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Page from "@layouts/Page.astro";
-import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
-import Card from "@wrappers/card/Card.astro";
-import Grid from "@wrappers/grid/Grid.astro";
-import GridItem from "@wrappers/grid/GridItem.astro";
-import { getCollection } from "astro:content";
+import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
+import type { GetStaticPaths, Page as PaginatedPage } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-type Paginate = (_data: any[], _opts: { pageSize: number }) => any;
-
-export interface Props {
-  page: { data: any[] };
-}
-
-export async function getStaticPaths({ paginate }: { paginate: Paginate }) {
-  const blogPosts = (await getCollection("blog")).sort(
-    (a: any, b: any) => b.data.date.getTime() - a.data.date.getTime()
-  );
+export const getStaticPaths = (async ({ paginate }) => {
+  const blogPosts = sortPostsByDateDesc(await getCollection("blog"));
 
   return paginate(blogPosts, { pageSize: 9 });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: PaginatedPage<CollectionEntry<"blog">>;
 }
 
-const { page } = Astro.props as Props;
+const { page } = Astro.props;
 
-// Try to load blog page from pages collection for hero sections
-let blogPage: any;
-let heroSections: any[] = [];
-
-try {
-  const pages = await getCollection("pages");
-
-  blogPage = pages.find((page: any) => page.id === "blog");
-
-  if (blogPage?.data?.pageSections) {
-    heroSections = blogPage.data.pageSections;
-  }
-} catch (e) {
-  console.error("Failed to load blog page data:", e);
-}
-
-const pageTitle = blogPage?.data?.title ?? "Blog";
+const pages = await getCollection("pages");
+const blogPage = pages.find((p) => p.id === "blog");
+const pageTitle = blogPage?.data.title ?? "記事一覧";
 const pageDescription =
-  blogPage?.data?.description ??
-  "CoderDojo 奈良の活動報告や関連情報のブログ記事一覧です。";
+  blogPage?.data.description ?? "CoderDojo 奈良の活動報告や関連情報のブログ記事一覧です。";
 
-function getPostUrl(post: any): string {
-  const year = String(post.data.date.getFullYear());
-  const filename = post.id.split("/").pop() ?? post.id;
-  const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" });
 
-  return `/${year}/${slug}/`;
+const pageUrl = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
+
+// ページネーションの表示番号（先頭・末尾・現在の前後を表示し、間は … で省略）
+const current = page.currentPage;
+const last = page.lastPage;
+const pageItems: (number | "ellipsis")[] = [];
+for (let n = 1; n <= last; n++) {
+  if (n === 1 || n === last || (n >= current - 1 && n <= current + 1)) {
+    pageItems.push(n);
+  } else if (pageItems[pageItems.length - 1] !== "ellipsis") {
+    pageItems.push("ellipsis");
+  }
 }
 ---
 
 <Page
-  frontmatter={{
-    title: pageTitle,
-    description: pageDescription,
-    pageSections: heroSections,
-  }}
+  title={pageTitle}
+  description={pageDescription}
 >
-  <CustomSection
-    maxContentWidth="2xl"
-    paddingHorizontal="lg"
-    paddingVertical="none"
-    colorScheme="inherit"
-    backgroundColor="base"
-  >
+  <div class="dj-page-header">
+    <div class="dj-page-header__inner">
+      <p class="dj-page-eyebrow">BLOG</p>
+      <h1 class="dj-page-header__title">記事一覧</h1>
+      <p class="dj-page-header__lead">Dojoの開催レポートやお知らせをお届けします。</p>
+    </div>
+  </div>
+
+  <section class="dj-wrap dj-wrap--narrow post-list">
     {
       page.data.length > 0 ? (
-        <>
-          <Grid
-            gap="lg"
-            layout="start"
-            minItemWidth="320"
-            maxItemWidth="400"
-            style="margin-top: var(--spacing-2xl)"
-          >
-            {page.data.map((post: any) => {
-              const pubDate = post.data.date.toLocaleDateString("ja-JP", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              });
-
-              return (
-                <GridItem>
-                  <Card
-                    link={getPostUrl(post)}
-                    rounded={true}
-                    border={true}
-                    paddingVertical="lg"
-                    paddingHorizontal="lg"
-                  >
-                    {post.data.image && (
-                      <Image
-                        slot="before"
-                        source={post.data.image}
-                        alt={post.data.title}
-                        aspectRatio="landscape"
-                      />
-                    )}
-                    <SimpleText
-                      size="sm"
-                      style="color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"
-                    >
-                      {pubDate} • {post.data.author || "Anonymous"}
-                    </SimpleText>
-                    <Heading
-                      level="h3"
-                      size="md"
-                      style="margin-bottom: var(--spacing-md); margin-top: var(--spacing-sm);"
-                    >
-                      {post.data.title}
-                    </Heading>
-                    <SimpleText
-                      size="sm"
-                      style="color: var(--color-text-muted); margin-top: 0;"
-                    >
-                      {post.data.description}
-                    </SimpleText>
-                  </Card>
-                </GridItem>
-              );
-            })}
-          </Grid>
-          <Pagination
-            page={page}
-            showArrows={true}
-            style="margin-top: var(--spacing-2xl);"
-          />
-        </>
+        <div class="post-list__items">
+          {page.data.map((post) => (
+            <a
+              href={getPostUrl(post)}
+              class="post-row"
+            >
+              <span class="post-row__date">{formatDate(post.data.date)}</span>
+              <span class="post-row__author">{post.data.author}</span>
+              <span class="post-row__title">{post.data.title}</span>
+            </a>
+          ))}
+        </div>
       ) : (
-        <SimpleText
-          alignX="center"
-          style="margin-top: var(--spacing-2xl);"
-        >
-          No blog posts yet. Check back soon!
-        </SimpleText>
+        <p class="post-list__empty">まだ記事がありません。</p>
       )
     }
-  </CustomSection>
+
+    {
+      last > 1 && (
+        <nav
+          class="pagination"
+          aria-label="ページ送り"
+        >
+          {pageItems.map((item) =>
+            item === "ellipsis" ? (
+              <span class="pagination__ellipsis">…</span>
+            ) : item === current ? (
+              <span
+                class="pagination__item pagination__item--current"
+                aria-current="page"
+              >
+                {item}
+              </span>
+            ) : (
+              <a
+                href={pageUrl(item)}
+                class="pagination__item"
+              >
+                {item}
+              </a>
+            )
+          )}
+        </nav>
+      )
+    }
+  </section>
 </Page>
+
+<style>
+  .post-list {
+    padding: 24px 32px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-list__items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-row {
+    display: grid;
+    grid-template-columns: 130px 90px 1fr;
+    gap: 20px;
+    padding: 22px 8px;
+    border-bottom: 1px solid var(--brand-border-hairline);
+    align-items: baseline;
+    color: var(--brand-ink);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .post-row:hover {
+    opacity: 0.75;
+  }
+
+  .post-row__date {
+    font-size: 13px;
+    color: var(--brand-ink-muted);
+  }
+
+  .post-row__author {
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+    color: var(--brand-amber);
+  }
+
+  .post-row__title {
+    font-weight: var(--font-weight-bold);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .post-list__empty {
+    text-align: center;
+    color: var(--brand-ink-sub);
+    padding: 40px 0;
+  }
+
+  /* ページネーション */
+  .pagination {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 40px 0 8px;
+    flex-wrap: wrap;
+  }
+
+  .pagination__item {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    color: var(--brand-navy);
+    border: 1px solid var(--brand-border);
+    transition: opacity 0.15s ease;
+  }
+
+  .pagination__item:hover {
+    opacity: 0.75;
+  }
+
+  .pagination__item--current {
+    background: var(--brand-navy);
+    color: #fff;
+    border-color: var(--brand-navy);
+  }
+
+  .pagination__ellipsis {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-ink-muted);
+  }
+
+  @media (width < 640px) {
+    .post-row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .post-row__author {
+      order: 3;
+    }
+  }
+</style>

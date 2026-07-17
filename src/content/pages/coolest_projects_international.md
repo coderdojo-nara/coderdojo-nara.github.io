@@ -26,7 +26,7 @@ DojoCon Japan 2016で開催されました"Go Global! DojoCon Japan 2016プロ�
 ### 現地開催時の様子
 こちらは2017年にダブリンで開催されたCoolest Proejctsのメイン会場の様子です、ここでトークイベントやイベントの最後には表彰式が行われます。すべてがニンジャ最優先で進められ、このメイン会場も表彰式で座ることが許されるのはニンジャのみです。表彰式ではカッコいい音楽も使われていました。
 
-![](/assets/images/coolest_projects/2017.jpg)
+![](/images/coolest_projects/2017.jpg)
 
 [Coolest Projects Global 2017のGoogle Photosアルバム](https://photos.app.goo.gl/P8sUz3sYyiHdPXJJ2)
 

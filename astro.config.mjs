@@ -2,6 +2,9 @@ import sitemap from "@astrojs/sitemap";
 import editableRegions from "@cloudcannon/editable-regions/astro-integration";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
+import { globSync } from "glob";
+import yaml from "js-yaml";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import rehypeExternalLinks from "rehype-external-links";
@@ -12,11 +15,35 @@ import { siteFonts } from "./site-fonts.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// frontmatter で sitemap: false が指定されたページのURLパスを集める
+// （除外指定は各ページの frontmatter を唯一の情報源とする）
+function collectSitemapExcludedPaths() {
+  const base = path.resolve(__dirname, "src/content/pages");
+
+  return globSync("**/*.md", { cwd: base }).flatMap((file) => {
+    const source = fs.readFileSync(path.join(base, file), "utf8");
+    const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+
+    if (!frontmatter) return [];
+    const data = yaml.load(frontmatter[1]);
+
+    if (data?.sitemap !== false) return [];
+    // Content Collections の glob loader と同じく小文字のURLになる
+    const slug = file
+      .replace(/\.md$/, "")
+      .replace(/(^|\/)index$/, "")
+      .toLowerCase();
+
+    return [slug === "" ? "/" : `/${slug}/`];
+  });
+}
+
+const sitemapExcludedPaths = collectSitemapExcludedPaths();
+
 // https://astro.build/config
 export default defineConfig({
   redirects: {
     "/2026/minecraft-workshp": "/2026/minecraft-workshop",
-    "/ninja/exclusive/minecraft/": "/ninja/minecraft/",
     "/dojo-coop/": "https://coderdojo-nara.github.io/dojo-bazaar/",
   },
   site: "https://coderdojo-nara.github.io",
@@ -29,9 +56,6 @@ export default defineConfig({
   },
   server: {
     port: 4321,
-  },
-  image: {
-    domains: ["picsum.photos"],
   },
   integrations: [
     {
@@ -79,14 +103,10 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const { pathname } = new URL(page);
+
         if (pathname.startsWith("/component-docs/")) return false;
-        // sitemap: false が指定されたページ
-        if (pathname.startsWith("/ninja/exclusive/")) return false;
-        if (pathname.startsWith("/redirect/")) return false;
-        if (pathname === "/ninja/") return false;
-        if (pathname === "/DojoMeeting/") return false;
-        if (pathname === "/projects/ShakyoDojo/") return false;
-        return true;
+
+        return !sitemapExcludedPaths.includes(pathname);
       },
     }),
     mdx(),
@@ -114,6 +134,7 @@ export default defineConfig({
         "@features": path.resolve(__dirname, "src/components/page-sections/features"),
         "@builders": path.resolve(__dirname, "src/components/page-sections/builders"),
         "@data": path.resolve(__dirname, "src/data"),
+        "@utils": path.resolve(__dirname, "src/utils"),
         "@content": path.resolve(__dirname, "src/content"),
         "@assets": path.resolve(__dirname, "src/assets"),
         "@component-docs": path.resolve(__dirname, "src/component-docs"),

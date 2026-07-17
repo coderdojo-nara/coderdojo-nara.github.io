@@ -7,63 +7,223 @@ import SpeakerDeck from "../components/SpeakerDeck.astro";
   title="CoderDojoとは"
   description="CoderDojoとは何か、その考え方や活動について"
 >
-  <section style="max-width: 70ch; margin: 4rem auto; padding: 0 1.5rem;">
-    <h1>CoderDojoとは</h1>
-    <p>
-      CoderDojoとは「ボランティアによる若い人たちのための無料のプログラミングクラブ」で、2011年にアイルランドで始まった世界的な活動です。
-      CoderDojoとは何かを知っていただくために、アイルランドのCoderDojo
-      Foundationが掲げる考え方を紹介します。
-    </p>
+  <div class="dj-page-header">
+    <div class="dj-page-header__inner">
+      <p class="dj-page-eyebrow">ABOUT</p>
+      <h1 class="dj-page-header__title">CoderDojoとは</h1>
+      <p class="dj-page-header__lead">
+        CoderDojoとは「ボランティアによる若い人たちのための無料のプログラミングクラブ」で、2011年にアイルランドで始まった世界的な活動です。CoderDojoとは何かを知っていただくために、アイルランドのCoderDojo
+        Foundationが掲げる考え方を紹介します。
+      </p>
+    </div>
+  </div>
 
-    <h2>What Is CoderDojo?</h2>
-    <p>
-      CoderDojo is a worldwide movement of free, volunteer-led, community-based programming clubs
-      for young people. Anyone aged seven to seventeen can visit a Dojo where they can learn to
-      code, build a website, create an app or a game, and explore technology in an informal,
-      creative, and social environment.
-    </p>
-    <p>
-      The CoderDojo movement believes that an understanding of programming languages is increasingly
-      important in the modern world, that it's both better and easier to learn these skills early,
-      and that nobody should be denied the opportunity to do so.
-    </p>
+  {/* What Is CoderDojo? */}
+  <section class="dj-wrap whatis">
+    <div class="whatis__card whatis__card--en">
+      <h2 class="whatis__title">What Is CoderDojo?</h2>
+      <p class="whatis__text">
+        CoderDojo is a worldwide movement of free, volunteer-led, community-based programming clubs
+        for young people. Anyone aged seven to seventeen can visit a Dojo where they can learn to
+        code, build a website, create an app or a game, and explore technology in an informal,
+        creative, and social environment.
+      </p>
+      <p class="whatis__text">
+        The CoderDojo movement believes that an understanding of programming languages is
+        increasingly important in the modern world, that it's both better and easier to learn these
+        skills early, and that nobody should be denied the opportunity to do so.
+      </p>
+    </div>
+    <div class="whatis__card whatis__card--ja">
+      <h2 class="whatis__title">
+        CoderDojoって何？<span class="whatis__title-sub">（日本語訳）</span>
+      </h2>
+      <p class="whatis__text">
+        「CoderDojoは、ボランティア主導で且つコミュニティベースな無料の若い人たち向けプログラミングクラブの世界的な活動です。7歳から17歳までの誰でもDojoを訪れて、コードを学んだり、ウェブサイトを作ったり、アプリやゲームをつくったり、技術を探求することができる、カジュアルで創造的な環境です。
+      </p>
+      <p class="whatis__text">
+        CoderDojoの活動の中では、プログラミング言語の理解が現代の世界でますます重要になってきていると考えられています。若いうちにこれらのスキルを学ぶほうがより容易に習得しやすく、誰もがその機会を拒否するべきではないと考えています。」
+      </p>
+    </div>
+  </section>
 
-    <h2>CoderDojoって何？（日本語訳）</h2>
-    <p>
-      「CoderDojoは、ボランティア主導で且つコミュニティベースな無料の若い人たち向けプログラミングクラブの世界的な活動です。
-      7歳から17歳までの誰でもDojoを訪れて、コードを学んだり、ウェブサイトを作ったり、アプリやゲームをつくったり、
-      技術を探求することができる、カジュアルで創造的な環境です。
-    </p>
-    <p>
-      CoderDojoの活動の中では、プログラミング言語の理解が現代の世界でますます重要になってきていると考えられています。
-      若いうちにこれらのスキルを学ぶほうがより容易に習得しやすく、誰もがその機会を拒否するべきではないと考えています。」
-    </p>
+  {/* ガイダンス */}
+  <section class="guidance">
+    <div class="dj-wrap guidance__grid">
+      <div>
+        <h2 class="dj-section-title guidance__title">CoderDojoガイダンス</h2>
+        <p class="guidance__text">
+          ここまでの内容は、CoderDojoとしての最も基本的な考え方の部分です。実際のDojoの様子や考え方を知っていただくには、こちらのスライド（作成：コーダー道場こだいら）をみていただくのがいいと思います。
+        </p>
+      </div>
+      <div class="guidance__slide">
+        <SpeakerDeck id="55f52b6eead6418c8da23c6e303909d8" />
+      </div>
+    </div>
+  </section>
 
-    <h2>CoderDojoガイダンス</h2>
-    <p>
-      ここまでの内容は、CoderDojoとしての最も基本的な考え方の部分です。実際のDojoの様子や考え方を知っていただくには、
-      こちらのスライド（作成：コーダー道場こだいら）をみていただくのがいいと思います。
-    </p>
-
-    <SpeakerDeck id="55f52b6eead6418c8da23c6e303909d8" />
-
-    <h2>あなたがDojoに来る理由は何ですか？</h2>
-    <div
-      style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 2rem 0;"
-    >
+  {/* 動画 */}
+  <section class="dj-wrap video-section">
+    <div class="video-section__frame">
       <iframe
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
         src="https://www.youtube.com/embed/gLDue2xb1j8?rel=0"
-        frameborder="0"
+        title="あなたがDojoに来る理由は何ですか？"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
     </div>
-
-    <p>
-      私たちは、活動の場をDojoと呼んでいます。これは空手や柔道などで使う「道場」と同じで、CoderDojoの創始者が合気道をやっていたこともあって、
-      自分たちの活動の場を「道場(Dojo)」と呼ぶようになったようです。
-    </p>
-    <p>もし、CoderDojoの活動に興味を持たれたら是非、お近くのDojoに足を運んでみてください。</p>
+    <div>
+      <h2 class="dj-section-title video-section__title">あなたがDojoに来る理由は何ですか？</h2>
+      <p class="video-section__text">
+        私たちは、活動の場をDojoと呼んでいます。これは空手や柔道などで使う「道場」と同じで、CoderDojoの創始者が合気道をやっていたこともあって、自分たちの活動の場を「道場(Dojo)」と呼ぶようになったようです。
+      </p>
+      <p class="video-section__text">
+        もし、CoderDojoの活動に興味を持たれたら是非、お近くのDojoに足を運んでみてください。
+      </p>
+    </div>
   </section>
+
+  {/* CTA */}
+  <div class="dj-cta">
+    <div class="dj-cta__inner">
+      <h2 class="dj-cta__title">まずは一度、遊びに来てみませんか？</h2>
+      <div class="dj-cta__actions">
+        <a
+          href="/join/"
+          class="dj-btn dj-btn--accent"
+          >参加方法を見る</a
+        >
+        <a
+          href="/contact/"
+          class="dj-btn dj-btn--ghost-light"
+          >お問い合わせ</a
+        >
+      </div>
+    </div>
+  </div>
 </Page>
+
+<style>
+  /* What Is */
+  .whatis {
+    padding: 32px 32px 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .whatis__card {
+    border-radius: 12px;
+    padding: 36px;
+  }
+
+  .whatis__card--en {
+    border: 1px solid var(--brand-border);
+  }
+
+  .whatis__card--ja {
+    background: var(--brand-surface);
+  }
+
+  .whatis__title {
+    font-weight: var(--font-weight-black);
+    font-size: 22px;
+    margin: 0 0 16px;
+    color: var(--brand-navy);
+  }
+
+  .whatis__title-sub {
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    color: var(--brand-ink-muted);
+  }
+
+  .whatis__text {
+    line-height: 2;
+    color: var(--brand-ink-sub);
+    margin: 0 0 16px;
+    font-size: 15px;
+  }
+
+  .whatis__text:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ガイダンス */
+  .guidance {
+    background: var(--brand-surface);
+  }
+
+  .guidance__grid {
+    padding-block: 56px;
+    display: grid;
+    grid-template-columns: 1fr 460px;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .guidance__title {
+    margin-bottom: 16px;
+  }
+
+  .guidance__text {
+    line-height: 2;
+    color: var(--brand-ink-sub);
+    margin: 0;
+  }
+
+  .guidance__slide :global(.speakerdeck-wrapper) {
+    margin: 0;
+  }
+
+  /* 動画 */
+  .video-section {
+    padding-block: 64px;
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .video-section__frame {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(20, 40, 70, 0.15);
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-section__frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .video-section__title {
+    margin-bottom: 16px;
+  }
+
+  .video-section__text {
+    line-height: 2;
+    color: var(--brand-ink-sub);
+    margin: 0 0 16px;
+  }
+
+  .video-section__text:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (width < 900px) {
+    .whatis {
+      grid-template-columns: 1fr;
+    }
+
+    .guidance__grid,
+    .video-section {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-block: 48px;
+    }
+  }
+</style>

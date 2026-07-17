@@ -1,0 +1,134 @@
+/* テキスト中心のコンテンツページ用の本文組版。
+   `.dj-prose` を付けた要素の中だけに適用され、他ページには影響しない。 */
+@layer components {
+  .dj-prose {
+    color: var(--brand-ink-sub);
+    font-size: 16px;
+    line-height: 1.9;
+    margin-inline: auto;
+
+    /* ヘッダー内テキストと同じ幅・中央寄せのカラム（幅は --dj-content-measure で共有） */
+    max-width: var(--dj-content-measure);
+    padding: 40px 32px 64px;
+  }
+
+  @media (width < 640px) {
+    .dj-prose {
+      padding-inline: 20px;
+    }
+  }
+
+  .dj-prose > :first-child {
+    margin-top: 0;
+  }
+
+  .dj-prose h2 {
+    border-left: 5px solid var(--brand-amber);
+    color: var(--brand-navy);
+    font-size: 24px;
+    font-weight: var(--font-weight-black);
+    line-height: 1.4;
+    margin: 48px 0 16px;
+    padding-left: 16px;
+  }
+
+  .dj-prose h3 {
+    color: var(--brand-navy);
+    font-size: 19px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5;
+    margin: 32px 0 12px;
+  }
+
+  .dj-prose p {
+    color: var(--brand-ink-sub);
+    line-height: 1.9;
+    margin: 0 0 20px;
+  }
+
+  .dj-prose a {
+    color: var(--brand-navy);
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-decoration-color: var(--brand-amber);
+    text-underline-offset: 3px;
+  }
+
+  .dj-prose a:hover {
+    color: var(--brand-amber-dark);
+  }
+
+  .dj-prose ul,
+  .dj-prose ol {
+    color: var(--brand-ink-sub);
+    line-height: 1.9;
+    margin: 0 0 20px;
+    padding-left: 1.5em;
+  }
+
+  .dj-prose li {
+    margin-bottom: 8px;
+  }
+
+  .dj-prose li::marker {
+    color: var(--brand-amber);
+  }
+
+  .dj-prose strong {
+    color: var(--brand-ink);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .dj-prose img {
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(20, 40, 70, 0.1);
+    display: block;
+    height: auto;
+    margin: 24px 0;
+    max-width: 100%;
+  }
+
+  .dj-prose iframe {
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(20, 40, 70, 0.1);
+    display: block;
+    margin: 24px 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .dj-prose hr {
+    border: 0;
+    border-top: 1px solid var(--brand-border);
+    margin: 40px 0;
+  }
+
+  .dj-prose blockquote {
+    background: var(--brand-surface);
+    border-left: 4px solid var(--brand-navy);
+    border-radius: 8px;
+    color: var(--brand-ink-sub);
+    margin: 24px 0;
+    padding: 16px 20px;
+  }
+
+  .dj-prose table {
+    border-collapse: collapse;
+    font-size: 15px;
+    margin: 24px 0;
+    width: 100%;
+  }
+
+  .dj-prose th,
+  .dj-prose td {
+    border: 1px solid var(--brand-border);
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  .dj-prose th {
+    background: var(--brand-surface);
+    color: var(--brand-navy);
+  }
+}

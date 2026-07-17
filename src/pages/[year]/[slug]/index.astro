@@ -1,25 +1,16 @@
 ---
-import Heading from "@core-elements/heading/Heading.astro";
-import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
-import Page from "@layouts/Page.astro";
-import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import Gallery from "@components/Gallery.astro";
+import Page from "@layouts/Page.astro";
+import { getPostSlug, getPostYear } from "@utils/blog";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
-  return posts.map((post: CollectionEntry<"blog">) => {
-    const year = String(post.data.date.getFullYear());
-    const filename = post.id.split("/").pop() ?? post.id;
-    const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.(md|mdx)$/, "");
-
-    return {
-      params: { year, slug },
-      props: { post },
-    };
-  });
+  return posts.map((post: CollectionEntry<"blog">) => ({
+    params: { year: getPostYear(post), slug: getPostSlug(post) },
+    props: { post },
+  }));
 }
 
 interface Props {
@@ -41,56 +32,30 @@ const images = post.data.images ?? [];
   description={post.data.description}
   image={post.data.image}
 >
-  <CustomSection
-    maxContentWidth="xl"
-    paddingHorizontal="lg"
-    paddingVertical="4xl"
-    colorScheme="inherit"
-    backgroundColor="base"
-    class="post-container"
-  >
-    <SimpleText
-      size="sm"
-      style="color: var(--color-text-muted); margin-bottom: var(--spacing-sm);"
-    >
-      {date} • {post.data.author}
-    </SimpleText>
+  <div class="dj-page-header dj-page-header--narrow">
+    <div class="dj-page-header__inner">
+      <p class="dj-page-eyebrow">BLOG</p>
+      <h1 class="dj-page-header__title">{post.data.title}</h1>
+      <p class="post-meta">
+        <span>{date}</span>
+        <span class="post-meta__author">{post.data.author}</span>
+      </p>
+      {post.data.description && <p class="dj-page-header__lead">{post.data.description}</p>}
+    </div>
+  </div>
 
-    <Heading
-      level="h1"
-      size="2xl"
-      style="margin-bottom: var(--spacing-xs);"
-    >
-      {post.data.title}
-    </Heading>
-
-    {
-      post.data.description && (
-        <SimpleText
-          size="lg"
-          style="color: var(--color-text-muted); margin-bottom: 0; margin-top: var(--spacing-xs);"
-        >
-          {post.data.description}
-        </SimpleText>
-      )
-    }
-
+  <article class="dj-prose">
     {
       post.data.image && (
-        <Image
-          source={post.data.image}
+        <img
+          src={post.data.image}
           alt={post.data.title}
-          rounded={true}
-          class="post-image"
-          aspectRatio="horizontal-strip"
-          positionVertical="center"
+          class="post-hero"
         />
       )
     }
 
-    <div class="post">
-      <Content components={{ Gallery }} />
-    </div>
+    <Content components={{ Gallery }} />
 
     {
       images.length > 0 && (
@@ -106,68 +71,53 @@ const images = post.data.images ?? [];
         </div>
       )
     }
-  </CustomSection>
+
+    <div class="post-back">
+      <a href="/blog/">← 記事一覧へ戻る</a>
+    </div>
+  </article>
 </Page>
 
+<style>
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: baseline;
+    margin: 0;
+    color: var(--brand-ink-muted);
+    font-size: 14px;
+  }
+
+  .post-meta__author {
+    color: var(--brand-amber);
+    font-weight: var(--font-weight-bold);
+    font-size: 13px;
+  }
+
+  .post-back {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--brand-border);
+    font-weight: var(--font-weight-bold);
+  }
+</style>
+
 <style is:global>
-  .post-container.custom-section > .outer-content > .content {
-    padding-bottom: 0 !important;
-  }
-
-  .post {
-    display: grid;
-    grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 70ch)
-      minmax(0, 1fr);
-    margin-inline: auto;
-    margin-top: var(--spacing-xl);
-  }
-
-  .post > * {
-    grid-column: 2;
-  }
-
-  .post > .wide,
-  .post > pre,
-  .post > .image,
-  .post > .video {
-    grid-column: 1 / -1;
-  }
-
-  .post > h1,
-  .post > h2,
-  .post > h3,
-  .post > h4,
-  .post > h5,
-  .post > h6 {
-    margin-bottom: 0;
-    margin-top: 1rem;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-
-  .post > .astro-code {
-    margin-block: var(--spacing-xl);
-  }
-
-  .post-image {
-    margin-top: var(--spacing-xl);
-  }
-
-  .post-images {
+  /* 記事本文中のギャラリーサムネイルは、プロースの img スタイルを上書きして格子状に並べる */
+  .dj-prose .post-images {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: var(--spacing-xs);
-    margin-top: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
   }
 
-  .post-gallery-image {
+  .dj-prose .post-images img {
     width: 100%;
     height: 140px;
-    object-fit: cover;
+    margin: 0;
     border-radius: var(--radius-sm);
+    object-fit: cover;
+    box-shadow: none;
   }
 </style>

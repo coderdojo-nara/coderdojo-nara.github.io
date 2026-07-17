@@ -11,6 +11,7 @@ export interface Props {
   keywords?: string[] | null;
   image?: string | null;
   canonical?: string | null;
+  noindex?: boolean;
 }
 
 const props = Astro.props;
@@ -80,6 +81,8 @@ const pageImage = rawImage
     <SEO
       title={formattedTitle}
       description={pageDescription}
+      noindex={props.noindex ?? false}
+      nofollow={props.noindex ?? false}
       openGraph={{
         basic: {
           title: formattedTitle,
@@ -112,7 +115,7 @@ const pageImage = rawImage
     <slot name="head" />
   </head>
   <body>
-    <div>
+    <div class="site-shell">
       <slot />
     </div>
     <script>

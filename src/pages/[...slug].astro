@@ -1,6 +1,7 @@
 ---
 import footerData from "@data/footer.json";
 import mainNavData from "@data/mainNav.json";
+import ContentPage from "@layouts/ContentPage.astro";
 import Page from "@layouts/Page.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 
@@ -15,7 +16,11 @@ export async function getStaticPaths() {
     .filter((page) => {
       const slug = page.id.replace(/index$/, "");
 
-      return slug !== "blog";
+      // blog は blog/[...page].astro、トップページは index.astro、
+      // 参加ページは join.astro、サポーターガイダンスは supporter/guidance.astro が描画する
+      return (
+        slug !== "blog" && slug !== "join" && slug !== "supporter/guidance" && page.id !== "index"
+      );
     })
     .map((page) => {
       const slug = page.id.replace(/index$/, "");
@@ -29,20 +34,35 @@ const { page } = Astro.props;
 const { Content } = await render(page);
 const hasSections = page.data.pageSections && page.data.pageSections.length > 0;
 const noindex = page.data.sitemap === false;
+
+// トップレベルのセクション名からアイブロウを補う（該当がなければ表示しない）
+const topSegment = page.id.split("/")[0];
+const eyebrowMap: Record<string, string> = {
+  supporter: "SUPPORTER",
+  ninja: "NINJA",
+};
+const eyebrow = eyebrowMap[topSegment];
 ---
 
-<Page
-  frontmatter={page.data}
-  mainNav={mainNavData}
-  footer={footerData}
->
-  {noindex && <meta slot="head" name="robots" content="noindex, nofollow" />}
-  {hasSections ? (
-    <Content />
-  ) : (
-    <section style="max-width: 70ch; margin: 4rem auto; padding: 0 1.5rem;">
-      <h1>{page.data.title}</h1>
+{
+  hasSections ? (
+    <Page
+      frontmatter={page.data}
+      noindex={noindex}
+      mainNav={mainNavData}
+      footer={footerData}
+    >
       <Content />
-    </section>
-  )}
-</Page>
+    </Page>
+  ) : (
+    <ContentPage
+      title={page.data.title}
+      description={page.data.description}
+      eyebrow={eyebrow}
+      lead={page.data.description}
+      noindex={noindex}
+    >
+      <Content />
+    </ContentPage>
+  )
+}

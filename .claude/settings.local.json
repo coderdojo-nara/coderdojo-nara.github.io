@@ -22,7 +22,23 @@
       "Bash(PATH=\"/Users/kwaka1208/.nodenv/versions/22.22.1/bin:$PATH\" npm install @astrojs/rss)",
       "Bash(PATH=\"/Users/kwaka1208/.nodenv/versions/22.22.1/bin:$PATH\" npm install rehype-external-links)",
       "Bash(find /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src/content/blog -type f -name *.md -o -name *.mdx)",
-      "Bash(find /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src -name *staff* -o -name *member*)"
+      "Bash(find /Users/kwaka1208/git/01_web/coderdojo-nara.github.io/src -name *staff* -o -name *member*)",
+      "Bash(git -C . status --short)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(grep -iB5 \"minecraft\")",
+      "Bash(grep -E \"^\\(assets|css\\)$\")",
+      "Bash(rm -rf src/content/blog/2023/2018 src/content/pages/search.md src/pages/join.astro _data assets public/scss public/css)",
+      "Bash(rmdir src/content/blog/2023)",
+      "Bash(npm uninstall *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(git -C /Users/kwaka1208/git/02_community/coderdojo-nara.github.io status --short)",
+      "Bash(npx prettier *)",
+      "Bash(npx stylelint *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(echo \"fix exit: $?\")",
+      "Bash(echo \"exit $?\")",
+      "Bash(echo \"lint: $?\")",
+      "Bash(echo \"fix: $?\")"
     ]
   }
 }

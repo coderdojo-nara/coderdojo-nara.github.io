@@ -1,6 +1,11 @@
 {
   "logoText": "CoderDojo 奈良",
-  "links": [],
+  "links": [
+    {
+      "name": "行動規範",
+      "path": "/code_of_conduct/"
+    }
+  ],
   "socials": [
     {
       "icon": "social/x",
