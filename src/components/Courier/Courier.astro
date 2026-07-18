@@ -12,20 +12,10 @@
  *   - 記録＝確定点／通知＝best-effort の二層
  */
 
-export type CourierFieldType =
-  | 'text'
-  | 'email'
-  | 'tel'
-  | 'url'
-  | 'number'
-  | 'date'
-  | 'time'
-  | 'textarea'
-  | 'select'
-  | 'radio'
-  | 'checkbox'
-  | 'consent'
-  | 'hidden';
+// 注意: この union 型は必ず1行で書くこと。複数行に分けると Astro 既定の WASM コンパイラ
+// （@astrojs/compiler）が型宣言を分断し、ビルドが Unexpected "|" で失敗する。
+// prettier-ignore
+export type CourierFieldType = 'text' | 'email' | 'tel' | 'url' | 'number' | 'date' | 'time' | 'textarea' | 'select' | 'radio' | 'checkbox' | 'consent' | 'hidden';
 
 /**
  * フィールドの入力バリデーション。空欄は required に委ね、値がある時だけ形式を検査する。

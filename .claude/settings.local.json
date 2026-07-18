@@ -42,7 +42,16 @@
       "Bash(npx astro *)",
       "Bash(mkdir -p src/components/Courier)",
       "Bash(cp /Users/kwaka1208/git/10_development/astro-courier/astro/src/components/Courier/Courier.astro src/components/Courier/Courier.astro)",
-      "Bash(git -C /Users/kwaka1208/git/02_community/coderdojo-nara.github.io status)"
+      "Bash(git -C /Users/kwaka1208/git/02_community/coderdojo-nara.github.io status)",
+      "Bash(DISABLE_COMPONENT_LIBRARY=true npx astro build)",
+      "Bash(mkdir -p src/components/Courier/_probe)",
+      "Bash(cat)",
+      "Bash(DISABLE_COMPONENT_LIBRARY=true NODE_OPTIONS=\"--import file:///tmp/patch-esbuild.mjs\" npx astro build)",
+      "Bash(cp src/pages/contact.astro /tmp/contact.astro.bak)",
+      "Bash(node --input-type=module)",
+      "Bash(npm ls *)",
+      "Bash(git stash *)",
+      "Bash(DISABLE_COMPONENT_LIBRARY=true npm run build)"
     ]
   }
 }
