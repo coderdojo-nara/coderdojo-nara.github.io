@@ -42,7 +42,7 @@ const FORM_DEFINITIONS = {
         // 送信者アドレスが入っているフィールド名。空／不正な形式なら送らない。
         toField: 'email',
         // 差出人の表示名（任意）
-        senderName: 'お問い合わせ窓口',
+        senderName: 'CoderDojo 奈良',
         subjectTemplate: '【自動返信】お問い合わせありがとうございます',
         // 本文テンプレート。{name} 等を差し込む（複数行可）。
         bodyTemplate: [
