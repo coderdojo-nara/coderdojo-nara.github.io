@@ -8,6 +8,8 @@
  * 戻り値は必ず { ok:true } / { ok:false, error } の JSON。例外は漏らさない。
  */
 
+APP_VERSION = "";
+
 /**
  * 疎通確認用。ブラウザで /exec を開くと稼働メッセージを返す。
  */
