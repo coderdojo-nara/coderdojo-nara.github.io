@@ -4,8 +4,6 @@ title: CoderDojo Community Platform Zenへの登録方法
 ## zenへの登録について
 「CoderDojo Community Platform Zen」とは、アイルランドのCoderDojo Foundationが開発・提供しているサービスで、Dojoのイベント管理機能やフォーラム（掲示板）などの機能があります。
 
-奈良と生駒では、2018年よりこのサービスを使って参加申し込みの受付を行いますので、保護者のみなさん、13以上のニンジャ、サポーターさんも以下の手順に沿って登録をお願いいたします。
-
 13歳未満のニンジャについては、自分のアカウントを持つことができませんので、保護者の方が登録していただいて保護者のアカウントにニンジャを追加する形になります。
 
 ## 13歳以上の方のアカウント登録
@@ -48,10 +46,9 @@ title: CoderDojo Community Platform Zenへの登録方法
 二人以上の子供を登録する場合は、画面左に表示されている「Add Chile」をクリックして登録してください。ここまででアカウント登録は完了です。
 
 ## Dojoへの登録
-アカウントができたら、参加したいDojoへの登録を行います。奈良と生駒、それぞれのページにアクセスして表示される「Join the Dojo」をクリックするとDojoへの参加完了です。
+アカウントができたら、参加したいDojoへの登録を行います。奈良、それぞれのページにアクセスして表示される「Subscribe to this club」をクリックするとDojoへの参加完了です。
 
-- [CoderDojo 奈良のページ](https://zen.coderdojo.com/dojos/jp/nara-nara-prefecture/nara-nara)
-- [CoderDojo 生駒のページ](https://zen.coderdojo.com/dojos/jp/ikoma-nara-prefecture/ikoma-nara)
+- [CoderDojo 奈良のページ](https://codeclub.org/en/clubs/0dc27210-c03a-4c3e-a819-0b5266a51654)
 
 <img src="/images/zen/05.png" style="border: solid 1px #222; max-width: 488px; width: 100%; height: auto;">
 
