@@ -39,7 +39,9 @@
       "Bash(echo \"exit $?\")",
       "Bash(echo \"lint: $?\")",
       "Bash(echo \"fix: $?\")",
-      "Bash(npx astro *)"
+      "Bash(npx astro *)",
+      "Bash(mkdir -p src/components/Courier)",
+      "Bash(cp /Users/kwaka1208/git/10_development/astro-courier/astro/src/components/Courier/Courier.astro src/components/Courier/Courier.astro)"
     ]
   }
 }

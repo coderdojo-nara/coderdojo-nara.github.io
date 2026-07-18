@@ -1,15 +1,46 @@
 ---
+import Courier from "@components/Courier/Courier.astro";
+import type { CourierField } from "@components/Courier/Courier.astro";
 import Page from "@layouts/Page.astro";
 import { Icon } from "astro-icon/components";
 
-const formUrl = "https://forms.gle/tYBwSvrEiEYujNNa7";
 const xUrl = "https://x.com/CoderDojoNara";
 const staffUrl = "/staff/";
+
+const endpoint =
+  "https://script.google.com/macros/s/AKfycbxmqio3iDQYH3E2LpgR0KilJOBvtYQaSafe4h3YR56QHMbGBnBn59q7qtxgbebmI0beDw/exec";
+const discordWebhookUrl =
+  "https://discord.com/api/webhooks/1527862640435789964/zD_2LJ3NGuSgnlJSuSXKlK5CxnepE4DIyNxsKPDlqJi95ISE1fGM1sWZzB00WNf3gQ-Y";
+
+const fields: CourierField[] = [
+  {
+    name: "name",
+    label: "お名前",
+    type: "text",
+    required: true,
+    placeholder: "山田 太郎",
+  },
+  {
+    name: "email",
+    label: "メールアドレス",
+    type: "email",
+    required: true,
+    placeholder: "you@example.com",
+    validation: "email",
+  },
+  {
+    name: "message",
+    label: "お問い合わせ内容",
+    type: "textarea",
+    required: true,
+    placeholder: "ご用件をご記入ください",
+  },
+];
 ---
 
 <Page
   title="お問い合わせ"
-  description="CoderDojo 奈良へのお問い合わせ方法。フォーム・X（旧Twitter）・スタッフ紹介をご案内します。"
+  description="CoderDojo 奈良へのお問い合わせフォーム。X（旧Twitter）・スタッフ紹介もご案内します。"
 >
   <div class="dj-page-header">
     <div class="dj-page-header__inner">
@@ -21,22 +52,25 @@ const staffUrl = "/staff/";
     </div>
   </div>
 
-  <section class="dj-wrap channels">
-    <article class="channel">
-      <div class="channel__chip channel__chip--info">
-        <Icon name="envelope" />
+  <section class="dj-wrap form-section">
+    <div class="form-card">
+      <h2 class="form-card__title">お問い合わせフォーム</h2>
+      <p class="form-card__text">
+        以下のフォームからお気軽にお問い合わせください。内容を確認のうえ、担当より折り返しご連絡いたします。
+      </p>
+      <div class="courier-wrap">
+        <Courier
+          endpoint={endpoint}
+          formType="contact"
+          fields={fields}
+          discordWebhookUrl={discordWebhookUrl}
+          successMessage={`<h2>送信が完了しました</h2><p>お問い合わせありがとうございます。担当より折り返しご連絡いたしますので、少々お待ちください。</p>`}
+        />
       </div>
-      <h2 class="channel__title">お問い合わせフォーム</h2>
-      <p class="channel__text">問い合わせについては、お問い合わせフォームで受け付けています。</p>
-      <a
-        href={formUrl}
-        class="dj-btn dj-btn--primary channel__cta"
-        target="_blank"
-        rel="noopener noreferrer"
-        >フォームを開く</a
-      >
-    </article>
+    </div>
+  </section>
 
+  <section class="dj-wrap channels">
     <article class="channel">
       <div class="channel__chip channel__chip--dark">
         <Icon name="social/x" />
@@ -49,8 +83,7 @@ const staffUrl = "/staff/";
         href={xUrl}
         class="dj-btn dj-btn--navy-outline channel__cta"
         target="_blank"
-        rel="noopener noreferrer"
-        >@CoderDojoNara</a
+        rel="noopener noreferrer">@CoderDojoNara</a
       >
     </article>
 
@@ -60,9 +93,7 @@ const staffUrl = "/staff/";
       </div>
       <h2 class="channel__title">どんな人がやってるの？</h2>
       <p class="channel__text">運営しているスタッフの紹介はこちらのページにあります。</p>
-      <a
-        href={staffUrl}
-        class="dj-btn dj-btn--amber-outline channel__cta"
+      <a href={staffUrl} class="dj-btn dj-btn--amber-outline channel__cta"
         >スタッフ紹介を見る</a
       >
     </article>
@@ -70,10 +101,52 @@ const staffUrl = "/staff/";
 </Page>
 
 <style>
+  .form-section {
+    padding: 32px 32px 8px;
+  }
+
+  .form-card {
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .form-card__title {
+    font-weight: var(--font-weight-black);
+    font-size: 19px;
+    margin: 0;
+    color: var(--brand-navy);
+  }
+
+  .form-card__text {
+    line-height: 1.9;
+    color: var(--brand-ink-sub);
+    margin: 0;
+    font-size: 14px;
+  }
+
+  /* Courier の公開 CSS 変数をサイトのブランドトークンに接続 */
+  .courier-wrap {
+    margin-top: 8px;
+    --courier-accent: var(--brand-navy);
+    --courier-accent-contrast: #ffffff;
+    --courier-text: var(--brand-ink);
+    --courier-muted: var(--brand-ink-sub);
+    --courier-border: var(--brand-border);
+    /* サイトはライト固定のため、OS のダークモードでも背景を白に固定する */
+    --courier-bg: #ffffff;
+    --courier-error: #dc2626;
+    --courier-radius: 8px;
+    --courier-max-width: 100%;
+  }
+
   .channels {
-    padding: 32px 32px 64px;
+    padding: 24px 32px 64px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 28px;
   }
 
@@ -98,11 +171,6 @@ const staffUrl = "/staff/";
   .channel__chip :global(svg) {
     width: 24px;
     height: 24px;
-  }
-
-  .channel__chip--info {
-    background: var(--brand-badge-info-bg);
-    color: var(--brand-navy);
   }
 
   .channel__chip--dark {

@@ -1,0 +1,574 @@
+---
+/**
+ * Courier.astro — 汎用お問い合わせ／申込フォームコンポーネント。
+ *
+ * fields 定義から「フォーム UI ＋ 確認モーダル ＋ 送信ペイロード」を生成する。
+ * 送信は GAS Web App へ（記録＝確定点）、成功時のみ Discord へ二重化通知（best-effort）。
+ * 完了は同一ページ内でフォームを successMessage に差し替える（インライン表示）。
+ *
+ * 設計上の不変条件（壊さない）:
+ *   - Content-Type を付けない JSON 文字列 POST（GAS の CORS プリフライト回避）
+ *   - ハニーポット・確認モーダル・自動再試行・入力保持のエラー復帰・二重送信抑止
+ *   - 記録＝確定点／通知＝best-effort の二層
+ */
+
+export type CourierFieldType = 'text' | 'email' | 'tel' | 'textarea' | 'select';
+
+/**
+ * フィールドの入力バリデーション。空欄は required に委ね、値がある時だけ形式を検査する。
+ *   'number'    … 半角数値のみ         ^[0-9]+$
+ *   'halfwidth' … 半角のみ（ASCII全般） ^[\x20-\x7E]+$
+ *   'email'     … メールアドレス形式
+ *   'none'      … 検査しない（既定）
+ */
+export type CourierValidation = 'number' | 'halfwidth' | 'email' | 'none';
+
+export interface CourierField {
+  /** ペイロードキー／シート列キー */
+  name: string;
+  /** 表示ラベル（GAS 側のシートヘッダー名にもなる） */
+  label: string;
+  type: CourierFieldType;
+  required?: boolean;
+  placeholder?: string;
+  /** 入力バリデーション（既定 'none'）。select には適用されない */
+  validation?: CourierValidation;
+  /** select 用の選択肢 */
+  options?: string[];
+}
+
+export interface CourierLabels {
+  /** 内容を確認するボタン（モーダルを開く） */
+  submit?: string;
+  /** 確認後に送信するボタン */
+  confirm?: string;
+  /** 修正に戻るボタン */
+  cancel?: string;
+  /** 送信中のボタン表示 */
+  sending?: string;
+  /** モーダルの見出し */
+  confirmHeading?: string;
+  /** 送信失敗時のエラーメッセージ */
+  error?: string;
+}
+
+export interface Props {
+  /** GAS Web App の /exec URL */
+  endpoint: string;
+  /** ペイロードの type（GAS 側ルーティングキー。例 'contact'） */
+  formType: string;
+  /** フィールド定義。UI・確認モーダル・ペイロードを生成 */
+  fields: CourierField[];
+  /** 送信成功後にインライン表示する完了メッセージ（HTML 可・作者が指定する信頼済み文字列） */
+  successMessage?: string;
+  /** 任意。空／未指定なら Discord 送信をスキップ */
+  discordWebhookUrl?: string;
+  /** ハニーポット欄の name。既定 'website' */
+  honeypotName?: string;
+  /** GAS 送信の再試行回数。既定 1（＝最大2回試行） */
+  retries?: number;
+  /** 文言差し替え */
+  labels?: CourierLabels;
+}
+
+const {
+  endpoint,
+  formType,
+  fields,
+  successMessage = '送信が完了しました。ありがとうございました。',
+  discordWebhookUrl = '',
+  honeypotName = 'website',
+  retries = 1,
+  labels = {},
+} = Astro.props;
+
+const L = {
+  submit: labels.submit ?? '内容を確認する',
+  confirm: labels.confirm ?? '送信する',
+  cancel: labels.cancel ?? '修正する',
+  sending: labels.sending ?? '送信中...',
+  confirmHeading: labels.confirmHeading ?? '送信内容の確認',
+  error: labels.error ?? '送信に失敗しました。時間をおいて再度お試しください。',
+};
+
+// インスタンスごとに一意な id 接頭辞（複数設置に対応）
+const uid = `courier-${Math.random().toString(36).slice(2, 9)}`;
+
+// クライアントスクリプトへ渡す設定（フィールドは name/label/type のみ）
+const clientConfig = {
+  endpoint,
+  formType,
+  honeypotName,
+  retries,
+  discordWebhookUrl,
+  labels: L,
+  fields: fields.map((f) => ({ name: f.name, label: f.label, type: f.type, validation: f.validation ?? 'none' })),
+};
+// </script> や < による早期終了・XSS を避けるためエスケープ
+const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
+---
+
+<section class="courier" data-courier aria-live="polite">
+  <script is:inline type="application/json" class="courier-config" set:html={clientConfigJson} />
+
+  <form class="courier-form" novalidate>
+    {
+      fields.map((field) => {
+        const fieldId = `${uid}-${field.name}`;
+        return (
+          <div class="courier-field">
+            <label class="courier-label" for={fieldId}>
+              {field.label}
+              {field.required && <span class="courier-required" aria-hidden="true">*</span>}
+            </label>
+
+            {field.type === 'textarea' ? (
+              <textarea
+                id={fieldId}
+                name={field.name}
+                required={field.required}
+                placeholder={field.placeholder}
+                rows="6"
+              />
+            ) : field.type === 'select' ? (
+              <select id={fieldId} name={field.name} required={field.required}>
+                <option value="">{field.placeholder ?? '選択してください'}</option>
+                {(field.options ?? []).map((opt) => (
+                  <option value={opt}>{opt}</option>
+                ))}
+              </select>
+            ) : (
+              <input
+                id={fieldId}
+                name={field.name}
+                type={field.type}
+                required={field.required}
+                placeholder={field.placeholder}
+              />
+            )}
+          </div>
+        );
+      })
+    }
+
+    {/* ハニーポット（画面外配置のおとり欄。display:none ではなく off-screen） */}
+    <div class="courier-honeypot" aria-hidden="true">
+      <label for={`${uid}-hp`}>この欄は入力しないでください</label>
+      <input id={`${uid}-hp`} name={honeypotName} type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="courier-error" role="alert" hidden>{L.error}</div>
+
+    <button type="button" class="courier-submit">{L.submit}</button>
+  </form>
+
+  {/* 送信成功後にインライン表示（作者提供の信頼済み HTML） */}
+  <div class="courier-success" hidden tabindex="-1" set:html={successMessage} />
+
+  {/* 確認モーダル */}
+  <div class="courier-modal" hidden role="dialog" aria-modal="true" aria-label={L.confirmHeading}>
+    <div class="courier-modal__backdrop" data-courier-cancel></div>
+    <div class="courier-modal__panel" role="document">
+      <h2 class="courier-modal__heading">{L.confirmHeading}</h2>
+      <div class="courier-modal__preview"></div>
+      <div class="courier-modal__actions">
+        <button type="button" class="courier-modal__cancel" data-courier-cancel>{L.cancel}</button>
+        <button type="button" class="courier-modal__confirm">{L.confirm}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .courier {
+    /* 公開トークン（利用側の CSS 変数で上書き可）→ 内部トークンに解決 */
+    --_accent: var(--courier-accent, #2563eb);
+    --_accent-contrast: var(--courier-accent-contrast, #ffffff);
+    --_text: var(--courier-text, #1f2937);
+    --_muted: var(--courier-muted, #6b7280);
+    --_border: var(--courier-border, #d1d5db);
+    --_bg: var(--courier-bg, #ffffff);
+    --_error: var(--courier-error, #dc2626);
+    --_radius: var(--courier-radius, 8px);
+    --_gap: var(--courier-gap, 1rem);
+    --_max-width: var(--courier-max-width, 40rem);
+
+    display: block;
+    max-width: var(--_max-width);
+    color: var(--_text);
+  }
+
+  .courier-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--_gap);
+  }
+
+  .courier-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .courier-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .courier-required {
+    color: var(--_error);
+    margin-inline-start: 0.25rem;
+  }
+
+  .courier-form input,
+  .courier-form textarea,
+  .courier-form select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    color: inherit;
+    background: var(--_bg);
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius);
+    box-sizing: border-box;
+  }
+
+  .courier-form textarea {
+    resize: vertical;
+  }
+
+  .courier-form input:focus,
+  .courier-form textarea:focus,
+  .courier-form select:focus {
+    outline: 2px solid var(--_accent);
+    outline-offset: 1px;
+    border-color: var(--_accent);
+  }
+
+  /* ハニーポット：display:none ではなく画面外へ（ボットに入力させる） */
+  .courier-honeypot {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .courier-error {
+    color: var(--_error);
+    font-size: 0.9rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--_error);
+    border-radius: var(--_radius);
+    background: color-mix(in srgb, var(--_error) 8%, transparent);
+  }
+
+  .courier-submit,
+  .courier-modal__confirm {
+    align-self: flex-start;
+    padding: 0.7rem 1.5rem;
+    font: inherit;
+    font-weight: 600;
+    color: var(--_accent-contrast);
+    background: var(--_accent);
+    border: none;
+    border-radius: var(--_radius);
+    cursor: pointer;
+  }
+
+  .courier-submit:disabled,
+  .courier-modal__confirm:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .courier-success {
+    padding: 1.25rem;
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius);
+    background: color-mix(in srgb, var(--_accent) 6%, var(--_bg));
+  }
+
+  /* モーダル */
+  .courier-modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    z-index: 1000;
+  }
+
+  .courier-modal[hidden] {
+    display: none;
+  }
+
+  .courier-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .courier-modal__panel {
+    position: relative;
+    width: 100%;
+    max-width: 32rem;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--_bg);
+    color: var(--_text);
+    border-radius: var(--_radius);
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .courier-modal__heading {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+  }
+
+  .courier-modal__preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .courier-modal__actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .courier-modal__cancel {
+    padding: 0.7rem 1.25rem;
+    font: inherit;
+    color: var(--_text);
+    background: transparent;
+    border: 1px solid var(--_border);
+    border-radius: var(--_radius);
+    cursor: pointer;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .courier {
+      --_text: var(--courier-text, #e5e7eb);
+      --_muted: var(--courier-muted, #9ca3af);
+      --_border: var(--courier-border, #4b5563);
+      --_bg: var(--courier-bg, #1f2937);
+    }
+  }
+</style>
+
+<script>
+  interface CourierClientField {
+    name: string;
+    label: string;
+    type: string;
+    validation: 'number' | 'halfwidth' | 'email' | 'none';
+  }
+
+  // バリデーション定義。空欄は required に委ねるため、値がある時だけ検査する。
+  const VALIDATORS: Record<string, { pattern: RegExp; message: string }> = {
+    number: { pattern: /^[0-9]+$/, message: '半角数字で入力してください。' },
+    halfwidth: { pattern: /^[\x20-\x7E]+$/, message: '半角文字で入力してください。' },
+    email: { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'メールアドレスの形式で入力してください。' },
+  };
+  interface CourierClientConfig {
+    endpoint: string;
+    formType: string;
+    honeypotName: string;
+    retries: number;
+    discordWebhookUrl: string;
+    labels: {
+      submit: string;
+      confirm: string;
+      cancel: string;
+      sending: string;
+      confirmHeading: string;
+      error: string;
+    };
+    fields: CourierClientField[];
+  }
+
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  function escapeHtml(value: string): string {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function jstTimestamp(): string {
+    // 'sv-SE' ロケールで yyyy-MM-dd HH:mm:ss 形式（JST）を得る
+    return new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Tokyo' });
+  }
+
+  function initCourier(root: HTMLElement): void {
+    const configEl = root.querySelector<HTMLScriptElement>('.courier-config');
+    if (!configEl?.textContent) return;
+    const cfg: CourierClientConfig = JSON.parse(configEl.textContent);
+
+    const form = root.querySelector<HTMLFormElement>('.courier-form');
+    const errorEl = root.querySelector<HTMLElement>('.courier-error');
+    const successEl = root.querySelector<HTMLElement>('.courier-success');
+    const openBtn = root.querySelector<HTMLButtonElement>('.courier-submit');
+    const modal = root.querySelector<HTMLElement>('.courier-modal');
+    const preview = root.querySelector<HTMLElement>('.courier-modal__preview');
+    const confirmBtn = root.querySelector<HTMLButtonElement>('.courier-modal__confirm');
+    if (!form || !errorEl || !successEl || !openBtn || !modal || !preview || !confirmBtn) return;
+
+    const getFieldEl = (name: string) =>
+      form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+
+    const getValue = (name: string): string => {
+      const el = getFieldEl(name);
+      return el ? el.value.trim() : '';
+    };
+
+    // 値がある時だけ形式検査し、結果を setCustomValidity で reportValidity に載せる。
+    const applyValidation = (field: CourierClientField): void => {
+      const el = getFieldEl(field.name);
+      if (!el || typeof el.setCustomValidity !== 'function') return;
+      const rule = VALIDATORS[field.validation];
+      const value = el.value.trim();
+      el.setCustomValidity(rule && value !== '' && !rule.pattern.test(value) ? rule.message : '');
+    };
+
+    const validatableFields = cfg.fields.filter((f) => f.validation && f.validation !== 'none');
+    validatableFields.forEach((field) => {
+      const el = getFieldEl(field.name);
+      if (el) el.addEventListener('input', () => applyValidation(field));
+    });
+
+    const buildPayload = (): Record<string, string> => {
+      const payload: Record<string, string> = { type: cfg.formType };
+      cfg.fields.forEach((f) => {
+        payload[f.name] = getValue(f.name);
+      });
+      return payload;
+    };
+
+    const openModal = (): void => {
+      modal.hidden = false;
+      confirmBtn.focus();
+    };
+    const closeModal = (): void => {
+      modal.hidden = true;
+    };
+
+    const buildPreview = (): void => {
+      preview.innerHTML = cfg.fields
+        .map((f) => {
+          const value = escapeHtml(getValue(f.name)).replace(/\n/g, '<br>');
+          return `<div><strong>${escapeHtml(f.label)}</strong><br>${value || '<span style="opacity:.6">（未入力）</span>'}</div>`;
+        })
+        .join('');
+    };
+
+    const showSuccess = (): void => {
+      closeModal();
+      form.hidden = true;
+      errorEl.hidden = true;
+      successEl.hidden = false;
+      successEl.focus();
+      successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    const showError = (): void => {
+      errorEl.hidden = false;
+    };
+
+    const restoreConfirmBtn = (): void => {
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = cfg.labels.confirm;
+    };
+
+    // GAS 送信（記録＝確定点）。失敗時は自動再試行。
+    async function sendToGas(payload: Record<string, string>, retries: number): Promise<void> {
+      try {
+        // Content-Type を付けない＝ simple request にして CORS プリフライトを回避
+        const res = await fetch(cfg.endpoint, { method: 'POST', body: JSON.stringify(payload) });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        if (!json || json.ok !== true) throw new Error(json?.error || '送信に失敗しました。');
+      } catch (err) {
+        if (retries > 0) {
+          await sleep(800);
+          return sendToGas(payload, retries - 1);
+        }
+        throw err;
+      }
+    }
+
+    // Discord 通知（best-effort・GAS 成功時のみ）。失敗は握りつぶす。
+    async function notifyDiscord(payload: Record<string, string>, retries: number): Promise<void> {
+      if (!cfg.discordWebhookUrl) return;
+      const lines = [`受信日時: ${jstTimestamp()}`, `種別: ${cfg.formType}`];
+      cfg.fields.forEach((f) => lines.push(`${f.label}: ${payload[f.name] ?? ''}`));
+      const content = lines.join('\n').slice(0, 1900); // Discord 2000 文字上限に余裕
+      try {
+        const res = await fetch(cfg.discordWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content }),
+        });
+        if (!res.ok) throw new Error(`Discord ${res.status}`);
+      } catch (err) {
+        if (retries > 0) {
+          await sleep(500);
+          return notifyDiscord(payload, retries - 1);
+        }
+        console.error('Discord 通知に失敗しました（記録には影響しません）', err);
+      }
+    }
+
+    const isBot = (): boolean => getValue(cfg.honeypotName) !== '';
+
+    openBtn.addEventListener('click', () => {
+      errorEl.hidden = true;
+      // ハニーポット：値ありはボット。実送信せず完了扱いにする。
+      if (isBot()) {
+        showSuccess();
+        return;
+      }
+      // 送信前に最新値で形式検査を反映してから標準バリデーションを走らせる
+      validatableFields.forEach(applyValidation);
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      buildPreview();
+      openModal();
+    });
+
+    root.querySelectorAll<HTMLElement>('[data-courier-cancel]').forEach((el) => {
+      el.addEventListener('click', closeModal);
+    });
+
+    confirmBtn.addEventListener('click', async () => {
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = cfg.labels.sending;
+      const payload = buildPayload();
+      try {
+        await sendToGas(payload, cfg.retries); // 確定点
+        await notifyDiscord(payload, 1); // 二重化通知（best-effort）
+        showSuccess();
+      } catch (err) {
+        // 成功を偽らない。入力は保持したままエラー表示し、再送可能にする。
+        console.error('送信に失敗しました', err);
+        closeModal();
+        showError();
+        restoreConfirmBtn();
+      }
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('.courier').forEach(initCourier);
+</script>
