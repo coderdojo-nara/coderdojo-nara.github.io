@@ -1,4 +1,5 @@
 import rss from "@astrojs/rss";
+import seoData from "@data/seo.json";
 import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import { getCollection } from "astro:content";
 import type { APIContext } from "astro";
@@ -7,8 +8,8 @@ export async function GET(context: APIContext) {
   const posts = sortPostsByDateDesc(await getCollection("blog"));
 
   return rss({
-    title: "CoderDojo 奈良",
-    description: "奈良市で開催している子どものためのプログラミングコミュニティ",
+    title: seoData.name,
+    description: seoData.description,
     site: context.site!,
     items: posts.map((post) => ({
       title: post.data.title,

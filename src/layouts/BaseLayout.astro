@@ -15,7 +15,12 @@ export interface Props {
 }
 
 const props = Astro.props;
-const formattedTitle = seoData.titleFormat.replace("{title}", props.title);
+const isTopPage = Astro.url.pathname === "/";
+const formattedTitle = isTopPage
+  ? `${seoData.name} | ${seoData.tagline}`
+  : seoData.titleFormat
+      .replace("{title}", props.title)
+      .replace("{siteName}", seoData.name);
 const pageDescription = props.description || seoData.description;
 const rawImage = props.image || seoData.logoSource;
 const pageImage = rawImage

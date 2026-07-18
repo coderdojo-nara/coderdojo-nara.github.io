@@ -1,6 +1,7 @@
 ---
 import Page from "@layouts/Page.astro";
 import nextEvent from "@data/nextEvent.json";
+import seoData from "@data/seo.json";
 import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import { getCollection } from "astro:content";
 
@@ -19,7 +20,7 @@ const badgeClass: Record<string, string> = {
 ---
 
 <Page
-  title={indexPage?.data.title ?? "CoderDojo 奈良"}
+  title={indexPage?.data.title ?? seoData.name}
   description={indexPage?.data.description}
 >
   {/* ヒーロー */}

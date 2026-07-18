@@ -38,7 +38,8 @@
       "Bash(echo \"fix exit: $?\")",
       "Bash(echo \"exit $?\")",
       "Bash(echo \"lint: $?\")",
-      "Bash(echo \"fix: $?\")"
+      "Bash(echo \"fix: $?\")",
+      "Bash(npx astro *)"
     ]
   }
 }
