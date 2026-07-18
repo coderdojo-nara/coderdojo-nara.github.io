@@ -8,16 +8,17 @@
  */
 
 /**
- * 通知メールを送信する。失敗時は例外を投げ、呼び出し側で状態列に記録する。
+ * 通知メールを送信する。通知先が未設定なら送らず '未設定' を返す
+ * （メール通知は独立した設定。未設定はエラーではなくスキップ）。
+ * 送信自体に失敗した場合は例外を投げ、呼び出し側で状態列に記録する。
  * @param {object} def   FORM_DEFINITIONS の 1 エントリ
  * @param {object} data  検証済みフィールド値
+ * @return {string} 状態（'送信済' / '未設定'）
  */
 function sendNotificationMail_(def, data) {
   const config = getConfig_();
   const to = config[CONFIG_KEY_NOTIFY_EMAIL];
-  if (!to) {
-    throw new Error('通知先メール（' + CONFIG_KEY_NOTIFY_EMAIL + '）が設定されていません。');
-  }
+  if (!to) return '未設定';
 
   const notify = def.notify || {};
   const subject = renderTemplate_(notify.subjectTemplate || '【フォーム送信】', data);
@@ -35,6 +36,7 @@ function sendNotificationMail_(def, data) {
   }
 
   GmailApp.sendEmail(to, subject, body, options);
+  return '送信済';
 }
 
 /**

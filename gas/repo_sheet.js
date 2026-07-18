@@ -13,20 +13,45 @@ const AUTO_REPLY_STATUS_HEADER = '自動返信';
 const SUBMISSION_ID_HEADER = '送信ID';
 
 /**
- * 記録先スプレッドシートを取得する。
- * スクリプトプロパティ SPREADSHEET_ID があればそれを開き、
- * 無ければコンテナバインドのアクティブなスプレッドシートを使う。
- * @return {GoogleAppsScript.Spreadsheet.Spreadsheet}
+ * 記録先スプレッドシートを解決する。解決順:
+ *   1. def.spreadsheetUrl（フォーム定義でURL指定。フォームごとに記録先を変えられる）
+ *   2. スクリプトプロパティ SPREADSHEET_ID
+ *   3. コンテナバインドのアクティブなスプレッドシート
+ * def 省略時（_config シートの読み取りなど）は 2 → 3 のみ。
+ *
+ * 記録は独立した設定（設定があるものだけ処理する）:
+ *   - どこにも設定が無い → null を返す（呼び出し側で記録をスキップ）
+ *   - 設定があるのに開けない（URL誤り・権限不足など） → 例外（設定不備は握りつぶさない）
+ * @param {object} [def]  FORM_DEFINITIONS の 1 エントリ（省略可）
+ * @return {GoogleAppsScript.Spreadsheet.Spreadsheet|null}
  */
-function getSpreadsheet_() {
-  const id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
-  if (id) return SpreadsheetApp.openById(id);
-
-  const active = SpreadsheetApp.getActiveSpreadsheet();
-  if (!active) {
-    throw new Error('記録先スプレッドシートが見つかりません。コンテナバインドで使うか、スクリプトプロパティ SPREADSHEET_ID を設定してください。');
+function resolveSpreadsheet_(def) {
+  if (def && def.spreadsheetUrl) {
+    try {
+      return SpreadsheetApp.openByUrl(def.spreadsheetUrl);
+    } catch (err) {
+      // URL の誤り・権限不足を運用者が特定しやすいメッセージにする。
+      throw new Error(
+        '記録先スプレッドシートを開けません。spreadsheetUrl と、デプロイ実行アカウントの編集権限を確認してください: ' +
+          (err && err.message ? err.message : err)
+      );
+    }
   }
-  return active;
+
+  const id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
+  if (id) {
+    try {
+      return SpreadsheetApp.openById(id);
+    } catch (err) {
+      throw new Error(
+        '記録先スプレッドシートを開けません。スクリプトプロパティ SPREADSHEET_ID と、デプロイ実行アカウントの編集権限を確認してください: ' +
+          (err && err.message ? err.message : err)
+      );
+    }
+  }
+
+  // コンテナバインドでなければ null（記録の設定なし＝スキップ対象）。
+  return SpreadsheetApp.getActiveSpreadsheet();
 }
 
 /**
@@ -41,8 +66,11 @@ function buildHeaders_(def) {
 }
 
 /**
- * 送信 1 件をシートに追記する（確定点）。
+ * 送信 1 件をシートに追記する（記録が設定されている場合の確定点）。
  * 通知メール列は仮に「送信中」を入れ、送信ID 列に一意キーを記録する。
+ *
+ * 記録先が未設定なら追記せず skipped=true を返す（記録は独立した設定）。
+ * ※記録なしの場合は冪等判定（二重送信の検知）もできない点に注意。
  *
  * 冪等性：同一 送信ID の行が既にあれば追記せず、その行番号を duplicate=true で返す。
  * これにより「記録は成功したがレスポンスが届かず再送された」ケースでも二重記録しない。
@@ -50,13 +78,14 @@ function buildHeaders_(def) {
  * @param {object} def          FORM_DEFINITIONS の 1 エントリ
  * @param {object} data         検証済みフィールド値
  * @param {string} submissionId フロント生成の一意キー（空なら冪等判定しない）
- * @return {{row: number, duplicate: boolean}}
+ * @return {{skipped: true}|{row: number, duplicate: boolean}}
  */
 function appendSubmissionRow_(def, data, submissionId) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    const ss = getSpreadsheet_();
+    const ss = resolveSpreadsheet_(def);
+    if (!ss) return { skipped: true };
     let sheet = ss.getSheetByName(def.sheetName);
     if (!sheet) sheet = ss.insertSheet(def.sheetName);
     if (sheet.getLastRow() === 0) {
@@ -120,13 +149,16 @@ function findRowBySubmissionId_(sheet, submissionId) {
 /**
  * 指定行・指定ヘッダー列に状態を書き戻す（best-effort）。
  * 列が無ければ末尾に追加してから書く。失敗しても記録本体には影響させない。
- * @param {string} sheetName
+ * 記録先（スプレッドシート・シート名）は def から解決する。
+ * @param {object} def     FORM_DEFINITIONS の 1 エントリ
  * @param {number} row
  * @param {string} header  書き込み先の列見出し
  * @param {string} status
  */
-function writeStatusCell_(sheetName, row, header, status) {
-  const sheet = getSpreadsheet_().getSheetByName(sheetName);
+function writeStatusCell_(def, row, header, status) {
+  const ss = resolveSpreadsheet_(def);
+  if (!ss) return;
+  const sheet = ss.getSheetByName(def.sheetName);
   if (!sheet) return;
   ensureColumn_(sheet, header);
   const idx = getColumnMap_(sheet)[header];
@@ -136,22 +168,22 @@ function writeStatusCell_(sheetName, row, header, status) {
 
 /**
  * 「通知メール」列に送信結果を書き戻す（best-effort）。
- * @param {string} sheetName
+ * @param {object} def     FORM_DEFINITIONS の 1 エントリ
  * @param {number} row
  * @param {string} status  '送信済' / '失敗: ...'
  */
-function writeMailStatus_(sheetName, row, status) {
-  writeStatusCell_(sheetName, row, MAIL_STATUS_HEADER, status);
+function writeMailStatus_(def, row, status) {
+  writeStatusCell_(def, row, MAIL_STATUS_HEADER, status);
 }
 
 /**
  * 「自動返信」列に送信結果を書き戻す（best-effort）。
- * @param {string} sheetName
+ * @param {object} def     FORM_DEFINITIONS の 1 エントリ
  * @param {number} row
  * @param {string} status  '送信済' / '未設定' / '対象外' / '失敗: ...'
  */
-function writeAutoReplyStatus_(sheetName, row, status) {
-  writeStatusCell_(sheetName, row, AUTO_REPLY_STATUS_HEADER, status);
+function writeAutoReplyStatus_(def, row, status) {
+  writeStatusCell_(def, row, AUTO_REPLY_STATUS_HEADER, status);
 }
 
 /**

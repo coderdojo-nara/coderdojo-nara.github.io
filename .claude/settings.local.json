@@ -51,7 +51,9 @@
       "Bash(node --input-type=module)",
       "Bash(npm ls *)",
       "Bash(git stash *)",
-      "Bash(DISABLE_COMPONENT_LIBRARY=true npm run build)"
+      "Bash(DISABLE_COMPONENT_LIBRARY=true npm run build)",
+      "Bash(npx eslint *)",
+      "Bash(node gas-sim.js /Users/kwaka1208/git/02_community/coderdojo-nara.github.io/gas)"
     ]
   }
 }

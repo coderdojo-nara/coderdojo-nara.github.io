@@ -20,6 +20,10 @@
  */
 const FORM_DEFINITIONS = {
   contact: {
+    // 記録先スプレッドシートのURL（ブラウザのアドレスバーからそのまま貼る）。
+    // 空文字なら従来どおり スクリプトプロパティ SPREADSHEET_ID → コンテナバインドの順で解決。
+    // 注意: デプロイ実行アカウントに対象スプレッドシートの編集権限が必要。
+    spreadsheetUrl: '',
     sheetName: 'お問い合わせ',
     fields: [
       // validation / maxLength はサーバー側の形式担保（フロントの検証と揃える）。
@@ -81,11 +85,14 @@ function getConfig_() {
 
 /**
  * _config シート（キー / 値の2列）を読み取ってオブジェクト化する。
- * シートが無ければ空オブジェクト。1行目がヘッダーでも空キー扱いで無視される。
+ * スプレッドシート自体が未設定、またはシートが無ければ空オブジェクト。
+ * 1行目がヘッダーでも空キー扱いで無視される。
  * @return {Object<string, string>}
  */
 function readConfigSheet_() {
-  const sheet = getSpreadsheet_().getSheetByName('_config');
+  const ss = resolveSpreadsheet_();
+  if (!ss) return {};
+  const sheet = ss.getSheetByName('_config');
   if (!sheet || sheet.getLastRow() === 0) return {};
 
   const values = sheet.getRange(1, 1, sheet.getLastRow(), 2).getValues();
