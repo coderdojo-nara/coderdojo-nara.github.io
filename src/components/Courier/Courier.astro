@@ -12,16 +12,30 @@
  *   - 記録＝確定点／通知＝best-effort の二層
  */
 
-export type CourierFieldType = 'text' | 'email' | 'tel' | 'textarea' | 'select';
+export type CourierFieldType =
+  | 'text'
+  | 'email'
+  | 'tel'
+  | 'url'
+  | 'number'
+  | 'date'
+  | 'time'
+  | 'textarea'
+  | 'select'
+  | 'radio'
+  | 'checkbox'
+  | 'consent'
+  | 'hidden';
 
 /**
  * フィールドの入力バリデーション。空欄は required に委ね、値がある時だけ形式を検査する。
  *   'number'    … 半角数値のみ         ^[0-9]+$
  *   'halfwidth' … 半角のみ（ASCII全般） ^[\x20-\x7E]+$
  *   'email'     … メールアドレス形式
+ *   'phone'     … 電話番号（ハイフン有無どちらも可・国内 10〜11 桁）
  *   'none'      … 検査しない（既定）
  */
-export type CourierValidation = 'number' | 'halfwidth' | 'email' | 'none';
+export type CourierValidation = 'number' | 'halfwidth' | 'email' | 'phone' | 'none';
 
 export interface CourierField {
   /** ペイロードキー／シート列キー */
@@ -31,9 +45,28 @@ export interface CourierField {
   type: CourierFieldType;
   required?: boolean;
   placeholder?: string;
-  /** 入力バリデーション（既定 'none'）。select には適用されない */
+  /** ラベル下に表示する補足テキスト（記入例・注意書きなど）。aria-describedby で関連付ける */
+  description?: string;
+  /** input/textarea/select の autocomplete 属性（例 'name' / 'email' / 'tel'）。ブラウザ補完・a11y 向上 */
+  autocomplete?: string;
+  /** number / date / time の最小値 */
+  min?: string | number;
+  /** number / date / time の最大値 */
+  max?: string | number;
+  /** number の刻み幅 */
+  step?: string | number;
+  /** hidden の固定値 */
+  value?: string;
+  /**
+   * hidden の値をクライアントで自動取得する（value より優先）。
+   *   'pageUrl'        … 現在ページの URL（location.href）
+   *   'referrer'       … 参照元（document.referrer）
+   *   'query:<param>'  … URL クエリの値（例 'query:utm_source'）
+   */
+  capture?: string;
+  /** 入力バリデーション（既定 'none'）。select / radio / checkbox / consent / hidden には適用されない */
   validation?: CourierValidation;
-  /** select 用の選択肢 */
+  /** select / radio / checkbox 用の選択肢 */
   options?: string[];
 }
 
@@ -102,7 +135,7 @@ const clientConfig = {
   retries,
   discordWebhookUrl,
   labels: L,
-  fields: fields.map((f) => ({ name: f.name, label: f.label, type: f.type, validation: f.validation ?? 'none' })),
+  fields: fields.map((f) => ({ name: f.name, label: f.label, type: f.type, validation: f.validation ?? 'none', required: f.required ?? false, capture: f.capture ?? '' })),
 };
 // </script> や < による早期終了・XSS を避けるためエスケープ
 const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
@@ -115,12 +148,87 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
     {
       fields.map((field) => {
         const fieldId = `${uid}-${field.name}`;
+        const descId = `${fieldId}-desc`;
+        const errId = `${fieldId}-error`;
+        // 補足テキスト（あれば）とエラー枠を aria-describedby でまとめて関連付ける
+        const describedBy = [field.description ? descId : null, errId].filter(Boolean).join(' ');
+
+        // hidden：画面に出さない値。value は初期値（capture 指定時はクライアントで上書き）。
+        if (field.type === 'hidden') {
+          return <input type="hidden" name={field.name} value={field.value ?? ''} />;
+        }
+
+        // consent：単一の同意チェックボックス。required で「チェック必須」（ネイティブ検証）。
+        if (field.type === 'consent') {
+          return (
+            <div class="courier-field">
+              <label class="courier-consent">
+                <input
+                  id={fieldId}
+                  name={field.name}
+                  type="checkbox"
+                  required={field.required}
+                  aria-describedby={describedBy}
+                />
+                <span>
+                  {field.label}
+                  {field.required && <span class="courier-required" aria-hidden="true">*</span>}
+                </span>
+              </label>
+              {field.description && (
+                <span class="courier-desc" id={descId}>{field.description}</span>
+              )}
+              <span class="courier-field-error" data-courier-error={field.name} id={errId} role="alert" hidden />
+            </div>
+          );
+        }
+
+        // ラジオ／チェックボックスは選択肢群として描画（グループラベル＋各選択肢を label で囲む）
+        if (field.type === 'radio' || field.type === 'checkbox') {
+          const labelId = `${fieldId}-label`;
+          // ネストした map 内では型の絞り込みが失われるため、ここで取り出しておく
+          const inputType = field.type;
+          const isRequired = field.required ?? false;
+          return (
+            <div class="courier-field" role="group" aria-labelledby={labelId} aria-describedby={describedBy}>
+              <span class="courier-label" id={labelId}>
+                {field.label}
+                {field.required && <span class="courier-required" aria-hidden="true">*</span>}
+              </span>
+              {field.description && (
+                <span class="courier-desc" id={descId}>{field.description}</span>
+              )}
+              <div class="courier-options">
+                {(field.options ?? []).map((opt, i) => {
+                  const optId = `${fieldId}-${i}`;
+                  return (
+                    <label class="courier-option" for={optId}>
+                      <input
+                        id={optId}
+                        name={field.name}
+                        type={inputType}
+                        value={opt}
+                        required={inputType === 'radio' && isRequired}
+                      />
+                      <span>{opt}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              <span class="courier-field-error" data-courier-error={field.name} id={errId} role="alert" hidden />
+            </div>
+          );
+        }
+
         return (
           <div class="courier-field">
             <label class="courier-label" for={fieldId}>
               {field.label}
               {field.required && <span class="courier-required" aria-hidden="true">*</span>}
             </label>
+            {field.description && (
+              <span class="courier-desc" id={descId}>{field.description}</span>
+            )}
 
             {field.type === 'textarea' ? (
               <textarea
@@ -129,9 +237,11 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
                 required={field.required}
                 placeholder={field.placeholder}
                 rows="6"
+                autocomplete={field.autocomplete}
+                aria-describedby={describedBy}
               />
             ) : field.type === 'select' ? (
-              <select id={fieldId} name={field.name} required={field.required}>
+              <select id={fieldId} name={field.name} required={field.required} autocomplete={field.autocomplete} aria-describedby={describedBy}>
                 <option value="">{field.placeholder ?? '選択してください'}</option>
                 {(field.options ?? []).map((opt) => (
                   <option value={opt}>{opt}</option>
@@ -144,8 +254,15 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
                 type={field.type}
                 required={field.required}
                 placeholder={field.placeholder}
+                autocomplete={field.autocomplete}
+                min={field.min}
+                max={field.max}
+                step={field.step}
+                aria-describedby={describedBy}
               />
             )}
+
+            <span class="courier-field-error" data-courier-error={field.name} id={errId} role="alert" hidden />
           </div>
         );
       })
@@ -220,7 +337,32 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
     margin-inline-start: 0.25rem;
   }
 
-  .courier-form input,
+  /* 補足テキスト（記入例・注意書き） */
+  .courier-desc {
+    font-size: 0.85rem;
+    color: var(--_muted);
+  }
+
+  /* フィールド単位のインラインエラー */
+  .courier-field-error {
+    font-size: 0.85rem;
+    color: var(--_error);
+  }
+
+  .courier-field-error[hidden] {
+    display: none;
+  }
+
+  /* 不正な入力欄は枠を強調（aria-invalid をトリガーにする） */
+  .courier-form [aria-invalid='true'] {
+    border-color: var(--_error);
+  }
+
+  .courier-form [aria-invalid='true']:focus {
+    outline-color: var(--_error);
+  }
+
+  .courier-form input:not([type='radio']):not([type='checkbox']),
   .courier-form textarea,
   .courier-form select {
     width: 100%;
@@ -237,12 +379,45 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
     resize: vertical;
   }
 
-  .courier-form input:focus,
+  .courier-form input:not([type='radio']):not([type='checkbox']):focus,
   .courier-form textarea:focus,
   .courier-form select:focus {
     outline: 2px solid var(--_accent);
     outline-offset: 1px;
     border-color: var(--_accent);
+  }
+
+  /* ラジオ／チェックボックスの選択肢群 */
+  .courier-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .courier-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .courier-option input {
+    accent-color: var(--_accent);
+  }
+
+  /* 単一の同意チェックボックス */
+  .courier-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .courier-consent input {
+    margin-top: 0.2rem;
+    accent-color: var(--_accent);
   }
 
   /* ハニーポット：display:none ではなく画面外へ（ボットに入力させる） */
@@ -368,14 +543,18 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
     name: string;
     label: string;
     type: string;
-    validation: 'number' | 'halfwidth' | 'email' | 'none';
+    validation: 'number' | 'halfwidth' | 'email' | 'phone' | 'none';
+    required: boolean;
+    capture: string;
   }
 
   // バリデーション定義。空欄は required に委ねるため、値がある時だけ検査する。
-  const VALIDATORS: Record<string, { pattern: RegExp; message: string }> = {
+  // strip 指定時は、その文字を除去してから pattern を適用する（例: 電話番号のハイフン）。
+  const VALIDATORS: Record<string, { pattern: RegExp; message: string; strip?: RegExp }> = {
     number: { pattern: /^[0-9]+$/, message: '半角数字で入力してください。' },
     halfwidth: { pattern: /^[\x20-\x7E]+$/, message: '半角文字で入力してください。' },
     email: { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'メールアドレスの形式で入力してください。' },
+    phone: { pattern: /^0\d{9,10}$/, strip: /[-\s]/g, message: '電話番号を正しい形式で入力してください（例: 03-1234-5678 / 09012345678）。' },
   };
   interface CourierClientConfig {
     endpoint: string;
@@ -410,10 +589,20 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
     return new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Tokyo' });
   }
 
+  // 送信の一意キー（冪等性）。自動再送・再クリックでも同じ値を使い、GAS 側で二重記録を防ぐ。
+  function newSubmissionId(): string {
+    const c = globalThis.crypto;
+    if (c && typeof c.randomUUID === 'function') return c.randomUUID();
+    return `sid-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  }
+
   function initCourier(root: HTMLElement): void {
     const configEl = root.querySelector<HTMLScriptElement>('.courier-config');
     if (!configEl?.textContent) return;
     const cfg: CourierClientConfig = JSON.parse(configEl.textContent);
+
+    // このフォームインスタンスの送信キー。成功でフォームは差し替わるので使い回しの心配はない。
+    const submissionId = newSubmissionId();
 
     const form = root.querySelector<HTMLFormElement>('.courier-form');
     const errorEl = root.querySelector<HTMLElement>('.courier-error');
@@ -432,25 +621,139 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
       return el ? el.value.trim() : '';
     };
 
-    // 値がある時だけ形式検査し、結果を setCustomValidity で reportValidity に載せる。
+    // フィールド型に応じた値取得。ラジオは選択1件、チェックボックスは選択を ", " で結合、
+    // consent はチェック有無を '同意' / '' で表す。
+    const getFieldValue = (field: CourierClientField): string => {
+      if (field.type === 'radio' || field.type === 'checkbox') {
+        const checked = form.querySelectorAll<HTMLInputElement>(
+          `input[name="${CSS.escape(field.name)}"]:checked`
+        );
+        return Array.from(checked)
+          .map((el) => el.value)
+          .join(', ');
+      }
+      if (field.type === 'consent') {
+        const el = getFieldEl(field.name) as HTMLInputElement | null;
+        return el && el.checked ? '同意' : '';
+      }
+      return getValue(field.name);
+    };
+
+    // hidden の capture 指定を解決してクライアントの文脈を埋める（ページURL・UTM等）。
+    const resolveCapture = (capture: string): string => {
+      if (capture === 'pageUrl') return location.href;
+      if (capture === 'referrer') return document.referrer;
+      if (capture.startsWith('query:')) {
+        return new URLSearchParams(location.search).get(capture.slice(6)) ?? '';
+      }
+      return '';
+    };
+    cfg.fields.forEach((field) => {
+      if (field.type !== 'hidden' || !field.capture) return;
+      const el = getFieldEl(field.name);
+      if (el) el.value = resolveCapture(field.capture);
+    });
+
+    // フィールドの「代表要素」。ラジオ／チェックは先頭 input（validity/validationMessage をここで読む）。
+    const getPrimaryEl = (field: CourierClientField): HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null => {
+      if (field.type === 'radio' || field.type === 'checkbox') {
+        return form.querySelector<HTMLInputElement>(`input[name="${CSS.escape(field.name)}"]`);
+      }
+      return getFieldEl(field.name);
+    };
+
+    // フィールドに紐づく入力要素（グループは全 input）。aria-invalid の付与に使う。
+    const getFieldControls = (field: CourierClientField): HTMLElement[] => {
+      if (field.type === 'radio' || field.type === 'checkbox') {
+        return Array.from(form.querySelectorAll<HTMLElement>(`input[name="${CSS.escape(field.name)}"]`));
+      }
+      const el = getFieldEl(field.name);
+      return el ? [el] : [];
+    };
+
+    // 値がある時だけ形式検査し、結果を setCustomValidity に載せる（インライン表示の元になる）。
     const applyValidation = (field: CourierClientField): void => {
       const el = getFieldEl(field.name);
       if (!el || typeof el.setCustomValidity !== 'function') return;
       const rule = VALIDATORS[field.validation];
       const value = el.value.trim();
-      el.setCustomValidity(rule && value !== '' && !rule.pattern.test(value) ? rule.message : '');
+      const target = rule?.strip ? value.replace(rule.strip, '') : value;
+      el.setCustomValidity(rule && value !== '' && !rule.pattern.test(target) ? rule.message : '');
     };
 
-    const validatableFields = cfg.fields.filter((f) => f.validation && f.validation !== 'none');
-    validatableFields.forEach((field) => {
-      const el = getFieldEl(field.name);
-      if (el) el.addEventListener('input', () => applyValidation(field));
+    // チェックボックス群の必須は「1つ以上選択」をカスタム検証で表現。
+    // ネイティブ required は各チェックが必須になってしまうため使わない。
+    const requiredCheckboxNames = new Set(
+      cfg.fields.filter((f) => f.type === 'checkbox' && f.required).map((f) => f.name)
+    );
+
+    const applyCheckboxRequired = (field: CourierClientField): void => {
+      const boxes = Array.from(
+        form.querySelectorAll<HTMLInputElement>(`input[name="${CSS.escape(field.name)}"]`)
+      );
+      if (boxes.length === 0) return;
+      const anyChecked = boxes.some((b) => b.checked);
+      boxes[0].setCustomValidity(anyChecked ? '' : '1つ以上選択してください。');
+    };
+
+    // フィールド単位のインラインエラー表示。
+    const getErrorEl = (name: string): HTMLElement | null =>
+      root.querySelector<HTMLElement>(`[data-courier-error="${CSS.escape(name)}"]`);
+
+    const clearFieldError = (field: CourierClientField): void => {
+      const errEl = getErrorEl(field.name);
+      if (errEl) {
+        errEl.textContent = '';
+        errEl.hidden = true;
+      }
+      getFieldControls(field).forEach((el) => el.removeAttribute('aria-invalid'));
+    };
+
+    const showFieldError = (field: CourierClientField, message: string): void => {
+      const errEl = getErrorEl(field.name);
+      if (errEl) {
+        errEl.textContent = message;
+        errEl.hidden = false;
+      }
+      getFieldControls(field).forEach((el) => el.setAttribute('aria-invalid', 'true'));
+    };
+
+    // カスタム検証を反映したうえで validity を読み、インラインエラーを更新する。
+    // 戻り値はそのフィールドが妥当かどうか。
+    const refreshFieldError = (field: CourierClientField): boolean => {
+      applyValidation(field);
+      if (requiredCheckboxNames.has(field.name)) applyCheckboxRequired(field);
+      const el = getPrimaryEl(field);
+      if (!el || typeof el.checkValidity !== 'function') {
+        clearFieldError(field);
+        return true;
+      }
+      if (el.validity.valid) {
+        clearFieldError(field);
+        return true;
+      }
+      showFieldError(field, el.validationMessage);
+      return false;
+    };
+
+    // 初回送信後のみライブ検証する（入力途中の早すぎるエラー表示を避ける）。
+    let submitted = false;
+    cfg.fields.forEach((field) => {
+      const evt =
+        field.type === 'radio' || field.type === 'checkbox' || field.type === 'select' || field.type === 'consent'
+          ? 'change'
+          : 'input';
+      getFieldControls(field).forEach((el) =>
+        el.addEventListener(evt, () => {
+          if (submitted) refreshFieldError(field);
+        })
+      );
     });
 
     const buildPayload = (): Record<string, string> => {
-      const payload: Record<string, string> = { type: cfg.formType };
+      const payload: Record<string, string> = { type: cfg.formType, submissionId };
       cfg.fields.forEach((f) => {
-        payload[f.name] = getValue(f.name);
+        payload[f.name] = getFieldValue(f);
       });
       return payload;
     };
@@ -465,8 +768,9 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
 
     const buildPreview = (): void => {
       preview.innerHTML = cfg.fields
+        .filter((f) => f.type !== 'hidden') // 隠し項目は確認画面に出さない
         .map((f) => {
-          const value = escapeHtml(getValue(f.name)).replace(/\n/g, '<br>');
+          const value = escapeHtml(getFieldValue(f)).replace(/\n/g, '<br>');
           return `<div><strong>${escapeHtml(f.label)}</strong><br>${value || '<span style="opacity:.6">（未入力）</span>'}</div>`;
         })
         .join('');
@@ -533,15 +837,20 @@ const clientConfigJson = JSON.stringify(clientConfig).replace(/</g, '\\u003c');
 
     openBtn.addEventListener('click', () => {
       errorEl.hidden = true;
+      submitted = true;
       // ハニーポット：値ありはボット。実送信せず完了扱いにする。
       if (isBot()) {
         showSuccess();
         return;
       }
-      // 送信前に最新値で形式検査を反映してから標準バリデーションを走らせる
-      validatableFields.forEach(applyValidation);
-      if (!form.checkValidity()) {
-        form.reportValidity();
+      // 全フィールドを検証し、エラーは項目直下にインライン表示。最初の不正項目へフォーカス。
+      let firstInvalid: HTMLElement | null = null;
+      cfg.fields.forEach((field) => {
+        if (!refreshFieldError(field) && !firstInvalid) firstInvalid = getPrimaryEl(field);
+      });
+      if (firstInvalid) {
+        (firstInvalid as HTMLElement).focus();
+        (firstInvalid as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
       buildPreview();
