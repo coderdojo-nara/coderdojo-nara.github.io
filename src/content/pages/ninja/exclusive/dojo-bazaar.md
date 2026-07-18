@@ -1,7 +1,5 @@
 ---
 title: Dojoバザール
-layout: page
-permalink: /dojo-bazaar/
 sitemap: false
 ---
 micro:bitやM5Stack、その周辺機器などプログラミングに使う電子デバイスなどを購入したいけど、そんなにたくさん買うわけじゃないので送料の方が高くついて買いにくい、ってことありませんか？若林はあります。
@@ -16,20 +14,11 @@ micro:bitやM5Stack、その周辺機器などプログラミングに使う電�
 3. Dojoの日にお金と交換（原則現金）
 
 送料負担を減らすのが狙いなので、基本的にDojoの日に受け渡しする前提です。
-連絡用にLINEのオープンチャットを作成しましたので、関心のある方はご参加ください。
-
-オープンチャット「Dojoバザール」（[参加リンク](https://line.me/ti/g2/2wnQ7ez-UbDaYkmNbmX_ThShiXss-KagsgnlXA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default)）
-
 何を買ったらいいのかわからない、ということの相談もできるようにしたいと思いますので、直近購入の予定が無い方でもぜひご参加ください。
 
 おすすめの製品などはこちらにまとめていきます。
 
-[Dojoバザール - CoderDojo Nara](https://scrapbox.io/CoderDojo-Nara/Dojo%E7%94%9F%E5%8D%94)
-
 ---
 Dojo開催日の4日前の23:59までに入力いただいたければ、その直後のDojoでお渡しできるように手配します。例）土曜日開催の場合は、火曜日の23:59までの入力が必要なります（水曜日に発注します）。
 
-{% include styled.html text="2月15日開催Dojoで受けとりたいものは、2月11日の23:59までに入力をお願いします" style="color:red; font-weight:bold;" %}
-
 共同購入を申込される方は[こちらのフォーム](https://forms.gle/utE4DY65ds7BwCrF8)からお申し込みください。
-
