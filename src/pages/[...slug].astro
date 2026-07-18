@@ -33,7 +33,8 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const { Content } = await render(page);
 const hasSections = page.data.pageSections && page.data.pageSections.length > 0;
-const noindex = page.data.sitemap === false;
+// exclusive ディレクトリ配下は検索エンジンに載せない（sitemap 除外は astro.config.mjs 側）
+const noindex = page.data.sitemap === false || page.id.split("/").includes("exclusive");
 
 // トップレベルのセクション名からアイブロウを補う（該当がなければ表示しない）
 const topSegment = page.id.split("/")[0];

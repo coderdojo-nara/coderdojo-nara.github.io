@@ -105,6 +105,8 @@ export default defineConfig({
         const { pathname } = new URL(page);
 
         if (pathname.startsWith("/component-docs/")) return false;
+        // exclusive ディレクトリ配下は sitemap に載せない（noindex は [...slug].astro 側）
+        if (pathname.split("/").includes("exclusive")) return false;
 
         return !sitemapExcludedPaths.includes(pathname);
       },
