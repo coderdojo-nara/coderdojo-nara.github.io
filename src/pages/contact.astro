@@ -33,7 +33,7 @@ const fields: CourierField[] = [
     label: "お問い合わせ内容",
     type: "textarea",
     required: true,
-    placeholder: "ご用件をご記入ください",
+    placeholder: "用件をご記入ください",
   },
 ];
 ---
@@ -64,7 +64,7 @@ const fields: CourierField[] = [
           formType="contact"
           fields={fields}
           discordWebhookUrl={discordWebhookUrl}
-          successMessage={`<h2>送信が完了しました</h2><p>お問い合わせありがとうございます。担当より折り返しご連絡いたしますので、少々お待ちください。</p>`}
+          successMessage={`<h2>送信が完了しました</h2><p>お問い合わせありがとうございます。折り返しご連絡いたしますので、少々お待ちください。</p>`}
         />
       </div>
     </div>
@@ -83,7 +83,8 @@ const fields: CourierField[] = [
         href={xUrl}
         class="dj-btn dj-btn--navy-outline channel__cta"
         target="_blank"
-        rel="noopener noreferrer">@CoderDojoNara</a
+        rel="noopener noreferrer"
+        >@CoderDojoNara</a
       >
     </article>
 
@@ -93,7 +94,9 @@ const fields: CourierField[] = [
       </div>
       <h2 class="channel__title">どんな人がやってるの？</h2>
       <p class="channel__text">運営しているスタッフの紹介はこちらのページにあります。</p>
-      <a href={staffUrl} class="dj-btn dj-btn--amber-outline channel__cta"
+      <a
+        href={staffUrl}
+        class="dj-btn dj-btn--amber-outline channel__cta"
         >スタッフ紹介を見る</a
       >
     </article>
