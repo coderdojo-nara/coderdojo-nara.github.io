@@ -40,7 +40,9 @@ pageSections:
     features:
       - title: 開催場所
         description: >-
-          奈良県奈良市大宮町３丁目５−４１ ぷろぼの福祉ビル 5F会議室
+          奈良県奈良市大宮町３丁目５−４１ ぷろぼの福祉ビル 5F会議室<br><a
+          href="https://maps.app.goo.gl/VLKTKLm1tsCLcxZr6" target="_blank"
+          rel="noopener noreferrer">Google Mapsで見る</a>
         iconName: map-pin
         iconColor: blue
       - title: 開催日
