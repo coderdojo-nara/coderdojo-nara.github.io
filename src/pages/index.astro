@@ -2,6 +2,7 @@
 import Page from "@layouts/Page.astro";
 import nextEventData from "@data/nextEvent.json";
 import seoData from "@data/seo.json";
+import supporters from "@data/supporters.json";
 import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import { getCollection } from "astro:content";
 
@@ -203,6 +204,37 @@ const badgeClass: Record<string, string> = {
       }
     </div>
   </section>
+
+  {/* サポート企業（一覧は src/data/supporters.json で定義） */}
+  {
+    supporters.companies.length > 0 && (
+      <section class="supporters">
+        <div class="container">
+          <h2 class="supporters__title">{supporters.heading}</h2>
+          {supporters.description && <p class="supporters__lead">{supporters.description}</p>}
+          <ul class="supporters__list">
+            {supporters.companies.map((company) => (
+              <li>
+                <a
+                  href={company.url}
+                  class="supporters__link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={company.logo}
+                    alt={company.alt || company.name}
+                    class="supporters__logo"
+                    loading="lazy"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 </Page>
 
 <style>
@@ -557,6 +589,67 @@ const badgeClass: Record<string, string> = {
     font-weight: var(--font-weight-medium);
   }
 
+  /* サポート企業 */
+  .supporters {
+    background: var(--brand-surface);
+    border-top: 1px solid var(--brand-border-hairline);
+  }
+
+  .supporters .container {
+    padding-block: 56px;
+  }
+
+  .supporters__title {
+    font-weight: var(--font-weight-black);
+    font-size: 24px;
+    margin: 0 0 12px;
+    color: var(--brand-navy);
+    text-align: center;
+  }
+
+  .supporters__lead {
+    margin: 0 auto 32px;
+    max-width: 640px;
+    text-align: center;
+    line-height: 1.9;
+    font-size: 15px;
+    color: var(--brand-ink-sub);
+  }
+
+  .supporters__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .supporters__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 220px;
+    min-height: 104px;
+    padding: 20px 28px;
+    background: #fff;
+    border: 1px solid var(--brand-border);
+    border-radius: 12px;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .supporters__link:hover {
+    box-shadow: 0 8px 20px rgba(20, 40, 70, 0.12);
+  }
+
+  .supporters__logo {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: 48px;
+  }
+
   /* レスポンシブ */
   @media (width < 900px) {
     .hero__grid {
@@ -600,6 +693,17 @@ const badgeClass: Record<string, string> = {
     .recent-blog__row {
       flex-direction: column;
       gap: 4px;
+    }
+
+    .supporters__link {
+      min-width: 0;
+      width: 100%;
+      min-height: 88px;
+      padding: 16px 20px;
+    }
+
+    .supporters__logo {
+      height: 40px;
     }
   }
 </style>

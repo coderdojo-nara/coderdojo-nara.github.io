@@ -1,0 +1,19 @@
+{
+  "heading": "サポート企業",
+  "description": "CoderDojo 奈良の活動は、次の企業・団体のご支援に支えられています。",
+  "companies": [
+    {
+      "name": "さくらインターネット株式会社",
+      "url": "https://www.sakura.ad.jp/",
+      "logo": "/images/supporters/sakura-internet.svg",
+      "alt": "さくらインターネット株式会社"
+    },
+    {
+      "name": "micro:bit教育財団",
+      "url": "https://microbit.org/",
+      "logo": "/images/supporters/microbit-150x89.svg",
+      "alt": "micro:bit教育財団"
+    }
+
+  ]
+}
