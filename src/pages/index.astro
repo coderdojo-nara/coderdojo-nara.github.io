@@ -1,9 +1,23 @@
 ---
 import Page from "@layouts/Page.astro";
-import nextEvent from "@data/nextEvent.json";
+import nextEventData from "@data/nextEvent.json";
 import seoData from "@data/seo.json";
 import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import { getCollection } from "astro:content";
+
+type NextEvent = {
+  date: string | null;
+  weekday: string | null;
+  time: string | null;
+  venue: string | null;
+  applyUrl: string | null;
+  badges: { label: string; variant: string }[];
+};
+
+const nextEvent = nextEventData as NextEvent;
+
+// 開催日が未定（date が null）のときは、日付・会場・申し込み情報の代わりに案内文を表示する
+const hasEventDate = Boolean(nextEvent.date);
 
 const pages = await getCollection("pages");
 const indexPage = pages.find((p) => p.id === "index");
@@ -50,29 +64,38 @@ const badgeClass: Record<string, string> = {
       <aside class="event-card">
         <div class="event-card__ribbon">次回の開催</div>
         <div class="event-card__body">
-          <div class="event-card__date">
-            <span class="event-card__day">{nextEvent.date}</span>
-            <span class="event-card__weekday">{nextEvent.weekday}</span>
-            <span class="event-card__time">{nextEvent.time}</span>
-          </div>
-          <p
-            class="event-card__venue"
-            set:html={nextEvent.venue.replace(/\n/g, "<br>")}
-          />
-          <div class="event-card__badges">
-            {
-              nextEvent.badges.map((b) => (
-                <span class={badgeClass[b.variant] ?? "badge"}>{b.label}</span>
-              ))
-            }
-          </div>
-          <a
-            href={nextEvent.applyUrl}
-            class="btn btn--primary event-card__cta"
-            target="_blank"
-            rel="noopener noreferrer"
-            >申し込みページへ</a
-          >
+          {
+            hasEventDate ? (
+              <Fragment>
+                <div class="event-card__date">
+                  <span class="event-card__day">{nextEvent.date}</span>
+                  <span class="event-card__weekday">{nextEvent.weekday}</span>
+                  <span class="event-card__time">{nextEvent.time}</span>
+                </div>
+                <p
+                  class="event-card__venue"
+                  set:html={nextEvent.venue?.replace(/\n/g, "<br>")}
+                />
+                <div class="event-card__badges">
+                  {nextEvent.badges.map((b) => (
+                    <span class={badgeClass[b.variant] ?? "badge"}>{b.label}</span>
+                  ))}
+                </div>
+                <a
+                  href={nextEvent.applyUrl}
+                  class="btn btn--primary event-card__cta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  申し込みページへ
+                </a>
+              </Fragment>
+            ) : (
+              <p class="event-card__notice">
+                基本、第三土曜日に開催していますが、月によって変わる場合があります。月初めに案内していますのでお待ちください。
+              </p>
+            )
+          }
         </div>
       </aside>
     </div>
@@ -309,6 +332,13 @@ const badgeClass: Record<string, string> = {
   .event-card__venue {
     font-size: 14px;
     line-height: 1.8;
+    color: var(--brand-ink-sub);
+    margin: 0;
+  }
+
+  .event-card__notice {
+    font-size: 15px;
+    line-height: 1.9;
     color: var(--brand-ink-sub);
     margin: 0;
   }
