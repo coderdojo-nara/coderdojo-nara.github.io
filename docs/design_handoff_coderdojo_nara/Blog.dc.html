@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; background: #fff; font-family: 'Noto Sans JP', sans-serif; color: #22303F; }
+a { color: #1F3A5F; text-decoration: none; }
+a:hover { opacity: 0.85; }
+</style>
+</helmet>
+<!-- nav -->
+<div style="background: #1F3A5F; color: #fff;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 18px 32px; flex-wrap: wrap; gap: 16px;">
+    <a href="Home.dc.html" style="font-weight: 900; font-size: 20px; letter-spacing: 0.02em; color: #fff;">CoderDojo 奈良</a>
+    <div style="display: flex; gap: 28px; font-size: 14px; align-items: center; flex-wrap: wrap;">
+      <a href="Home.dc.html" style="color: #C4D0DE;">ホーム</a>
+      <a href="About.dc.html" style="color: #C4D0DE;">About</a>
+      <a href="Join.dc.html" style="color: #C4D0DE;">参加する</a>
+      <a href="Blog.dc.html" style="color: #fff; font-weight: 700;">Blog</a>
+      <a href="Contact.dc.html" style="color: #C4D0DE;">お問い合わせ</a>
+      <a href="Join.dc.html" style="background: #E8A23D; color: #22303F; font-weight: 700; padding: 8px 20px; border-radius: 6px;">参加申し込み</a>
+    </div>
+  </div>
+</div>
+<!-- page header -->
+<div style="background: linear-gradient(180deg, #F4F6F9 0%, #fff 100%);">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px 40px;">
+    <div style="color: #E8A23D; font-size: 13px; font-weight: 900; letter-spacing: 0.16em; margin-bottom: 12px;">BLOG</div>
+    <h1 style="font-weight: 900; font-size: 38px; margin: 0 0 8px; color: #1F3A5F;">記事一覧</h1>
+    <p style="margin: 0; line-height: 2; color: #4A5A6A;">Dojoの開催レポートやお知らせをお届けします。</p>
+  </div>
+</div>
+<!-- list -->
+<div style="max-width: 900px; margin: 0 auto; padding: 24px 32px 40px; display: flex; flex-direction: column;">
+  <sc-for list="{{ posts }}" as="post" hint-placeholder-count="6">
+    <a href="Blog.dc.html" style="display: grid; grid-template-columns: 130px 90px 1fr; gap: 20px; padding: 22px 8px; border-bottom: 1px solid #E4E9EF; align-items: baseline; color: #22303F;">
+      <span style="font-size: 13px; color: #8595A5;">{{ post.date }}</span>
+      <span style="font-size: 12px; font-weight: 700; color: #E8A23D;">{{ post.author }}</span>
+      <span style="font-weight: 700; font-size: 16px; line-height: 1.7;">{{ post.title }}</span>
+    </a>
+  </sc-for>
+  <!-- pagination -->
+  <div style="display: flex; gap: 8px; justify-content: center; padding: 40px 0 8px;">
+    <span style="background: #1F3A5F; color: #fff; font-weight: 700; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px;">1</span>
+    <a href="Blog.dc.html" style="border: 1px solid #DDE4EC; font-weight: 700; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px;">2</a>
+    <a href="Blog.dc.html" style="border: 1px solid #DDE4EC; font-weight: 700; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px;">3</a>
+    <a href="Blog.dc.html" style="border: 1px solid #DDE4EC; font-weight: 700; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px;">4</a>
+    <span style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; color: #8595A5;">…</span>
+    <a href="Blog.dc.html" style="border: 1px solid #DDE4EC; font-weight: 700; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px;">8</a>
+  </div>
+</div>
+<!-- footer -->
+<div style="background: #16293F; color: #8FA3B8;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px;">
+    <span>© CoderDojo 奈良 All rights reserved.</span>
+    <div style="display: flex; gap: 20px;">
+      <a href="Home.dc.html" style="color: #8FA3B8;">ホーム</a>
+      <a href="About.dc.html" style="color: #8FA3B8;">About</a>
+      <a href="Join.dc.html" style="color: #8FA3B8;">参加する</a>
+      <a href="Blog.dc.html" style="color: #8FA3B8;">Blog</a>
+      <a href="Contact.dc.html" style="color: #8FA3B8;">お問い合わせ</a>
+      <a href="https://x.com/CoderDojoNara" style="color: #E8A23D; font-weight: 700;">X @CoderDojoNara</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      posts: [
+        { date: "2026年4月4日", author: "kwaka1208", title: "大人のためのマインクラフトワークショップを開催" },
+        { date: "2026年4月1日", author: "kwaka1208", title: "コンテスト参加にあたって知っておいてほしいこと" },
+        { date: "2026年3月1日", author: "kwaka1208", title: "2026年3月から発表タイムを変更します" },
+        { date: "2026年2月9日", author: "kwaka1208", title: "DojoMeetingを開催しました" },
+        { date: "2025年8月24日", author: "kwaka1208", title: "第89回〜93回:ずっとやってますよ" },
+        { date: "2025年2月16日", author: "610t", title: "第88回 CoderDojo 奈良:LEGO, micro:bit LEDテープ, Spheroなどなど" },
+        { date: "2025年2月15日", author: "kwaka1208", title: "第88回:ルールとゴールを決めることで生まれる学び" },
+        { date: "2025年1月18日", author: "610t", title: "第87回 CoderDojo 奈良:めっちゃ人いっぱい!!" },
+        { date: "2025年1月18日", author: "kwaka1208", title: "第87回 新年早々、大賑わいでした" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

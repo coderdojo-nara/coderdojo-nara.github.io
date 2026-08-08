@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+body { margin: 0; background: #fff; font-family: 'Noto Sans JP', sans-serif; color: #22303F; }
+a { color: #1F3A5F; text-decoration: none; }
+a:hover { opacity: 0.85; }
+</style>
+</helmet>
+<!-- nav -->
+<div style="background: #1F3A5F; color: #fff;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 18px 32px; flex-wrap: wrap; gap: 16px;">
+    <a href="Home.dc.html" style="font-weight: 900; font-size: 20px; letter-spacing: 0.02em; color: #fff;">CoderDojo 奈良</a>
+    <div style="display: flex; gap: 28px; font-size: 14px; align-items: center; flex-wrap: wrap;">
+      <a href="Home.dc.html" style="color: #fff; font-weight: 700;">ホーム</a>
+      <a href="About.dc.html" style="color: #C4D0DE;">About</a>
+      <a href="Join.dc.html" style="color: #C4D0DE;">参加する</a>
+      <a href="Blog.dc.html" style="color: #C4D0DE;">Blog</a>
+      <a href="Contact.dc.html" style="color: #C4D0DE;">お問い合わせ</a>
+      <a href="Join.dc.html" style="background: #E8A23D; color: #22303F; font-weight: 700; padding: 8px 20px; border-radius: 6px;">参加申し込み</a>
+    </div>
+  </div>
+</div>
+<!-- hero -->
+<div style="background: linear-gradient(180deg, #F4F6F9 0%, #fff 100%);">
+  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 48px; padding: 64px 32px; align-items: center;">
+    <div>
+      <div style="color: #1F3A5F; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 16px;">子どものためのプログラミングクラブ</div>
+      <h1 style="font-weight: 900; font-size: 42px; line-height: 1.4; margin: 0 0 20px; color: #1F3A5F;">CoderDojo 奈良へようこそ</h1>
+      <p style="font-size: 16px; line-height: 2; margin: 0 0 28px; color: #4A5A6A;">CoderDojoは、アイルランドで始まった子どものためのプログラミングクラブです。プログラミング以外にもコンピュータを使った活動が好きな子どもたちが仲間を見つける場所で、誰でも参加費用を払うことなく参加できます。</p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="Join.dc.html" style="background: #1F3A5F; color: #fff; font-weight: 700; padding: 14px 36px; border-radius: 8px; white-space: nowrap;">参加する</a>
+        <a href="About.dc.html" style="border: 2px solid #1F3A5F; color: #1F3A5F; font-weight: 700; padding: 12px 36px; border-radius: 8px; white-space: nowrap;">CoderDojoとは</a>
+      </div>
+    </div>
+    <div style="background: #fff; border: 1px solid #DDE4EC; border-radius: 16px; box-shadow: 0 12px 32px rgba(20,40,70,0.12); overflow: hidden;">
+      <div style="background: #E8A23D; color: #22303F; font-weight: 900; text-align: center; padding: 10px; font-size: 15px; letter-spacing: 0.08em;">次回の開催</div>
+      <div style="padding: 28px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="display: flex; align-items: baseline; gap: 10px;">
+          <span style="font-size: 40px; font-weight: 900; color: #1F3A5F;">7/18</span>
+          <span style="font-size: 18px; font-weight: 700; color: #1F3A5F;">（土）</span>
+          <span style="color: #4A5A6A;">13:00〜17:00</span>
+        </div>
+        <div style="font-size: 14px; line-height: 1.8; color: #4A5A6A;">奈良市大宮町3-5-41<br>ぷろぼの福祉ビル 5F会議室</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="background: #EFF4E6; color: #567D2E; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 4px;">参加費 無料</span>
+          <span style="background: #E9F0F8; color: #1F3A5F; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 4px;">connpass受付</span>
+        </div>
+        <a href="https://coderdojo-nara-ikoma.connpass.com/" style="background: #1F3A5F; color: #fff; font-weight: 700; text-align: center; padding: 12px; border-radius: 8px;">申し込みページへ</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- photo band -->
+<image-slot id="home-hero" shape="rect" style="width: 100%; height: 320px;" placeholder="Dojoの活動写真（ワイド）"></image-slot>
+<!-- Be Cool -->
+<div style="max-width: 1200px; margin: 0 auto; padding: 64px 32px; display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: center;">
+  <h2 style="font-weight: 900; font-size: 40px; margin: 0; color: #E8A23D; border-left: 6px solid #1F3A5F; padding-left: 24px;">Be Cool!</h2>
+  <p style="line-height: 2; color: #4A5A6A; margin: 0;">CoderDojoのただひとつのルールは、"Be Cool!（カッコよくあれ！）"です。活動の中のすべてのことについて"Cool"であることを心がけてください。</p>
+</div>
+<!-- info + join -->
+<div style="background: #F4F6F9;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px;">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #DDE4EC; border: 1px solid #DDE4EC; border-radius: 12px; overflow: hidden;">
+      <div style="background: #fff; padding: 32px;">
+        <div style="font-size: 13px; font-weight: 700; color: #8595A5; letter-spacing: 0.1em; margin-bottom: 10px;">開催場所</div>
+        <p style="margin: 0; line-height: 1.9; font-size: 15px; font-weight: 500;">奈良県奈良市大宮町３丁目５−４１ ぷろぼの福祉ビル 5F会議室</p>
+      </div>
+      <div style="background: #fff; padding: 32px;">
+        <div style="font-size: 13px; font-weight: 700; color: #8595A5; letter-spacing: 0.1em; margin-bottom: 10px;">開催日</div>
+        <p style="margin: 0; line-height: 1.9; font-size: 15px; font-weight: 500;">毎月第三土曜日（月によって変わる場合があります）</p>
+      </div>
+      <div style="background: #fff; padding: 32px;">
+        <div style="font-size: 13px; font-weight: 700; color: #8595A5; letter-spacing: 0.1em; margin-bottom: 10px;">参加費</div>
+        <p style="margin: 0; line-height: 1.9; font-size: 15px; font-weight: 500;">無料。どなたでもご参加いただけます。</p>
+      </div>
+    </div>
+    <div style="margin-top: 40px; background: #1F3A5F; color: #fff; border-radius: 12px; padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap;">
+      <div style="min-width: 300px; flex: 1;">
+        <h2 style="font-weight: 900; font-size: 24px; margin: 0 0 10px;">参加したい方へ</h2>
+        <p style="margin: 0; line-height: 1.9; color: #C4D0DE; font-size: 15px;">参加申し込みはconnpassで受け付けています。登録していただくと開催ごとにメールでご案内します。</p>
+      </div>
+      <div style="display: flex; gap: 12px; flex: none;">
+        <a href="Join.dc.html" style="background: #E8A23D; color: #22303F; font-weight: 700; padding: 12px 28px; border-radius: 8px; white-space: nowrap;">参加方法を見る</a>
+        <a href="Contact.dc.html" style="border: 2px solid #fff; color: #fff; font-weight: 700; padding: 10px 28px; border-radius: 8px; white-space: nowrap;">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- blog -->
+<div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px;">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px;">
+    <h2 style="font-weight: 900; font-size: 24px; margin: 0; color: #1F3A5F;">最近のブログ記事</h2>
+    <a href="Blog.dc.html" style="font-weight: 700; font-size: 14px;">記事一覧を見る →</a>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <a href="Blog.dc.html" style="display: flex; gap: 24px; padding: 18px 8px; border-top: 1px solid #E4E9EF; align-items: baseline; color: #22303F;"><span style="font-size: 13px; color: #8595A5; flex: none; width: 110px;">2026年4月4日</span><span style="font-weight: 500;">大人のためのマインクラフトワークショップを開催</span></a>
+    <a href="Blog.dc.html" style="display: flex; gap: 24px; padding: 18px 8px; border-top: 1px solid #E4E9EF; align-items: baseline; color: #22303F;"><span style="font-size: 13px; color: #8595A5; flex: none; width: 110px;">2026年4月1日</span><span style="font-weight: 500;">コンテスト参加にあたって知っておいてほしいこと</span></a>
+    <a href="Blog.dc.html" style="display: flex; gap: 24px; padding: 18px 8px; border-top: 1px solid #E4E9EF; align-items: baseline; color: #22303F;"><span style="font-size: 13px; color: #8595A5; flex: none; width: 110px;">2026年3月1日</span><span style="font-weight: 500;">2026年3月から発表タイムを変更します</span></a>
+    <a href="Blog.dc.html" style="display: flex; gap: 24px; padding: 18px 8px; border-top: 1px solid #E4E9EF; border-bottom: 1px solid #E4E9EF; align-items: baseline; color: #22303F;"><span style="font-size: 13px; color: #8595A5; flex: none; width: 110px;">2026年2月9日</span><span style="font-weight: 500;">DojoMeetingを開催しました</span></a>
+  </div>
+</div>
+<!-- footer -->
+<div style="background: #16293F; color: #8FA3B8;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px;">
+    <span>© CoderDojo 奈良 All rights reserved.</span>
+    <div style="display: flex; gap: 20px;">
+      <a href="Home.dc.html" style="color: #8FA3B8;">ホーム</a>
+      <a href="About.dc.html" style="color: #8FA3B8;">About</a>
+      <a href="Join.dc.html" style="color: #8FA3B8;">参加する</a>
+      <a href="Blog.dc.html" style="color: #8FA3B8;">Blog</a>
+      <a href="Contact.dc.html" style="color: #8FA3B8;">お問い合わせ</a>
+      <a href="https://x.com/CoderDojoNara" style="color: #E8A23D; font-weight: 700;">X @CoderDojoNara</a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+</body>
+</html>

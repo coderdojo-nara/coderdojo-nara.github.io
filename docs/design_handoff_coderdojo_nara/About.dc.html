@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+body { margin: 0; background: #fff; font-family: 'Noto Sans JP', sans-serif; color: #22303F; }
+a { color: #1F3A5F; text-decoration: none; }
+a:hover { opacity: 0.85; }
+</style>
+</helmet>
+<!-- nav -->
+<div style="background: #1F3A5F; color: #fff;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 18px 32px; flex-wrap: wrap; gap: 16px;">
+    <a href="Home.dc.html" style="font-weight: 900; font-size: 20px; letter-spacing: 0.02em; color: #fff;">CoderDojo 奈良</a>
+    <div style="display: flex; gap: 28px; font-size: 14px; align-items: center; flex-wrap: wrap;">
+      <a href="Home.dc.html" style="color: #C4D0DE;">ホーム</a>
+      <a href="About.dc.html" style="color: #fff; font-weight: 700;">About</a>
+      <a href="Join.dc.html" style="color: #C4D0DE;">参加する</a>
+      <a href="Blog.dc.html" style="color: #C4D0DE;">Blog</a>
+      <a href="Contact.dc.html" style="color: #C4D0DE;">お問い合わせ</a>
+      <a href="Join.dc.html" style="background: #E8A23D; color: #22303F; font-weight: 700; padding: 8px 20px; border-radius: 6px;">参加申し込み</a>
+    </div>
+  </div>
+</div>
+<!-- page header -->
+<div style="background: linear-gradient(180deg, #F4F6F9 0%, #fff 100%);">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px 40px;">
+    <div style="color: #E8A23D; font-size: 13px; font-weight: 900; letter-spacing: 0.16em; margin-bottom: 12px;">ABOUT</div>
+    <h1 style="font-weight: 900; font-size: 38px; margin: 0 0 16px; color: #1F3A5F;">CoderDojoとは</h1>
+    <p style="max-width: 760px; margin: 0; line-height: 2; color: #4A5A6A;">CoderDojoとは「ボランティアによる若い人たちのための無料のプログラミングクラブ」で、2011年にアイルランドで始まった世界的な活動です。CoderDojoとは何かを知っていただくために、アイルランドのCoderDojo Foundationが掲げる考え方を紹介します。</p>
+  </div>
+</div>
+<!-- what is -->
+<div style="max-width: 1200px; margin: 0 auto; padding: 32px 32px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch;">
+  <div style="border: 1px solid #DDE4EC; border-radius: 12px; padding: 36px;">
+    <h2 style="font-weight: 900; font-size: 22px; margin: 0 0 16px; color: #1F3A5F;">What Is CoderDojo?</h2>
+    <p style="line-height: 2; color: #4A5A6A; margin: 0 0 16px; font-size: 15px;">CoderDojo is a worldwide movement of free, volunteer-led, community-based programming clubs for young people. Anyone aged seven to seventeen can visit a Dojo where they can learn to code, build a website, create an app or a game, and explore technology in an informal, creative, and social environment.</p>
+    <p style="line-height: 2; color: #4A5A6A; margin: 0; font-size: 15px;">The CoderDojo movement believes that an understanding of programming languages is increasingly important in the modern world, that it's both better and easier to learn these skills early, and that nobody should be denied the opportunity to do so.</p>
+  </div>
+  <div style="background: #F4F6F9; border-radius: 12px; padding: 36px;">
+    <h2 style="font-weight: 900; font-size: 22px; margin: 0 0 16px; color: #1F3A5F;">CoderDojoって何？<span style="font-size: 14px; font-weight: 700; color: #8595A5;">（日本語訳）</span></h2>
+    <p style="line-height: 2; color: #4A5A6A; margin: 0 0 16px; font-size: 15px;">「CoderDojoは、ボランティア主導で且つコミュニティベースな無料の若い人たち向けプログラミングクラブの世界的な活動です。7歳から17歳までの誰でもDojoを訪れて、コードを学んだり、ウェブサイトを作ったり、アプリやゲームをつくったり、技術を探求することができる、カジュアルで創造的な環境です。</p>
+    <p style="line-height: 2; color: #4A5A6A; margin: 0; font-size: 15px;">CoderDojoの活動の中では、プログラミング言語の理解が現代の世界でますます重要になってきていると考えられています。若いうちにこれらのスキルを学ぶほうがより容易に習得しやすく、誰もがその機会を拒否するべきではないと考えています。」</p>
+  </div>
+</div>
+<!-- guidance -->
+<div style="background: #F4F6F9;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 56px 32px; display: grid; grid-template-columns: 1fr 420px; gap: 48px; align-items: center;">
+    <div>
+      <h2 style="font-weight: 900; font-size: 24px; margin: 0 0 16px; color: #1F3A5F;">CoderDojoガイダンス</h2>
+      <p style="line-height: 2; color: #4A5A6A; margin: 0 0 24px;">ここまでの内容は、CoderDojoとしての最も基本的な考え方の部分です。実際のDojoの様子や考え方を知っていただくには、こちらのスライド（作成：コーダー道場こだいら）をみていただくのがいいと思います。</p>
+      <a href="https://coderdojo-nara.github.io/about/" style="display: inline-block; background: #1F3A5F; color: #fff; font-weight: 700; padding: 12px 32px; border-radius: 8px;">ガイダンススライドを見る</a>
+    </div>
+    <image-slot id="about-guidance" style="width: 100%; height: 240px;" radius="12" placeholder="ガイダンススライドのサムネイル"></image-slot>
+  </div>
+</div>
+<!-- video / dojo -->
+<div style="max-width: 1200px; margin: 0 auto; padding: 64px 32px; display: grid; grid-template-columns: 480px 1fr; gap: 48px; align-items: center;">
+  <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 12px 32px rgba(20,40,70,0.15); aspect-ratio: 16 / 9;">
+    <iframe src="https://www.youtube.com/embed/gLDue2xb1j8?rel=0" style="width: 100%; height: 100%; border: 0; display: block;" title="あなたがDojoに来る理由は何ですか？" allowfullscreen="allowfullscreen"></iframe>
+  </div>
+  <div>
+    <h2 style="font-weight: 900; font-size: 24px; margin: 0 0 16px; color: #1F3A5F;">あなたがDojoに来る理由は何ですか？</h2>
+    <p style="line-height: 2; color: #4A5A6A; margin: 0 0 16px;">私たちは、活動の場をDojoと呼んでいます。これは空手や柔道などで使う「道場」と同じで、CoderDojoの創始者が合気道をやっていたこともあって、自分たちの活動の場を「道場(Dojo)」と呼ぶようになったようです。</p>
+    <p style="line-height: 2; color: #4A5A6A; margin: 0;">もし、CoderDojoの活動に興味を持たれたら是非、お近くのDojoに足を運んでみてください。</p>
+  </div>
+</div>
+<!-- cta -->
+<div style="background: #1F3A5F; color: #fff;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 48px 32px; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap;">
+    <h2 style="font-weight: 900; font-size: 24px; margin: 0;">まずは一度、遊びに来てみませんか？</h2>
+    <div style="display: flex; gap: 12px;">
+      <a href="Join.dc.html" style="background: #E8A23D; color: #22303F; font-weight: 700; padding: 12px 28px; border-radius: 8px; white-space: nowrap;">参加方法を見る</a>
+      <a href="Contact.dc.html" style="border: 2px solid #fff; color: #fff; font-weight: 700; padding: 10px 28px; border-radius: 8px; white-space: nowrap;">お問い合わせ</a>
+    </div>
+  </div>
+</div>
+<!-- footer -->
+<div style="background: #16293F; color: #8FA3B8;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px;">
+    <span>© CoderDojo 奈良 All rights reserved.</span>
+    <div style="display: flex; gap: 20px;">
+      <a href="Home.dc.html" style="color: #8FA3B8;">ホーム</a>
+      <a href="About.dc.html" style="color: #8FA3B8;">About</a>
+      <a href="Join.dc.html" style="color: #8FA3B8;">参加する</a>
+      <a href="Blog.dc.html" style="color: #8FA3B8;">Blog</a>
+      <a href="Contact.dc.html" style="color: #8FA3B8;">お問い合わせ</a>
+      <a href="https://x.com/CoderDojoNara" style="color: #E8A23D; font-weight: 700;">X @CoderDojoNara</a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+</body>
+</html>
