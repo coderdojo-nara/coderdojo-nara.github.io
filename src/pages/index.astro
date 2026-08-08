@@ -19,6 +19,9 @@ const nextEvent = nextEventData as NextEvent;
 // 開催日が未定（date が null）のときは、日付・会場・申し込み情報の代わりに案内文を表示する
 const hasEventDate = Boolean(nextEvent.date);
 
+// 開催日に依存しないconnpassグループのURL（開催日未定のときの案内先）
+const connpassGroupUrl = "https://coderdojo-nara-ikoma.connpass.com/";
+
 const pages = await getCollection("pages");
 const indexPage = pages.find((p) => p.id === "index");
 
@@ -91,9 +94,19 @@ const badgeClass: Record<string, string> = {
                 </a>
               </Fragment>
             ) : (
-              <p class="event-card__notice">
-                基本、第三土曜日に開催していますが、月によって変わる場合があります。月初めに案内していますのでお待ちください。
-              </p>
+              <Fragment>
+                <p class="event-card__notice">
+                  基本、第三土曜日に開催していますが、月によって変わる場合があります。月初めにconnpassでご案内しますので、グループに登録してお待ちください。
+                </p>
+                <a
+                  href={connpassGroupUrl}
+                  class="btn btn--primary event-card__cta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  connpassグループへ
+                </a>
+              </Fragment>
             )
           }
         </div>
