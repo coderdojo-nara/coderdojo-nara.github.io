@@ -1,5 +1,4 @@
 import sitemap from "@astrojs/sitemap";
-import editableRegions from "@cloudcannon/editable-regions/astro-integration";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import { globSync } from "glob";
@@ -58,33 +57,6 @@ export default defineConfig({
     port: 4321,
   },
   integrations: [
-    {
-      name: "builder-preview-dev-only",
-      hooks: {
-        "astro:config:setup": ({ command, injectRoute, updateConfig }) => {
-          if (command === "dev") {
-            injectRoute({
-              pattern: "/component-docs/builder-preview",
-              entrypoint: "./src/component-docs/pages/builder-preview.astro",
-              prerender: false,
-            });
-            updateConfig({
-              adapter: {
-                name: "dev-only-server-preview",
-                serverEntrypoint: "",
-                supportedAstroFeatures: {
-                  serverOutput: "stable",
-                  staticOutput: "stable",
-                  hybridOutput: "stable",
-                  sharpImageService: "stable",
-                },
-              },
-            });
-          }
-        },
-      },
-    },
-    editableRegions(),
     icon({
       iconDir: path.resolve(__dirname, "src/icons"),
       svgoOptions: {
@@ -104,7 +76,6 @@ export default defineConfig({
       filter: (page) => {
         const { pathname } = new URL(page);
 
-        if (pathname.startsWith("/component-docs/")) return false;
         // exclusive ディレクトリ配下は sitemap に載せない（noindex は [...slug].astro 側）
         if (pathname.split("/").includes("exclusive")) return false;
 
@@ -139,7 +110,6 @@ export default defineConfig({
         "@utils": path.resolve(__dirname, "src/utils"),
         "@content": path.resolve(__dirname, "src/content"),
         "@assets": path.resolve(__dirname, "src/assets"),
-        "@component-docs": path.resolve(__dirname, "src/component-docs"),
         "@layouts": path.resolve(__dirname, "src/layouts"),
         "@component-utils": path.resolve(__dirname, "src/components/utils"),
         "@styles": path.resolve(__dirname, "src/styles"),
