@@ -1,11 +1,11 @@
 ---
 import Gallery from "@components/Gallery.astro";
 import Page from "@layouts/Page.astro";
-import { getPostSlug, getPostYear } from "@utils/blog";
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { getBlogPosts, getPostSlug, getPostYear } from "@utils/blog";
+import { render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getBlogPosts();
 
   return posts.map((post: CollectionEntry<"blog">) => ({
     params: { year: getPostYear(post), slug: getPostSlug(post) },

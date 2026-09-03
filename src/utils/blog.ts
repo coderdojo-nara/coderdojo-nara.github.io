@@ -1,4 +1,4 @@
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 /**
  * 記事ファイル名（YYYY-MM-DD-slug）から日付プレフィックスを除いた slug を返す。
@@ -23,4 +23,12 @@ export function getPostUrl(post: CollectionEntry<"blog">): string {
 /** 記事一覧を新しい順に並べ替えて返す。 */
 export function sortPostsByDateDesc(posts: CollectionEntry<"blog">[]): CollectionEntry<"blog">[] {
   return [...posts].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}
+
+/**
+ * 記事一覧を取得する。
+ * 本番ビルド時は draft: true の記事を除外し、ローカルの dev サーバーでは表示する。
+ */
+export async function getBlogPosts(): Promise<CollectionEntry<"blog">[]> {
+  return await getCollection("blog", ({ data }) => !import.meta.env.PROD || !data.draft);
 }

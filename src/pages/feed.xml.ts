@@ -1,11 +1,10 @@
 import rss from "@astrojs/rss";
 import seoData from "@data/seo.json";
-import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
-import { getCollection } from "astro:content";
+import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
-  const posts = sortPostsByDateDesc(await getCollection("blog"));
+  const posts = sortPostsByDateDesc(await getBlogPosts());
 
   return rss({
     title: seoData.name,

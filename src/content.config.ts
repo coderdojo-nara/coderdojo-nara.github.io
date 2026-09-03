@@ -23,6 +23,8 @@ const blogPostSchema = z.object({
   description: z.string().optional().default(""),
   date: z.coerce.date(),
   author: z.string().default("CoderDojo 奈良"),
+  // true のときは下書き。ローカルの dev サーバーでのみ表示し、本番ビルドからは除外する。
+  draft: z.boolean().default(false),
   image: z.string().optional(),
   tags: z.array(z.string()).default([]),
   images: z

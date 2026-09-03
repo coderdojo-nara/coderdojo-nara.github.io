@@ -1,11 +1,11 @@
 ---
 import Page from "@layouts/Page.astro";
-import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
+import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import type { GetStaticPaths, Page as PaginatedPage } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const blogPosts = sortPostsByDateDesc(await getCollection("blog"));
+  const blogPosts = sortPostsByDateDesc(await getBlogPosts());
 
   return paginate(blogPosts, { pageSize: 9 });
 }) satisfies GetStaticPaths;

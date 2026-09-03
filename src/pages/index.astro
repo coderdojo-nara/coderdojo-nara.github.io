@@ -3,7 +3,7 @@ import Page from "@layouts/Page.astro";
 import nextEventData from "@data/nextEvent.json";
 import seoData from "@data/seo.json";
 import supporters from "@data/supporters.json";
-import { getPostUrl, sortPostsByDateDesc } from "@utils/blog";
+import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import { getCollection } from "astro:content";
 
 type NextEvent = {
@@ -26,7 +26,7 @@ const connpassGroupUrl = "https://coderdojo-nara-ikoma.connpass.com/";
 const pages = await getCollection("pages");
 const indexPage = pages.find((p) => p.id === "index");
 
-const recentPosts = sortPostsByDateDesc(await getCollection("blog")).slice(0, 4);
+const recentPosts = sortPostsByDateDesc(await getBlogPosts()).slice(0, 4);
 
 const formatDate = (date: Date) =>
   date.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" });
