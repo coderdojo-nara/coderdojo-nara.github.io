@@ -4,6 +4,7 @@ import nextEventData from "@data/nextEvent.json";
 import seoData from "@data/seo.json";
 import supporters from "@data/supporters.json";
 import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
+import { formatPostDate } from "@utils/date";
 import { getCollection } from "astro:content";
 
 type NextEvent = {
@@ -27,9 +28,6 @@ const pages = await getCollection("pages");
 const indexPage = pages.find((p) => p.id === "index");
 
 const recentPosts = sortPostsByDateDesc(await getBlogPosts()).slice(0, 4);
-
-const formatDate = (date: Date) =>
-  date.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" });
 
 const badgeClass: Record<string, string> = {
   success: "badge badge--success",
@@ -197,7 +195,7 @@ const badgeClass: Record<string, string> = {
             href={getPostUrl(post)}
             class="recent-blog__row"
           >
-            <span class="recent-blog__date">{formatDate(post.data.date)}</span>
+            <span class="recent-blog__date">{formatPostDate(post.data.date)}</span>
             <span class="recent-blog__title">{post.data.title}</span>
           </a>
         ))

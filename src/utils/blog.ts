@@ -1,3 +1,4 @@
+import { getJstFullYear } from "@utils/date";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 /**
@@ -10,9 +11,9 @@ export function getPostSlug(post: CollectionEntry<"blog">): string {
   return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "");
 }
 
-/** frontmatter の date から記事の年を返す。 */
+/** frontmatter の date から記事の年（JST基準）を返す。 */
 export function getPostYear(post: CollectionEntry<"blog">): string {
-  return String(post.data.date.getFullYear());
+  return getJstFullYear(post.data.date);
 }
 
 /** 記事のURL（/YYYY/slug/）を返す。 */

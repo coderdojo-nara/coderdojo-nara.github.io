@@ -1,6 +1,7 @@
 ---
 import Page from "@layouts/Page.astro";
 import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
+import { formatPostDate } from "@utils/date";
 import type { GetStaticPaths, Page as PaginatedPage } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
@@ -21,9 +22,6 @@ const blogPage = pages.find((p) => p.id === "blog");
 const pageTitle = blogPage?.data.title ?? "記事一覧";
 const pageDescription =
   blogPage?.data.description ?? "CoderDojo 奈良の活動報告や関連情報のブログ記事一覧です。";
-
-const formatDate = (date: Date) =>
-  date.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" });
 
 const pageUrl = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
 
@@ -61,7 +59,7 @@ for (let n = 1; n <= last; n++) {
               href={getPostUrl(post)}
               class="post-row"
             >
-              <span class="post-row__date">{formatDate(post.data.date)}</span>
+              <span class="post-row__date">{formatPostDate(post.data.date)}</span>
               <span class="post-row__author">{post.data.author}</span>
               <span class="post-row__title">{post.data.title}</span>
             </a>
