@@ -39,6 +39,22 @@ function collectSitemapExcludedPaths() {
 
 const sitemapExcludedPaths = collectSitemapExcludedPaths();
 
+// .yml / .yaml を JSON と同じ感覚で import できるようにする
+// （src/data のサイト設定データを YAML で管理するため）
+function yamlPlugin() {
+  return {
+    name: "yaml-loader",
+    transform(code, id) {
+      if (!/\.ya?ml$/.test(id)) return null;
+
+      return {
+        code: `export default ${JSON.stringify(yaml.load(code) ?? null)};`,
+        map: null,
+      };
+    },
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
   redirects: {
@@ -88,6 +104,7 @@ export default defineConfig({
     rehypePlugins: [[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }]],
   },
   vite: {
+    plugins: [yamlPlugin()],
     build: {
       chunkSizeWarningLimit: 1024,
     },

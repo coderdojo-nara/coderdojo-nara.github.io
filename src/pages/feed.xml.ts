@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import seoData from "@data/seo.json";
+import seoData from "@data/seo.yml";
 import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import type { APIContext } from "astro";
 

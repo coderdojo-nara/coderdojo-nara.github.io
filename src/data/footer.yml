@@ -1,0 +1,8 @@
+logoText: CoderDojo 奈良
+links:
+  - name: 行動規範
+    path: /code_of_conduct/
+socials:
+  - icon: social/x
+    link: https://twitter.com/CoderDojoNara
+footerText: © CoderDojo 奈良 All rights reserved.

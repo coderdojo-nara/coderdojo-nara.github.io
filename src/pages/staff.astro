@@ -1,18 +1,22 @@
 ---
 import Page from "@layouts/Page.astro";
-import staffData from "@data/staff.json";
+import staffData from "@data/staff.yml";
+import { Icon } from "astro-icon/components";
+
+// staff.yml で image を省略したときに使う忍者アイコン
+const defaultAvatar = "/images/staff/default-avatar.svg";
 ---
 
 <Page
-  title="スタッフ"
-  description="CoderDojo 奈良を運営しているスタッフの紹介ページです。"
+  title="運営メンバー"
+  description="CoderDojo 奈良を運営しているメンバーの紹介ページです。"
 >
   <div class="dj-page-header dj-page-header--narrow">
     <div class="dj-page-header__inner">
       <p class="dj-page-eyebrow">STAFF</p>
-      <h1 class="dj-page-header__title">スタッフ紹介</h1>
+      <h1 class="dj-page-header__title">運営メンバー</h1>
       <p class="dj-page-header__lead">
-        CoderDojo 奈良は、ボランティアのスタッフが運営しています。どんな人が活動しているのかをご紹介します。
+        CoderDojo 奈良は、ボランティアで運営しています。どんな人が活動しているのかをご紹介します。
       </p>
     </div>
   </div>
@@ -22,22 +26,18 @@ import staffData from "@data/staff.json";
       staffData.map((member) => (
         <article class="staff-card">
           <img
-            src={member.image}
+            src={member.image || defaultAvatar}
             alt={member.name}
             class="staff-card__avatar"
             loading="lazy"
           />
           <div class="staff-card__body">
             <h2 class="staff-card__name">{member.name}</h2>
-            {member.role && (
-              <ul class="staff-card__roles">
-                {member.role
-                  .split(/[\/／]/)
-                  .map((role) => role.trim())
-                  .filter(Boolean)
-                  .map((role) => (
-                    <li class="staff-card__role">{role}</li>
-                  ))}
+            {member.tags?.length > 0 && (
+              <ul class="staff-card__tags">
+                {member.tags.map((tag) => (
+                  <li class="staff-card__tag">{tag}</li>
+                ))}
               </ul>
             )}
             {member.address && <p class="staff-card__address">{member.address}</p>}
@@ -50,6 +50,10 @@ import staffData from "@data/staff.json";
                 rel="noopener noreferrer"
               >
                 プロフィールを見る
+                <Icon
+                  name="arrow-top-right-on-square"
+                  aria-hidden="true"
+                />
               </a>
             )}
           </div>
@@ -96,7 +100,7 @@ import staffData from "@data/staff.json";
     font-weight: var(--font-weight-black);
   }
 
-  .staff-card__roles {
+  .staff-card__tags {
     margin: 0 0 12px;
     padding: 0;
     list-style: none;
@@ -105,7 +109,7 @@ import staffData from "@data/staff.json";
     gap: 8px;
   }
 
-  .staff-card__role {
+  .staff-card__tag {
     padding: 4px 12px;
     border-radius: 999px;
     background: var(--brand-amber);
@@ -130,8 +134,17 @@ import staffData from "@data/staff.json";
   }
 
   .staff-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 10px 24px;
     font-size: 14px;
+  }
+
+  /* 外部サイトへ移動することを示すアイコン */
+  .staff-card__link :global(svg) {
+    width: 16px;
+    height: 16px;
   }
 
   @media (width < 640px) {
@@ -146,7 +159,7 @@ import staffData from "@data/staff.json";
       text-align: center;
     }
 
-    .staff-card__roles {
+    .staff-card__tags {
       justify-content: center;
     }
   }

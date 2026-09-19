@@ -1,8 +1,8 @@
 ---
 import Page from "@layouts/Page.astro";
-import nextEventData from "@data/nextEvent.json";
-import seoData from "@data/seo.json";
-import supporters from "@data/supporters.json";
+import nextEventData from "@data/nextEvent.yml";
+import seoData from "@data/seo.yml";
+import supporters from "@data/supporters.yml";
 import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import { formatPostDate } from "@utils/date";
 import { getCollection } from "astro:content";
@@ -203,7 +203,7 @@ const badgeClass: Record<string, string> = {
     </div>
   </section>
 
-  {/* サポート企業（一覧は src/data/supporters.json で定義） */}
+  {/* サポート企業（一覧は src/data/supporters.yml で定義） */}
   {
     supporters.companies.length > 0 && (
       <section class="supporters">

@@ -64,3 +64,14 @@ declare module "js-yaml" {
   export function load(str: string, opts?: Record<string, unknown>): unknown;
   export function dump(obj: unknown, opts?: DumpOptions): string;
 }
+
+// astro.config.mjs の yamlPlugin が .yml / .yaml を JSON 相当の値に変換する
+declare module "*.yml" {
+  const data: any;
+  export default data;
+}
+
+declare module "*.yaml" {
+  const data: any;
+  export default data;
+}
