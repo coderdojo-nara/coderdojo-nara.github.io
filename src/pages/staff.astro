@@ -29,6 +29,17 @@ import staffData from "@data/staff.json";
           />
           <div class="staff-card__body">
             <h2 class="staff-card__name">{member.name}</h2>
+            {member.role && (
+              <ul class="staff-card__roles">
+                {member.role
+                  .split(/[\/／]/)
+                  .map((role) => role.trim())
+                  .filter(Boolean)
+                  .map((role) => (
+                    <li class="staff-card__role">{role}</li>
+                  ))}
+              </ul>
+            )}
             {member.address && <p class="staff-card__address">{member.address}</p>}
             <p class="staff-card__profile">{member.profile}</p>
             {member.link && (
@@ -85,6 +96,25 @@ import staffData from "@data/staff.json";
     font-weight: var(--font-weight-black);
   }
 
+  .staff-card__roles {
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .staff-card__role {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--brand-amber);
+    color: var(--brand-ink);
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.6;
+  }
+
   .staff-card__address {
     margin: 0 0 14px;
     color: var(--brand-ink-muted);
@@ -114,6 +144,10 @@ import staffData from "@data/staff.json";
       justify-items: center;
       gap: 18px;
       text-align: center;
+    }
+
+    .staff-card__roles {
+      justify-content: center;
     }
   }
 </style>
