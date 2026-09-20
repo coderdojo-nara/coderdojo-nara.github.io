@@ -5,6 +5,9 @@ import { Icon } from "astro-icon/components";
 
 // staff.yml で image を省略したときに使う忍者アイコン
 const defaultAvatar = "/images/staff/default-avatar.svg";
+
+// 本番ビルド時は draft: true のメンバーを除外し、ローカルの dev サーバーでは表示する。
+const staffMembers = staffData.filter((member) => !import.meta.env.PROD || !member.draft);
 ---
 
 <Page
@@ -23,7 +26,7 @@ const defaultAvatar = "/images/staff/default-avatar.svg";
 
   <section class="staff">
     {
-      staffData.map((member) => (
+      staffMembers.map((member) => (
         <article class="staff-card">
           <img
             src={member.image || defaultAvatar}
