@@ -249,19 +249,12 @@ const badgeClass: Record<string, string> = {
   {/* Raspberry Pi財団の活動であることの表示（内容は src/data/affiliation.yml で定義） */}
   <section class="affiliation">
     <div class="container affiliation__inner">
-      <a
-        href={affiliation.linkUrl}
-        class="affiliation__logo-link"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src={affiliation.logo}
-          alt={affiliation.logoAlt}
-          class="affiliation__logo"
-          loading="lazy"
-        />
-      </a>
+      <img
+        src={affiliation.logo}
+        alt={affiliation.logoAlt}
+        class="affiliation__logo"
+        loading="lazy"
+      />
       <div class="affiliation__body">
         <p class="affiliation__label">{affiliation.label}</p>
         <p class="affiliation__text">{affiliation.text}</p>
@@ -745,19 +738,10 @@ const badgeClass: Record<string, string> = {
     padding-block: 44px;
   }
 
-  .affiliation__logo-link {
+  .affiliation__logo {
+    /* 横長ロゴ（800 : 226）。高さ基準で表示する */
     display: block;
     flex: none;
-    transition: opacity 0.15s ease;
-  }
-
-  .affiliation__logo-link:hover {
-    opacity: 0.8;
-  }
-
-  .affiliation__logo {
-    /* 横長ロゴ（450 : 136）。高さ基準で表示する */
-    display: block;
     width: auto;
     height: 56px;
   }

@@ -1,7 +1,7 @@
 # トップページ最下部「Raspberry Pi財団の活動である」ことを示す帯の内容
 label: PART OF
-logo: /images/logo/raspberry-pi-foundation.svg
-logoAlt: Raspberry Pi Foundation
+logo: /images/logo/coderdojo-logo.svg
+logoAlt: CoderDojo
 text: CoderDojoは、イギリスの教育慈善団体 Raspberry Pi 財団（Raspberry Pi Foundation）のもとで世界に広がっているプログラミングクラブの活動です。
 linkLabel: Raspberry Pi財団について
 linkUrl: https://www.raspberrypi.org/
