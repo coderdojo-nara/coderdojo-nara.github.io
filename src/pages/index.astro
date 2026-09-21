@@ -3,6 +3,7 @@ import Page from "@layouts/Page.astro";
 import nextEventData from "@data/nextEvent.yml";
 import seoData from "@data/seo.yml";
 import supporters from "@data/supporters.yml";
+import affiliation from "@data/affiliation.yml";
 import { getBlogPosts, getPostUrl, sortPostsByDateDesc } from "@utils/blog";
 import { formatPostDate } from "@utils/date";
 import { getCollection } from "astro:content";
@@ -233,6 +234,36 @@ const badgeClass: Record<string, string> = {
       </section>
     )
   }
+
+  {/* Raspberry Pi財団の活動であることの表示（内容は src/data/affiliation.yml で定義） */}
+  <section class="affiliation">
+    <div class="container affiliation__inner">
+      <a
+        href={affiliation.linkUrl}
+        class="affiliation__logo-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={affiliation.logo}
+          alt={affiliation.logoAlt}
+          class="affiliation__logo"
+          loading="lazy"
+        />
+      </a>
+      <div class="affiliation__body">
+        <p class="affiliation__label">{affiliation.label}</p>
+        <p class="affiliation__text">{affiliation.text}</p>
+        <a
+          href={affiliation.linkUrl}
+          class="affiliation__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          >{affiliation.linkLabel} →</a
+        >
+      </div>
+    </div>
+  </section>
 </Page>
 
 <style>
@@ -648,6 +679,69 @@ const badgeClass: Record<string, string> = {
     height: 48px;
   }
 
+  /* Raspberry Pi財団 */
+  .affiliation {
+    border-top: 1px solid var(--brand-border);
+    background: #fff;
+  }
+
+  .affiliation__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-block: 44px;
+  }
+
+  .affiliation__logo-link {
+    display: block;
+    flex: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .affiliation__logo-link:hover {
+    opacity: 0.8;
+  }
+
+  .affiliation__logo {
+    /* 横長ロゴ（450 : 136）。高さ基準で表示する */
+    display: block;
+    width: auto;
+    height: 56px;
+  }
+
+  .affiliation__body {
+    max-width: 520px;
+  }
+
+  .affiliation__label {
+    font-size: 12px;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.16em;
+    color: var(--brand-ink-muted);
+    margin: 0 0 8px;
+  }
+
+  .affiliation__text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--brand-ink-sub);
+  }
+
+  .affiliation__link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    color: var(--brand-navy);
+    text-decoration: none;
+  }
+
+  .affiliation__link:hover {
+    text-decoration: underline;
+  }
+
   /* レスポンシブ */
   @media (width < 900px) {
     .hero__grid {
@@ -702,6 +796,17 @@ const badgeClass: Record<string, string> = {
 
     .supporters__logo {
       height: 40px;
+    }
+
+    .affiliation__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding-block: 36px;
+    }
+
+    .affiliation__logo {
+      height: 44px;
     }
   }
 </style>
