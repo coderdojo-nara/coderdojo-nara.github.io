@@ -44,8 +44,19 @@ const badgeClass: Record<string, string> = {
   <section class="hero">
     <div class="container hero__grid">
       <div>
-        <p class="eyebrow-label">子どものためのプログラミングクラブ</p>
-        <h1 class="hero__title">CoderDojo 奈良へようこそ</h1>
+        <div class="hero__intro">
+          <img
+            src="/images/logo/coderdojo-nara.svg"
+            alt="CoderDojo 奈良"
+            class="hero__logo"
+            width="115"
+            height="120"
+          />
+          <div>
+            <p class="eyebrow-label">子どものためのプログラミングクラブ</p>
+            <h1 class="hero__title">CoderDojo 奈良へようこそ</h1>
+          </div>
+        </div>
         <p class="hero__text">
           CoderDojoは、アイルランドで始まった子どものためのプログラミングクラブです。プログラミング以外にもコンピュータを使った活動が好きな子どもたちが仲間を見つける場所で、誰でも参加費用を払うことなく参加できます。
         </p>
@@ -294,11 +305,25 @@ const badgeClass: Record<string, string> = {
     align-items: center;
   }
 
+  .hero__intro {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 24px;
+  }
+
+  .hero__logo {
+    display: block;
+    flex-shrink: 0;
+    width: auto;
+    height: 120px;
+  }
+
   .hero__title {
     font-weight: var(--font-weight-black);
-    font-size: 42px;
+    font-size: 38px;
     line-height: 1.4;
-    margin: 0 0 20px;
+    margin: 0;
     color: var(--brand-navy);
   }
 
@@ -743,17 +768,25 @@ const badgeClass: Record<string, string> = {
   }
 
   /* レスポンシブ */
-  @media (width < 900px) {
+  /* 2カラムのままだと見出しが2行になるため、1140px 未満はヒーローを1カラムにする */
+  @media (width < 1140px) {
     .hero__grid {
       grid-template-columns: 1fr;
       gap: 32px;
       padding-block: 48px;
     }
 
+    /* 1カラムになる幅では、見出しを画面幅に追従させて1行を保つ */
+    .hero__title {
+      font-size: clamp(22px, calc(7.95vw - 18.5px), 38px);
+    }
+
     .event-card {
       max-width: 420px;
     }
+  }
 
+  @media (width < 900px) {
     .be-cool {
       grid-template-columns: 1fr;
       gap: 24px;
@@ -770,8 +803,21 @@ const badgeClass: Record<string, string> = {
       padding-inline: 20px;
     }
 
+    /* 縦積みになるモバイルでは、ロゴ・ラベル・見出しを中央に揃える */
+    .hero__intro {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .hero__logo {
+      height: 100px;
+    }
+
+    /* 「CoderDojo 奈良へようこそ」が折り返さないよう画面幅に追従させる */
     .hero__title {
-      font-size: 32px;
+      font-size: clamp(18px, calc(7.7vw - 4px), 32px);
     }
 
     .be-cool__title {
