@@ -1,4 +1,5 @@
 - name: わか（若林健一）
+  draft: false
   tags:
     - ドージョー主
     - micro:bit
@@ -10,3 +11,14 @@
   profile: CoderDojo 奈良のチャンピオンです（CoderDojoでは各地域のDojoの代表者のことをチャンピオンと呼びます）以前は家電メーカーでソフトウェアエンジニアをやっていました。今は、組織のDXやデジタル化支援などをやってます。
   link: https://crssrds.jp/aboutme/
   image: https://crssrds.jp/images/aboutme/mfk2024.jpg
+
+- name: 安江克尚
+  draft: false
+  tags:
+    - マイクラカップファン
+    - KNIMEエバンジェリスト
+    - AI創薬研究者
+    - 奈良が好き
+  address: 大和西大寺駅の近くで活動中
+  profile: 子どもたちのプログラミングの発想や作品、そして若林さんたちの活動に感銘を受け、CoderDojo 大和西大寺を立ち上げたばかりです。もともとは創薬化学者でしたが今はAI創薬研究者です（こちらもにわか）。プログラミングは教えられるほどではないですが化学なら得意なはずです。STEM教育にもお役に立てることがありそうなら呼んでください。
+  link: https://prtimes.jp/main/html/rd/p/000000001.000180677.html
