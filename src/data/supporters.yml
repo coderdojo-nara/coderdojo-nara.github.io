@@ -1,11 +1,15 @@
 heading: サポート企業・団体
 description: CoderDojo 奈良の活動は、次の企業・団体のご支援に支えられています。
 companies:
+  - name: 社会福祉法人ぷろぼの
+    url: https://pro-bono.jp/
+    logo: /images/supporters/probono.png
+    alt: さくらインターネット株式会社
   - name: さくらインターネット株式会社
     url: https://www.sakura.ad.jp/
-    logo: /images/logo/sakura-internet.svg
+    logo: /images/supporters/sakura-internet.svg
     alt: さくらインターネット株式会社
   - name: micro:bit教育財団
     url: https://microbit.org/
-    logo: /images/logo/microbit-150x89.svg
+    logo: /images/supporters/microbit-150x89.svg
     alt: micro:bit教育財団
