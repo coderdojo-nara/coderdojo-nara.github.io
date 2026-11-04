@@ -1,10 +1,11 @@
-date:
+published: true # true にすると日付・会場・申込ボタンを表示。false なら「お待ちください」表示
+date: 11月21日
 weekday: （土）
 time: 13:00〜16:00
 venue:
   奈良市大宮町3-5-41
   ぷろぼの福祉ビル 5F会議室
-applyUrl: https://coderdojo-nara-ikoma.connpass.com/event/409205/
+applyUrl: https://coderdojo-nara-ikoma.connpass.com/event/412054/
 badges:
   - label: 参加費 無料
     variant: success

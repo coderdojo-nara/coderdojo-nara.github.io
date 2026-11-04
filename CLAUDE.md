@@ -15,6 +15,8 @@ Astro 6 製の静的サイト。`main` に push すると GitHub Actions（`.git
 
 `src/data/nextEvent.yml` を編集する（日付・曜日・時間・会場・connpass の申込 URL・バッジ）。トップページなどに表示される。
 
+`published: true` のときだけ詳細と申込ボタンが表示される。`false`（または未指定）や `date` が空のときは「お待ちください」の案内文と connpass グループへのボタンが表示される。
+
 ### ブログ記事
 
 `src/content/blog/<年>/YYYY-MM-DD-<slug>.md`（MDX も可）を追加する。frontmatter のスキーマは `src/content.config.ts` の `blogPostSchema`。

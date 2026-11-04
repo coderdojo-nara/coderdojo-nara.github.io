@@ -9,6 +9,7 @@ import { formatPostDate } from "@utils/date";
 import { getCollection } from "astro:content";
 
 type NextEvent = {
+  published?: boolean;
   date: string | null;
   weekday: string | null;
   time: string | null;
@@ -19,8 +20,9 @@ type NextEvent = {
 
 const nextEvent = nextEventData as NextEvent;
 
-// 開催日が未定（date が null）のときは、日付・会場・申し込み情報の代わりに案内文を表示する
-const hasEventDate = Boolean(nextEvent.date);
+// 公開フラグが true かつ開催日が入っているときだけ、日付・会場・申し込み情報を表示する
+// それ以外（非公開・フラグ未指定・開催日未定）は案内文を表示する
+const showEventDetail = nextEvent.published === true && Boolean(nextEvent.date);
 
 // 開催日に依存しないconnpassグループのURL（開催日未定のときの案内先）
 const connpassGroupUrl = "https://coderdojo-nara-ikoma.connpass.com/";
@@ -79,7 +81,7 @@ const badgeClass: Record<string, string> = {
         <div class="event-card__ribbon">次回の開催</div>
         <div class="event-card__body">
           {
-            hasEventDate ? (
+            showEventDetail ? (
               <Fragment>
                 <div class="event-card__date">
                   <span class="event-card__day">{nextEvent.date}</span>
