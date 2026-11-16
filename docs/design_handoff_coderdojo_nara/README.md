@@ -27,45 +27,45 @@ CoderDojo 奈良（子ども向けの無料プログラミングクラブ）の�
 ## Screens / Views
 
 共通要素（全ページ）:
-- **ヘッダーナビ**: 背景 `#1F3A5F`、文字 `#fff`。左にロゴ「CoderDojo 奈良」(font-weight 900 / 20px / letter-spacing 0.02em)。右にリンク（ホーム / About / 参加する / Blog / お問い合わせ、14px）＋ CTAボタン「参加申し込み」(背景 `#E8A23D` / 文字 `#22303F` / font-weight 700 / padding 8px 20px / radius 6px)。現在ページのリンクは `#fff` + weight 700、非アクティブは `#C4D0DE`。
+- **ヘッダーナビ**: 背景 `#1F3A5F`、文字 `#fff`。左にロゴ「CoderDojo 奈良」(font-weight 900 / 20px / letter-spacing 0.02em)。右にリンク（ホーム / About / 参加する / Blog / お問い合わせ、14px）＋ CTAボタン「参加申し込み」(背景 `#62BDEA` / 文字 `#22303F` / font-weight 700 / padding 8px 20px / radius 6px)。現在ページのリンクは `#fff` + weight 700、非アクティブは `#C4D0DE`。
 - 内側コンテナ幅: `max-width: 1200px; margin: 0 auto; padding: 0 32px`。狭い画面ではナビは `flex-wrap: wrap; gap: 16px`。
-- **フッター**: 背景 `#16293F`、文字 `#8FA3B8`、13px。左にコピーライト、右にナビ複製＋ X リンク（`#E8A23D` / weight 700）。`flex-wrap: wrap`。
+- **フッター**: 背景 `#16293F`、文字 `#8FA3B8`、13px。左にコピーライト、右にナビ複製＋ X リンク（`#62BDEA` / weight 700）。`flex-wrap: wrap`。
 
 ### 1. ホーム (Home.dc.html)
 - **Purpose**: サイトの入口。CoderDojoの概要理解と次回開催日の把握、参加/About への誘導。
 - **Layout**:
   - ヒーロー: 背景 `linear-gradient(180deg,#F4F6F9 0%,#fff 100%)`。`grid-template-columns: 1fr 400px; gap: 48px; padding: 64px 32px`。左=見出し＋本文＋ボタン、右=次回開催カード。
   - ヒーロー下に全幅の写真バンド（高さ320px）。
-  - Be Cool!セクション: `grid 320px 1fr`。
+  - Be Cool!セクション: `grid 320px 1fr`。見出し「Be Cool!」は `#1F3A5F`。
   - 開催情報 3カラム（場所/開催日/参加費、罫線で仕切ったテーブル風カード）＋ 参加誘導バナー（ネイビー地）。背景 `#F4F6F9`。
   - 最近のブログ記事リスト（4件、罫線区切り）。
 - **主要コンポーネント**:
   - 見出し `h1`: 42px / weight 900 / line-height 1.4 / color `#1F3A5F`。「CoderDojo 奈良へようこそ」。上に小見出し「子どものためのプログラミングクラブ」(14px / weight 700 / letter-spacing 0.12em / `#1F3A5F`)。
   - 本文: 16px / line-height 2 / `#4A5A6A`。
   - CTAボタン: プライマリ=背景 `#1F3A5F` / 文字 `#fff` / padding 14px 36px / radius 8px。セカンダリ=`border: 2px solid #1F3A5F` / 文字 `#1F3A5F`。両方 `white-space: nowrap`。
-  - **次回開催カード**（最重要）: 白地 / `border: 1px solid #DDE4EC` / radius 16px / `box-shadow: 0 12px 32px rgba(20,40,70,0.12)`。上部に `#E8A23D` の帯「次回の開催」(weight 900 / letter-spacing 0.08em)。本体に日付「7/18」(40px / weight 900 / `#1F3A5F`) +「（土）」+「13:00〜17:00」、会場、バッジ2つ（`参加費 無料`= 背景`#EFF4E6`文字`#567D2E`、`connpass受付`= 背景`#E9F0F8`文字`#1F3A5F`、13px/weight700/padding 4px 12px/radius 4px）、CTA「申し込みページへ」(→ connpass)。
+  - **次回開催カード**（最重要）: 白地 / `border: 1px solid #DDE4EC` / radius 16px / `box-shadow: 0 12px 32px rgba(20,40,70,0.12)`。上部に `#62BDEA` の帯「次回の開催」(weight 900 / letter-spacing 0.08em)。本体に日付「7/18」(40px / weight 900 / `#1F3A5F`) +「（土）」+「13:00〜17:00」、会場、バッジ2つ（`参加費 無料`= 背景`#EFF4E6`文字`#567D2E`、`connpass受付`= 背景`#E9F0F8`文字`#1F3A5F`、13px/weight700/padding 4px 12px/radius 4px）、CTA「申し込みページへ」(→ connpass)。
   - 開催情報カード: 白地セルを `gap:1px; background:#DDE4EC` で罫線化、外枠 radius 12px。ラベルは 13px / weight 700 / `#8595A5` / letter-spacing 0.1em、本文 15px / weight 500。
-  - 参加誘導バナー: 背景 `#1F3A5F` / 文字 `#fff` / radius 12px / padding 40px 48px。見出し24px、本文 `#C4D0DE`。ボタン「参加方法を見る」(amber) と「お問い合わせ」(白枠線)。
+  - 参加誘導バナー: 背景 `#1F3A5F` / 文字 `#fff` / radius 12px / padding 40px 48px。見出し24px、本文 `#C4D0DE`。ボタン「参加方法を見る」(スカイブルー) と「お問い合わせ」(白枠線)。
   - ブログ行: `grid 110px 1fr`、日付 13px `#8595A5`、タイトル weight 500。
 
 ### 2. About (About.dc.html)
 - **Purpose**: CoderDojoとは何かの理解。最優先導線のゴール。
-- **Layout**: ページヘッダー（グラデ背景・小見出し「ABOUT」amber）→ What Is CoderDojo（英/日 2カラム、`grid 1fr 1fr; gap 32px`。英語カードは白枠線、日本語カードは `#F4F6F9` 地）→ ガイダンス（`grid 1fr 420px`、右に画像スロット、`#F4F6F9`地）→ 動画セクション（`grid 480px 1fr`、YouTube 埋め込み 16:9）→ CTAバナー（ネイビー地）。
-- ページ見出し `h1`: 38px / weight 900 / `#1F3A5F`。小見出しラベル: 13px / weight 900 / letter-spacing 0.16em / `#E8A23D`。
+- **Layout**: ページヘッダー（グラデ背景・小見出し「ABOUT」スカイブルー濃）→ What Is CoderDojo（英/日 2カラム、`grid 1fr 1fr; gap 32px`。英語カードは白枠線、日本語カードは `#F4F6F9` 地）→ ガイダンス（`grid 1fr 420px`、右に画像スロット、`#F4F6F9`地）→ 動画セクション（`grid 480px 1fr`、YouTube 埋め込み 16:9）→ CTAバナー（ネイビー地）。
+- ページ見出し `h1`: 38px / weight 900 / `#1F3A5F`。小見出しラベル: 13px / weight 900 / letter-spacing 0.16em / `#1A6A9C`。
 - 動画: `iframe src="https://www.youtube.com/embed/gLDue2xb1j8?rel=0"`、コンテナ radius 12px / shadow / `aspect-ratio: 16/9`。
 - 本文コピーは英日対訳（現行サイト準拠）。
 
 ### 3. 参加する (Join.dc.html)
 - **Purpose**: 参加の心構えと2種類の参加導線（ニンジャ / サポーター）の提示。
 - **Layout**: ページヘッダー → 活動理念テキスト（`grid 1fr 420px`、右に写真）→ Be Cool!（`#F4F6F9`地）→ 参加方法2カード（`grid 1fr 1fr`、等高 flex カラム）→ CTA（ネイビー地・中央寄せ）。
-- 参加カード左: ヘッダ帯 `#1F3A5F`「ニンジャとして参加したい」、本文＋注意ボックス（背景`#FDF4E3`/文字`#7A6230`/radius 8px）＋ CTA「connpassで申し込む」(amber)。
-- 参加カード右: ヘッダ帯 `#E8A23D`「ボランティアスタッフ・サポーターとして参加したい」、本文＋写真＋CTA「スタッフ募集ページを見る」(ネイビー枠線)。
+- 参加カード左: ヘッダ帯 `#1F3A5F`「ニンジャとして参加したい」、本文＋注意ボックス（背景`#E6F4FC`/文字`#1F5F85`/radius 8px）＋ CTA「connpassで申し込む」(スカイブルー)。
+- 参加カード右: ヘッダ帯 `#62BDEA`「ボランティアスタッフ・サポーターとして参加したい」、本文＋写真＋CTA「スタッフ募集ページを見る」(ネイビー枠線)。
 - ナビの「参加申し込み」CTA はこのページのみ connpass へ直接リンク。
 
 ### 4. Blog (Blog.dc.html)
 - **Purpose**: 開催レポート・お知らせの記事一覧。
 - **Layout**: ページヘッダー → 記事リスト（`max-width: 900px`、各行 `grid 130px 90px 1fr; gap 20px`：日付 / 著者 / タイトル、下罫線）→ ページネーション（現在ページ=ネイビー塗り38px角丸、他=枠線）。
-- タイトル 16px / weight 700 / line-height 1.7、日付 13px `#8595A5`、著者 12px / weight 700 / `#E8A23D`。
+- タイトル 16px / weight 700 / line-height 1.7、日付 13px `#8595A5`、著者 12px / weight 700 / `#1A6A9C`。
 - 記事データは `renderVals().posts`（`{date, author, title}`）配列。実装ではMarkdown等に置換。
 
 ### 5. お問い合わせ (Contact.dc.html)
@@ -73,7 +73,7 @@ CoderDojo 奈良（子ども向けの無料プログラミングクラブ）の�
 - **Layout**: ページヘッダー → 3カラムカード（`grid 1fr 1fr 1fr; gap 28px`）。各カードは白枠線 / radius 12px / padding 36px / 等高 flex、上部にアイコンチップ48px、見出し19px、本文14px、下端にCTA。
   - カード1: アイコン地`#E9F0F8`文字`#1F3A5F`、「お問い合わせフォーム」→ Google フォーム（塗りネイビーCTA）。
   - カード2: アイコン地`#22303F`文字`#fff`、「X（旧Twitter）」→ `@CoderDojoNara`（ネイビー枠線CTA）。
-  - カード3: アイコン地`#FDF4E3`文字`#E8A23D`、「どんな人がやってるの？」→ スタッフ紹介（amber枠線CTA）。
+  - カード3: アイコン地`#E6F4FC`文字`#1A6A9C`、「どんな人がやってるの？」→ スタッフ紹介（スカイブルー枠線CTA）。
 
 ## Interactions & Behavior
 - **ナビゲーション**: ページ間は相対リンク（`Home.dc.html` 等）。実装ではルーティングに置換。
@@ -100,8 +100,8 @@ CoderDojo 奈良（子ども向けの無料プログラミングクラブ）の�
 |---|---|
 | プライマリ（ネイビー） | `#1F3A5F` |
 | フッター濃ネイビー | `#16293F` |
-| アクセント（アンバー） | `#E8A23D` |
-| アンバー濃（文字用） | `#B07817` |
+| アクセント（スカイブルー） | `#62BDEA` |
+| スカイブルー濃（文字用） | `#1A6A9C` |
 | 本文テキスト | `#22303F` |
 | サブテキスト | `#4A5A6A` |
 | 淡色テキスト/ラベル | `#8595A5` |
@@ -111,7 +111,7 @@ CoderDojo 奈良（子ども向けの無料プログラミングクラブ）の�
 | 罫線/ボーダー | `#DDE4EC` / `#E4E9EF` |
 | 成功バッジ地/文字 | `#EFF4E6` / `#567D2E` |
 | 情報バッジ地 | `#E9F0F8` |
-| 注意ボックス地/文字 | `#FDF4E3` / `#7A6230` |
+| 注意ボックス地/文字 | `#E6F4FC` / `#1F5F85` |
 | 白 | `#fff` |
 | ヒーローグラデ | `linear-gradient(180deg,#F4F6F9 0%,#fff 100%)` |
 

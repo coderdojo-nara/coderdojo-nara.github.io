@@ -32,7 +32,7 @@
   }
 
   .dj-page-eyebrow {
-    color: var(--brand-amber);
+    color: var(--brand-amber-dark);
     font-size: 13px;
     font-weight: var(--font-weight-black);
     letter-spacing: 0.16em;

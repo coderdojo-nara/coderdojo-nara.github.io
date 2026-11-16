@@ -40,8 +40,10 @@
   /* CoderDojo 奈良 ブランドパレット（リニューアルデザイン準拠） */
   --brand-navy: #1f3a5f;
   --brand-navy-dark: #16293f;
-  --brand-amber: #e8a23d;
-  --brand-amber-dark: #b07817;
+
+  /* アクセント。変数名は amber のままだが、色はスカイブルー */
+  --brand-amber: #62bdea;
+  --brand-amber-dark: #1a6a9c;
   --brand-ink: #22303f;
   --brand-ink-sub: #4a5a6a;
   --brand-ink-muted: #8595a5;
@@ -53,7 +55,7 @@
   --brand-badge-success-bg: #eff4e6;
   --brand-badge-success-text: #567d2e;
   --brand-badge-info-bg: #e9f0f8;
-  --brand-notice-bg: #fdf4e3;
-  --brand-notice-text: #7a6230;
+  --brand-notice-bg: #e6f4fc;
+  --brand-notice-text: #1f5f85;
   --brand-hero-gradient: linear-gradient(180deg, #f4f6f9 0%, #fff 100%);
 }
