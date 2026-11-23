@@ -32,19 +32,8 @@ create-deploy:
 	$(if $(d),,$(error "エラー: 引数 d が指定されていません。例: make create-deploy d=explanation"))
 	$(COMMAND) deploy --description "$(d)"
 
-# デプロイを更新
+# push してデプロイを更新
 deploy:
 	$(if $(d),,$(error "エラー: 引数 d が指定されていません。例: make deploy d=explanation"))
-	$(COMMAND) deploy --deploymentId $(DEPLOY_ID) \
-		--description "$(d)"
-
-# 現在のバージョンを表示
-version:
-	@echo "現在のバージョン: $$(sed -n 's/.*const APP_VERSION = "\([^"]*\)".*/\1/p' main.js)"
-
-# バージョン情報を書き換えてリリース
-release:
-	$(if $(v),,$(error "エラー: 引数 v が指定されていません。例: make release v=v1.01"))
-	sed -i '' 's/const APP_VERSION = "[^"]*"/const APP_VERSION = "$(v)"/' main.js
 	$(COMMAND) push
-	$(COMMAND) deploy --deploymentId $(DEPLOY_ID) --description "$(v)"
+	$(COMMAND) deploy --deploymentId $(DEPLOY_ID) --description "$(d)"

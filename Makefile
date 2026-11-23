@@ -15,7 +15,7 @@ install:
 	npm install
 
 # ビルド後にサイトを同期
-release: build
+deploy: build
 	rsync -avz --delete ./dist/ pote2@pote2.sakura.ne.jp:/home/pote2/www/crssrds.jp/dist/
 
 # check.txt内のURLアクセステスト（make serveでサーバー起動後に実行）
