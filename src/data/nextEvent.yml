@@ -1,4 +1,4 @@
-published: true # true にすると日付・会場・申込ボタンを表示。false なら「お待ちください」表示
+published: false # true にすると日付・会場・申込ボタンを表示。false なら「お待ちください」表示
 date: 11月21日
 weekday: （土）
 time: 13:00〜16:00
